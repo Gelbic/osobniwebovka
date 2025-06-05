@@ -11332,3 +11332,17 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-size: large;
   color: white;
 }
+
+.certifikat {
+  display: block;
+  margin: 0 auto;       /* centrování */
+  max-width: 100%;      /* obrázek se nevejde přes rodiče, tak se zmenší */
+  width: 600px;         /* nebo jakou chceš pevnou šířku */
+  height: auto;         /* zachování poměru stran */
+}
+
+.sekcecertifikaty {   /* odsazení odshora */
+  margin-bottom: 80px; /* odsazení odspodu */
+  /* případně padding */
+  /* padding-top: 40px; */
+}
