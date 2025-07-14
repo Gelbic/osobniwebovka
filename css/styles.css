@@ -11346,3 +11346,24 @@ section#contact form#contactForm :-ms-input-placeholder {
   /* případně padding */
   /* padding-top: 40px; */
 }
+
+.obrazky-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* díky tomu se na menších obrazovkách obrázky zalomí */
+    padding: 20px;
+}
+
+.obrazek-box {
+    flex: 1 1 30%; /* každému obrázku dá cca 30% šířky, ale dovolí zmenšení i zvětšení */
+    max-width: 300px; /* maximální šířka jednoho obrázku */
+}
+
+.obrazky-container .img-fluid {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+}
