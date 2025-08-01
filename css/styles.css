@@ -11366,4 +11366,41 @@ section#contact form#contactForm :-ms-input-placeholder {
     display: block;
 }
 
+.obrazky-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 900px;
+}
+.obrazek-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.scroll-gallery {
+    overflow-x: auto;
+    overflow-y: hidden; /* skryje vertikální scroll, kdyby se objevil */
+    white-space: nowrap;
+    padding: 15px;
+    margin-top: 30px;
+    background-color: transparent; /* odstranění pozadí */
+    border: none; /* odstranění rámečku */
+    scrollbar-width: none; /* Firefox */
+}
+
+.scroll-gallery::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+
+.scroll-gallery img {
+    height: 300px !important;
+    width: auto !important;
+    margin-right: 15px;
+    display: inline-block;
+    border-radius: 5px;
 }

@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html lang="cs">
-    
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Osobní web Jana Galby" />
     <meta name="author" content="Jan Galba" />
     <title>Jan Galba Osobní web</title>
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Font Awesome icons -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" />
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Custom CSS -->
     <link href="css/styles.css" rel="stylesheet" />
-    <!-- Lightbox2 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet">
 
+    <style>
+        .scroll-gallery {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 15px;
+            margin-top: 30px;
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
+        .scroll-gallery img {
+            height: 120px;
+            margin-right: 10px;
+            display: inline-block;
+            border-radius: 5px;
+            transition: transform 0.2s ease;
+        }
+
+        .scroll-gallery img:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+    </style>
 </head>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <body id="page-top">
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="#page-top">Jan Galba</a>
-            <!-- Hamburger Menu Button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- Navigation Links -->
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#services">Dovednosti</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">O mně</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Certifikace</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Masthead -->
     <header class="masthead">
         <div class="container">
             <div class="masthead-subheading">Vítejte na webu Jana Galby</div>
@@ -55,7 +67,6 @@
         </div>
     </header>
 
-    <!-- Services Section -->
     <section class="page-section" id="services">
         <div class="container">
             <div class="text-center">
@@ -63,7 +74,6 @@
                 <h3 class="section-subheading text-muted">Nejdůležitější informace</h3>
             </div>
             <div class="row text-center">
-                <!-- Dovednost 1 -->
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
@@ -72,7 +82,6 @@
                     <h4 class="my-3">WWW Aplikace - Python</h4>
                     <p class="text-muted">Studuji rekvalifikační kurz - programátor webových aplikací Python.</p>
                 </div>
-                <!-- Dovednost 2 -->
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
@@ -81,7 +90,6 @@
                     <h4 class="my-3">Zámečník<br>Nástrojař</h4>
                     <p class="text-muted">Jsem přihlášen ke studiu abych dokončil přerušené studium a stal se Strojním mechanikem, dále jsem rekvalifikovaný nástrojař.</p>
                 </div>
-                <!-- Dovednost 3 -->
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
@@ -94,14 +102,12 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section class="page-section" id="about">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">O mně</h2>
             </div>
             <ul class="timeline">
-                <!-- Pracovní zkušenost 1 -->
                 <li>
                     <div class="timeline-image"><img class="rounded-circle img-fluid" src="obrazky/SCHAEFFLER.png" alt="Schaeffler nástrojař" /></div>
                     <div class="timeline-panel">
@@ -112,7 +118,6 @@
                         <div class="timeline-body"><p class="text-muted">Na této pozici pracuji ve firmě Schaeffler Production CZ s.r.o.</p></div>
                     </div>
                 </li>
-                <!-- Pracovní zkušenost 2 -->
                 <li class="timeline-inverted">
                     <div class="timeline-image"><img class="rounded-circle img-fluid" src="obrazky/studium.png" alt="Studium Rekvalifikace Nástrojař" /></div>
                     <div class="timeline-panel">
@@ -123,7 +128,6 @@
                         <div class="timeline-body"><p class="text-muted">Během zaměstnání jsem absolvoval rekvalifikační kurz na obor <strong>Nástrojař</strong> na učilišti v Lanškrouně.</p></div>
                     </div>
                 </li>
-                <!-- Pracovní zkušenost 3 -->
                 <li>
                     <div class="timeline-image"><img class="rounded-circle img-fluid" src="obrazky/python.png" alt="Python programátor HTML CSS JavaScript" /></div>
                     <div class="timeline-panel">
@@ -134,7 +138,6 @@
                         <div class="timeline-body"><p class="text-muted">Právě absolvuji rekvalifikační kurz na <strong>Programátor www aplikací Python</strong> se zaměřením na HTML, CSS, Python a okrajově JavaScript.</p></div>
                     </div>
                 </li>
-                <!-- Pracovní zkušenost 4 -->
                 <li class="timeline-inverted">
                     <div class="timeline-image"><img class="rounded-circle img-fluid" src="obrazky/sps.png" alt="SPŠ Strojní mechanik SOU Svitavy" /></div>
                     <div class="timeline-panel">
@@ -142,10 +145,9 @@
                             <h4>09/2025</h4>
                             <h4 class="subheading">Strojní Mechanik</h4>
                         </div>
-                        <div class="timeline-body"><p class="text-muted">Přijat ke Studiu SPŠ Ždár Nad Sázavou.</p></div>
+                        <div class="timeline-body"><p class="text-muted">Přijat ke Studiu SPŠ Žďár Nad Sázavou.</p></div>
                     </div>
                 </li>
-                <!-- Budoucnost -->
                 <li class="timeline-inverted">
                     <div class="timeline-image">
                         <h4>
@@ -160,62 +162,85 @@
             </ul>
         </div>
     </section>
- <!-- Fotogalerie Section -->
-<section class="page-section bg-light" id="gallery">
-    <div class="container">
-        <div class="text-center">
-            <h2 class="section-heading text-uppercase">Certifikace</h2>
-            <h3 class="section-subheading text-muted"></h3>
-        </div>
-        <div class="row">
-           <div class="obrazky-container">
-    <div class="obrazek-box">
-        <a href="obrazky/pythoncertifikat.png" data-lightbox="certifikaty" data-title="Základ Python">
-            <img class="img-fluid" src="obrazky/pythoncertifikat.png" alt="zaklad python" />
+
+    <section class="page-section bg-light" id="gallery">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Certifikace</h2>
+                <h3 class="section-subheading text-muted">Přehled mých certifikátů.</h3>
+            </div>
+
+           
+
+            <div class="scroll-gallery-container" style="position: relative; margin-top: 30px;">
+
+    <!-- Šipka vlevo -->
+    <button id="scroll-left" aria-label="Posunout vlevo" 
+            style="
+                position: absolute; 
+                left: 0; 
+                top: 50%; 
+                transform: translateY(-50%); 
+                background: rgba(0,0,0,0.5); 
+                border: none; 
+                color: white; 
+                font-size: 2rem; 
+                padding: 0 12px; 
+                cursor: pointer; 
+                border-radius: 0 5px 5px 0;
+                z-index: 10;
+            ">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <!-- Původní scroll-gallery -->
+    <div class="scroll-gallery" style="padding: 15px 40px;"> <!-- přidány paddingy, aby šipky nezasahovaly do fotek -->
+        <a href="obrazky/oop.png" data-lightbox="vodorovna-galerie" data-title="Objektově orientované programování v Pythonu">
+            <img src="obrazky/oop.png" alt="Objektově orientované programování v Pythonu" />
         </a>
-    </div>
-    <div class="obrazek-box">
-        <a href="obrazky/oop.png" data-lightbox="certifikaty" data-title="OOP v Pythonu">
-            <img class="img-fluid" src="obrazky/oop.png" alt="Python objektově orientované programování." />
+        <a href="obrazky/kolekce.png" data-lightbox="vodorovna-galerie" data-title="Kolekce v Pythonu">
+            <img src="obrazky/kolekce.png" alt="Kolekce v Pythonu" />
         </a>
-    </div>
-    <div class="obrazek-box">
-        <a href="obrazky/webdesing.png" data-lightbox="certifikaty" data-title="Webdesign certifikát">
-            <img class="img-fluid" src="obrazky/webdesing.png" alt="webdesing certifikat" />
+        <a href="obrazky/sqlite.png" data-lightbox="vodorovna-galerie" data-title="sqlite databáze">
+            <img src="obrazky/sqlite.png" alt="sqlite databáze" />
         </a>
-        <div class="obrazek-box">
-        <a href="obrazky/nastrojar.png" data-lightbox="certifikaty" data-title="Nástrojař certifikát">
-            <img class="img-fluid" src="obrazky/nastrojar.png" alt="Nástrojař certifikat" />
-            </a>
+        <a href="obrazky/webdesing.png" data-lightbox="vodorovna-galerie" data-title="Moderní webdesing">
+            <img src="obrazky/webdesing.png" alt="Moderní webdesing" />
+        </a>
+        <a href="obrazky/pythoncertifikat.png" data-lightbox="vodorovna-galerie" data-title="Základy Pythonu">
+            <img src="obrazky/pythoncertifikat.png" alt="Základy Pythonu" />
+        </a>
+        <a href="obrazky/nastrojar.png" data-lightbox="vodorovna-galerie" data-title="Rekvalifikace Nástrojař">
+            <img src="obrazky/nastrojar.png" alt="Rekvalifikace Nástrojař" />
+        </a>
+        <!-- Přidej další obrázky obdobně -->
     </div>
+
+    <!-- Šipka vpravo -->
+    <button id="scroll-right" aria-label="Posunout vpravo" 
+            style="
+                position: absolute; 
+                right: 0; 
+                top: 50%; 
+                transform: translateY(-50%); 
+                background: rgba(0,0,0,0.5); 
+                border: none; 
+                color: white; 
+                font-size: 2rem; 
+                padding: 0 12px; 
+                cursor: pointer; 
+                border-radius: 5px 0 0 5px;
+                z-index: 10;
+            ">
+        <i class="fas fa-chevron-right"></i>
+    </button>
 </div>
 
-    </div>
-</div>
 
-            </div>
-        </div>
-    </div>
-</section>
-            <!-- Social Media -->
-            <div class="py-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6 my-3">
-                            <a href="https://www.facebook.com/Jan.Galba">
-                                
-                                <img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/facebook.svg" alt="Facebook Jan Galba programátor strojní mechanik zámečník svářeč" aria-label="Facebook Logo" />
-                            
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </section>
 
-
-    <!-- Contact Section -->
     <section class="page-section" id="contact">
         <div class="container">
             <div class="text-center">
@@ -225,13 +250,12 @@
                 <strong>Telefonní kontakt</strong>:<br>775 600 674<br>
                 <strong>Email</strong>:<br>JanGalba7@gmail.com
             </p>
-            <!-- Social Media -->
             <div class="py-5">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-6 my-3">
                             <a href="https://www.facebook.com/Jan.Galba">
-                                <img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/facebook.svg" alt="Facebook Jan Galba programátor strojní mechanik zámečník svářeč" aria-label="Facebook Logo" />
+                                <img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/facebook.svg" alt="Facebook Jan Galba" aria-label="Facebook Logo" />
                             </a>
                         </div>
                     </div>
@@ -240,10 +264,36 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer py-4">
         <div class="container">
             <div class="row align-items-center">
-                <p>Jan Galba 2025</p>
-               
- 
+                <div class="col-lg-4 text-lg-start">
+                    <p>Jan Galba 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+    const scrollContainer = document.querySelector('.scroll-gallery');
+    const btnLeft = document.getElementById('scroll-left');
+    const btnRight = document.getElementById('scroll-right');
+    const scrollAmount = 150; // o kolik px se posune po kliknutí
+
+    btnLeft.addEventListener('click', () => {
+        scrollContainer.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+
+    btnRight.addEventListener('click', () => {
+        scrollContainer.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
+</body>
+</html>
