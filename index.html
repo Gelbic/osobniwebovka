@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Jsem Jan Galba, technicky zaměřený rekvalifikovaný programátor s praxí v nástrojařině. Věnuji se Pythonu, webovému vývoji a přecházím z výroby do IT." />
-    <meta name="keywords" content="Jan Galba, programátor, rekvalifikace, junior programátor, Python, osobní web, přechod do IT, nástrojař" />
     <meta name="author" content="Jan Galba" />
+    <meta name="description" content="Jan Galba – programátor webových aplikací v Pythonu. EasyZakazky.cz – aplikace pro správu zakázek a faktur, generování faktur, správa hodin zaměstnanců, evidence nezaplacených faktur. Přeplatné za nízkou cenu.">
+    <meta name="keywords" content="EasyZakazky.cz, správa zakázek, faktury, evidence faktur, generování faktur, správa hodin zaměstnanců, programátor Python, online aplikace, česká aplikace, přeplatné, malá firma, podnikání, nástrojař,Zámečník,Strojní">
     <meta name="robots" content="index, follow" />
     <meta name="language" content="cs" />
     <meta property="og:title" content="Jan Galba – Rekvalifikovaný programátor" />
@@ -54,6 +54,28 @@
             transform: scale(1.05);
             cursor: pointer;
         }
+
+               /* EasyZakazky promo sekce */
+        #easyzakazky {
+            background-color: #e9f7ef;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        #easyzakazky h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        #easyzakazky p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        #easyzakazky .btn-lg {
+            font-size: 1.3rem;
+            padding: 12px 30px;
+        }
     </style>
 </head>
 
@@ -71,6 +93,7 @@
                     <li class="nav-item"><a class="nav-link" href="#about">O mně</a></li>
                     <li class="nav-item"><a class="nav-link" href="#gallery">Certifikace</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#easyzakazky">EasyZakazky.cz</a></li>
                 </ul>
             </div>
         </div>
@@ -293,6 +316,29 @@ Jsem hrdým otcem tří dětí, které jsou mou největší motivací. Ve volné
             </div>
         </div>
     </section>
+    <!-- Nová agresivní SEO sekce pro EasyZakazky.cz -->
+    <section id="easyzakazky">
+        <div class="container">
+            <h2>EasyZakazky.cz – online aplikace pro správu zakázek a faktur</h2>
+            <h3>Autor a programátor: Jan Galba</h3>
+            <p>
+                <strong>EasyZakazky.cz</strong> je moderní online aplikace, kterou jsem vyvinul jako webový programátor v Pythonu.
+                Aplikace umožňuje kompletní správu zakázek, generování faktur, ohlídání nezaplacených faktur, zadávání hodinového času zaměstnanců u jednotlivých zakázek a přehlednou evidenci zákazníků.
+                Nabízím ji formou nízkopříjmového předplatného pro malé firmy a jednotlivce. 
+                Vyzkoušejte <strong>EasyZakazky.cz</strong> pro efektivní řízení vašeho podnikání a lepší přehled nad financemi!
+            </p>
+            <div class="text-center mt-4">
+                <a href="https://www.easyzakazky.cz" target="_blank" class="btn btn-success btn-lg">Vyzkoušet EasyZakazky.cz</a>
+            </div>
+            <ul style="text-align:left; margin-top:30px; font-size:1.1rem;">
+                <li>Kompletní správa zakázek a zákazníků</li>
+                <li>Generování faktur a kontrola nezaplacených</li>
+                <li>Zadávání hodinového času zaměstnanců k jednotlivým zakázkám</li>
+                <li>Přehledná evidence a statistiky</li>
+                <li>Dostupná formou nízkopříjmového předplatného</li>
+            </ul>
+        </div>
+    </section>
 
     <footer class="footer py-4">
         <div class="container">
@@ -326,27 +372,38 @@ Jsem hrdým otcem tří dětí, které jsou mou největší motivací. Ve volné
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
   <!-- Modal na konec body -->
-  <div class="modal" id="promoModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Doporučuji !</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          Vyzkoušejte <a href="https://www.easyzakazky.cz" target="_blank">EasyZakazky.cz</a>  jednoduchou aplikaci pro lepší správu zakázek s možností evidence zákazníku a vystavování a evidence faktur!
-        </div>
+<div class="modal" id="promoModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Doporučuji!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zavřít"></button>
+      </div>
+      <div class="modal-body">
+  Vyzkoušejte 
+  <a href="https://www.EasyZakazky.cz" target="_blank" 
+     style="color:#ffffff; background-color:#28a745; padding:6px 12px; border-radius:4px; text-decoration:none; font-weight:bold;">
+     EasyZakazky.cz
+  </a> – jednoduchou aplikaci pro lepší správu zakázek s možností evidence zákazníků a vystavování faktur.
+</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
       </div>
     </div>
   </div>
+</div>
 
-  <script>
-    // Zobraz modal po 3 sekundách
-    window.addEventListener('load', () => {
+<script>
+  // Otevře modal jen jednou pomocí localStorage
+  window.addEventListener('load', () => {
+    if (!localStorage.getItem('promoModalShown')) {
       setTimeout(() => {
-        new bootstrap.Modal(document.getElementById('promoModal')).show();
+        const promoModal = new bootstrap.Modal(document.getElementById('promoModal'));
+        promoModal.show();
+        localStorage.setItem('promoModalShown', 'true'); // uložíme stav do localStorage
       }, 3000);
-    });
-  </script>
+    }
+  });
+</script>
 </body>
 </html>
