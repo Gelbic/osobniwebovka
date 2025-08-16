@@ -325,5 +325,28 @@ Jsem hrdým otcem tří dětí, které jsou mou největší motivací. Ve volné
 </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
+  <!-- Modal na konec body -->
+  <div class="modal" id="promoModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Doporučujeme</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Vyzkoušej <a href="https://www.easyzakazky.cz" target="_blank">EasyZakazky.cz</a> pro lepší správu zakázek!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Zobraz modal po 3 sekundách
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        new bootstrap.Modal(document.getElementById('promoModal')).show();
+      }, 3000);
+    });
+  </script>
 </body>
 </html>
