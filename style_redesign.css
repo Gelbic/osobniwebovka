@@ -504,3 +504,48 @@ details[open] .faq__otazka::after { content: '−'; }
 
 /* Zamknutí scrollu při otevřeném menu */
 html.menu-locked, body.menu-locked { overflow: hidden; }
+/* === DEBUG/FIX: vynucené mobilní offcanvas menu (dej na konec souboru) === */
+@media (max-width: 899px) {
+  nav.navigace {
+    position: fixed !important;
+    inset: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 24px !important;
+
+    background: rgba(255,255,255,0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+
+    transform: translateX(100%) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+
+    z-index: 1001 !important;
+    padding: 20px !important;
+  }
+
+  nav.navigace.navigace--otevrena {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  nav.navigace .navigace__odkaz {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    padding: 10px 20px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Kontakt jako CTA button */
+  nav.navigace .tlacitko {
+    background: linear-gradient(135deg, #2563eb, #1e40af) !important;
+    color: #fff !important;
+  }
+}
