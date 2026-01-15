@@ -1,13 +1,27 @@
 (() => {
+  const html = document.documentElement;
+  const body = document.body;
+
+  // Rok v patičce
+  const rok = document.getElementById("rok");
+  if (rok) rok.textContent = String(new Date().getFullYear());
+
+  // Mobilní menu toggle
   const tlacitkoMenu = document.querySelector("[data-menu-tlacitko]");
   const navigace = document.querySelector("[data-navigace]");
 
-  // Mobilní menu toggle
+  const zamknoutScroll = (zamknout) => {
+    html.classList.toggle("menu-locked", zamknout);
+    body.classList.toggle("menu-locked", zamknout);
+  };
+
   if (tlacitkoMenu && navigace) {
     const prepnout = (otevrit) => {
       const jeOtevrene = otevrit ?? !navigace.classList.contains("navigace--otevrena");
       navigace.classList.toggle("navigace--otevrena", jeOtevrene);
       tlacitkoMenu.setAttribute("aria-expanded", String(jeOtevrene));
+      navigace.setAttribute("aria-hidden", String(!jeOtevrene));
+      zamknoutScroll(jeOtevrene);
     };
 
     tlacitkoMenu.addEventListener("click", () => prepnout());
@@ -22,22 +36,35 @@
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") prepnout(false);
     });
+
+    // Zavřít při resize na desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 900) prepnout(false);
+    });
+
+    // počáteční stav aria-hidden (menu je defaultně zavřené)
+    navigace.setAttribute("aria-hidden", "true");
   }
 
   // Animace při scrollu (IntersectionObserver)
   const prvky = Array.from(document.querySelectorAll(".animace"));
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("animace--videt");
-          observer.unobserve(entry.target);
+  if (prvky.length && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animace--videt");
+            observer.unobserve(entry.target);
+          }
         }
-      }
-    },
-    { threshold: 0.14 }
-  );
-  prvky.forEach((el) => observer.observe(el));
+      },
+      { threshold: 0.14 }
+    );
+    prvky.forEach((el) => observer.observe(el));
+  } else {
+    // fallback
+    prvky.forEach((el) => el.classList.add("animace--videt"));
+  }
 
   // Zvýraznění aktivní sekce v navigaci
   const odkazy = Array.from(document.querySelectorAll(".navigace__odkaz"))
@@ -47,7 +74,7 @@
     .map(a => document.querySelector(a.getAttribute("href")))
     .filter(Boolean);
 
-  if (odkazy.length && sekce.length) {
+  if (odkazy.length && sekce.length && "IntersectionObserver" in window) {
     const aktivni = (id) => {
       odkazy.forEach(a => {
         const je = a.getAttribute("href") === `#${id}`;
@@ -156,19 +183,15 @@
       }
     });
   }
-})();
 
-// Automatické otevírání <details> podle URL hashe (pro obchodní podmínky)
+  // Automatické otevírání <details> podle URL hashe (pro GDPR / obchodní podmínky)
   const otevritPodleHashe = () => {
     const hash = window.location.hash;
     if (hash) {
-      // Najdeme element podle ID (např. #gdpr)
       const cil = document.querySelector(hash);
-      
-      // Pokud je to <details>, otevřeme ho
+
       if (cil && cil.tagName === "DETAILS") {
         cil.open = true;
-        // Chvíli počkáme a scrollneme (aby se stihl vykreslit obsah)
         setTimeout(() => {
           cil.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 100);
@@ -176,7 +199,49 @@
     }
   };
 
-  // Spustit při načtení stránky
   window.addEventListener("load", otevritPodleHashe);
-  // Spustit i když se změní URL (např. kliknutí na odkaz v patičce, pokud tam bude)
   window.addEventListener("hashchange", otevritPodleHashe);
+
+  // Legal modal – basic open/close + tabs (obsah je placeholder, reálný obsah máš v <details>)
+  const modal = document.querySelector(".legal-modal");
+  if (modal) {
+    const closeBtns = Array.from(modal.querySelectorAll("[data-legal-close]"));
+    const tabBtns = Array.from(modal.querySelectorAll("[data-legal-tab]"));
+    const panels = Array.from(modal.querySelectorAll("[data-legal-panel]"));
+
+    const otevritModal = () => {
+      modal.setAttribute("aria-hidden", "false");
+      zamknoutScroll(true);
+    };
+
+    const zavritModal = () => {
+      modal.setAttribute("aria-hidden", "true");
+      zamknoutScroll(false);
+    };
+
+    // pokud budeš chtít modal otevírat z odkazů, stačí přidat data-legal-open na tlačítko/link
+    const openTriggers = Array.from(document.querySelectorAll("[data-legal-open]"));
+    openTriggers.forEach(btn => btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      otevritModal();
+    }));
+
+    closeBtns.forEach(b => b.addEventListener("click", zavritModal));
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") zavritModal();
+    });
+
+    const aktivovatTab = (klic) => {
+      tabBtns.forEach(b => b.setAttribute("aria-selected", String(b.dataset.legalTab === klic)));
+      panels.forEach(p => {
+        const je = p.dataset.legalPanel === klic;
+        p.toggleAttribute("hidden", !je);
+      });
+    };
+
+    tabBtns.forEach(b => b.addEventListener("click", () => aktivovatTab(b.dataset.legalTab)));
+
+    // init
+    aktivovatTab("gdpr");
+  }
+})();
