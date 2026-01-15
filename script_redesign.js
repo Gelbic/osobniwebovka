@@ -264,3 +264,70 @@
     aktivovatTab("gdpr");
   }
 })();
+
+(function () {
+      const modal = document.getElementById('legalModal');
+      const panel = modal?.querySelector('.legal-modal__panel');
+      const tabButtons = modal?.querySelectorAll('[data-legal-tab]');
+      const panels = {
+        op: modal?.querySelector('#panel-op'),
+        gdpr: modal?.querySelector('#panel-gdpr')
+      };
+
+      const setYear = () => {
+        const el = document.getElementById('rok');
+        if (el) el.textContent = new Date().getFullYear();
+      };
+
+      const openModal = (which) => {
+        if (!modal) return;
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        switchTab(which || 'op');
+        // fokus
+        setTimeout(() => panel?.focus(), 0);
+      };
+
+      const closeModal = () => {
+        if (!modal) return;
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+
+      const switchTab = (which) => {
+        const key = (which === 'gdpr') ? 'gdpr' : 'op';
+        // tabs
+        tabButtons?.forEach(btn => {
+          const isActive = btn.getAttribute('data-legal-tab') === key;
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        // panels
+        if (panels.op) panels.op.hidden = (key !== 'op');
+        if (panels.gdpr) panels.gdpr.hidden = (key !== 'gdpr');
+      };
+
+      // open triggers
+      document.querySelectorAll('[data-legal-open]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal(a.getAttribute('data-legal-open'));
+        });
+      });
+
+      // close triggers
+      modal?.querySelectorAll('[data-legal-close]').forEach(el => {
+        el.addEventListener('click', closeModal);
+      });
+
+      // tab switching
+      tabButtons?.forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.getAttribute('data-legal-tab')));
+      });
+
+      // ESC / click outside handled by backdrop + esc
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal?.getAttribute('aria-hidden') === 'false') closeModal();
+      });
+
+      setYear();
+    })();
