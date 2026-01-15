@@ -10,7 +10,7 @@
   --akcent-2: #06b6d4;   
 
   /* === GLASSMORPHISM === */
-  --sklo-bg: rgba(255, 255, 255, 0.85); /* Neprůhlednější pro lepší čitelnost */
+  --sklo-bg: rgba(255, 255, 255, 0.85);
   --sklo-border: rgba(255, 255, 255, 1);
   --sklo-lesk: inset 0 1px 0 0 rgba(255, 255, 255, 1);
   --sklo-stín: 0 12px 40px -8px rgba(37, 99, 235, 0.12);
@@ -20,9 +20,10 @@
   --radius-2: 24px;
   
   --max: 1120px;
-  --mezera: clamp(16px, 3vw, 28px);
-  --hlava: clamp(34px, 4.6vw, 56px);
-  --h2: clamp(26px, 3.3vw, 38px);
+  /* Zmenšeno pro mobil, aby byl obsah širší */
+  --mezera: clamp(16px, 4vw, 28px); 
+  --hlava: clamp(32px, 5vw, 56px);
+  --h2: clamp(24px, 4vw, 38px);
   --radek: 1.6;
 }
 
@@ -41,6 +42,8 @@ body {
     radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.10), transparent 40%);
   background-attachment: fixed;
   min-height: 100vh;
+  /* Důležité: zabrání horizontálnímu scrollování při animacích */
+  overflow-x: hidden; 
 }
 
 img { display: block; max-width: 100%; height: auto; }
@@ -61,587 +64,382 @@ a:hover { color: var(--akcent); }
   box-shadow: var(--sklo-stín), var(--sklo-lesk);
 }
 
-/* === HLAVIČKA === */
-.hlavicka { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.9); }
-.hlavicka__vnitr { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+/* === HLAVIČKA A NAVIGACE === */
+.hlavicka { 
+  position: sticky; 
+  top: 0; 
+  z-index: 100; /* Zvýšeno kvůli modálním oknům */
+  background: rgba(255, 255, 255, 0.9); 
+}
+.hlavicka__vnitr { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 12px 0; 
+  height: 70px;
+}
 
-.znacka { display: flex; align-items: center; gap: 10px; }
+.znacka { display: flex; align-items: center; gap: 10px; z-index: 102; position: relative; }
 .znacka__tecka {
   width: 14px; height: 14px; border-radius: 50%;
   background: linear-gradient(135deg, var(--akcent), var(--akcent-2));
 }
-.znacka__text { font-weight: 800; font-size: 18px; color: var(--text); }
+.znacka__text { 
+  font-weight: 800; 
+  font-size: 16px; /* Menší font na mobil */
+  color: var(--text); 
+}
+@media (min-width: 400px) { .znacka__text { font-size: 18px; } }
 
-.navigace { display: none; align-items: center; gap: 8px; }
-@media (min-width: 900px) { .navigace { display: flex; } }
-.navigace__odkaz { color: var(--text-2); padding: 8px 16px; border-radius: 99px; transition: all 0.2s; }
-.navigace__odkaz:hover { background: #fff; color: var(--akcent); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+/* MENU TLAČÍTKO (BURGER) */
+.menu-tlacitko { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 5px; 
+  padding: 10px; 
+  background: transparent; 
+  border: none;
+  cursor: pointer; 
+  z-index: 102;
+  position: relative;
+}
+.menu-tlacitko__cara { 
+  width: 24px; 
+  height: 2px; 
+  background: var(--text); 
+  transition: 0.3s; 
+  border-radius: 2px;
+}
 
-/* Menu tlačítko pro mobil */
-.menu-tlacitko { display: flex; flex-direction: column; gap: 5px; padding: 10px; background: transparent; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; cursor: pointer; }
-.menu-tlacitko__cara { width: 20px; height: 2px; background: var(--text); }
-@media (min-width: 900px) { .menu-tlacitko { display: none; } }
+/* Animace burger menu při otevření */
+.navigace--otevrena + .menu-tlacitko .menu-tlacitko__cara:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.navigace--otevrena + .menu-tlacitko .menu-tlacitko__cara:nth-child(2) { opacity: 0; }
+.navigace--otevrena + .menu-tlacitko .menu-tlacitko__cara:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* NAVIGACE - MOBILNÍ STYLY (Critical Fix) */
+.navigace {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(15px);
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 20px;
+}
+
+/* Třída přidávaná Javascriptem */
+.navigace.navigace--otevrena {
+  transform: translateX(0);
+}
+
+.navigace__odkaz { 
+  color: var(--text); 
+  font-size: 20px; 
+  font-weight: 700; 
+  padding: 10px 20px; 
+  border-radius: 12px;
+}
+.navigace__odkaz:hover, .navigace__odkaz--aktivni { 
+  color: var(--akcent); 
+  background: rgba(37, 99, 235, 0.05); 
+}
+
+/* NAVIGACE - DESKTOP */
+@media (min-width: 900px) { 
+  .menu-tlacitko { display: none; }
+  
+  .navigace {
+    position: static;
+    transform: none;
+    background: transparent;
+    flex-direction: row;
+    gap: 6px;
+    padding: 0;
+    backdrop-filter: none;
+    height: auto;
+    justify-content: flex-end;
+  }
+  
+  .navigace__odkaz {
+    font-size: 15px;
+    color: var(--text-2);
+    padding: 8px 16px;
+    border-radius: 99px;
+  }
+  
+  .navigace__odkaz:hover { 
+    background: #fff; 
+    color: var(--akcent); 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+  }
+}
+
 
 /* === HERO === */
-.hero { padding: clamp(50px, 9vw, 100px) 0; }
-.hero__mřížka { display: grid; gap: 40px; align-items: center; grid-template-columns: 1fr; }
+.hero { padding: clamp(40px, 8vw, 100px) 0; overflow: hidden; } /* Overflow hidden fixuje přetékání animací */
+.hero__mřížka { 
+  display: grid; 
+  gap: 40px; 
+  align-items: center; 
+  grid-template-columns: 1fr; 
+}
 @media (min-width: 900px) { .hero__mřížka { grid-template-columns: 1fr 1fr; } }
 
-.hero__nadpis { font-size: var(--hlava); line-height: 1.1; margin: 0 0 20px 0; font-weight: 800; letter-spacing: -1px; }
+.hero__text { z-index: 2; position: relative; }
+.hero__nadpis { 
+  font-size: var(--hlava); 
+  line-height: 1.15; 
+  margin: 0 0 20px 0; 
+  font-weight: 800; 
+  letter-spacing: -0.02em; 
+}
 .hero__nadpis-zvýraznění {
   background: linear-gradient(90deg, var(--akcent), var(--akcent-2));
   -webkit-background-clip: text; background-clip: text; color: transparent;
+  white-space: nowrap; /* Aby se slova nelámala divně */
 }
-.hero__popis { margin: 0 0 30px 0; font-size: 18px; color: var(--text-2); max-width: 50ch; }
-.hero__cta { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
+.hero__popis { margin: 0 0 30px 0; font-size: 17px; color: var(--text-2); max-width: 50ch; line-height: 1.6; }
+
+.hero__cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
 
 /* Tlačítka */
 .tlacitko {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 12px 24px; border-radius: 12px; font-weight: 700; cursor: pointer;
-  transition: transform 0.2s; border: none; font-size: 15px;
+  transition: transform 0.2s; border: none; font-size: 15px; text-align: center;
 }
+.tlacitko--male { padding: 8px 16px; font-size: 14px; }
 .tlacitko:hover { transform: translateY(-2px); }
 .tlacitko--plne {
   background: linear-gradient(135deg, var(--akcent), #1e40af);
   color: #fff; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
 }
 .tlacitko--sekundarni { background: #fff; border: 1px solid rgba(0,0,0,0.1); color: var(--text); }
+a.tlacitko { text-decoration: none; color: inherit; } 
+a.tlacitko--plne { color: #fff; }
 
-/* Karty fakt (Hero) - oprava rozložení */
+/* Rychlá fakta v Hero */
 .hero__rychla-fakta {
-  grid-column: 1 / -1; width: 100%; margin-top: 30px;
-  display: grid; gap: 15px; grid-template-columns: 1fr;
+  width: 100%; margin-top: 20px;
+  display: grid; gap: 12px; grid-template-columns: 1fr;
 }
+/* Na tabletu už 3 vedle sebe */
 @media (min-width: 600px) { .hero__rychla-fakta { grid-template-columns: 1fr 1fr 1fr; } }
 
 .karta-fakt {
-  padding: 20px; border-radius: 16px; text-align: center;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 16px; border-radius: 16px; text-align: center;
 }
-.karta-fakt__cislo { font-size: 18px; font-weight: 800; color: var(--akcent); margin-bottom: 5px; }
-.karta-fakt__text { font-size: 14px; opacity: 0.8; }
+.karta-fakt__cislo { font-size: 16px; font-weight: 800; color: var(--akcent); margin-bottom: 4px; display: block; }
+.karta-fakt__text { font-size: 13px; opacity: 0.8; line-height: 1.4; }
 
-/* Panel s kódem */
-.panel { border-radius: var(--radius-2); overflow: hidden; }
-.panel__hlava { padding: 12px 16px; background: rgba(255,255,255,0.4); display: flex; gap: 8px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+
+/* Panel s kódem (Hero visual) */
+.hero__vizual { width: 100%; min-width: 0; /* Flexbox/Grid fix pro přetékání */ }
+.panel { border-radius: var(--radius-2); overflow: hidden; max-width: 100%; }
+.panel__hlava { padding: 12px 16px; background: rgba(255,255,255,0.6); display: flex; gap: 8px; border-bottom: 1px solid rgba(0,0,0,0.05); }
 .tecka { width: 10px; height: 10px; border-radius: 50%; }
 .tecka--cervena { background: #ff5f57; } .tecka--zluta { background: #febc2e; } .tecka--zelena { background: #28c840; }
-.panel__telo { padding: 20px; }
-.kodovy-blok { background: rgba(255,255,255,0.5); padding: 15px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); overflow-x: auto; }
-code { font-family: monospace; color: #334155; font-size: 13px; }
+
+.panel__telo { padding: 15px; }
+
+/* FIX PŘETÉKÁNÍ KÓDU NA MOBILU */
+.kodovy-blok { 
+  background: rgba(255,255,255,0.5); 
+  padding: 15px; 
+  border-radius: 12px; 
+  border: 1px solid rgba(0,0,0,0.05); 
+  overflow-x: auto; /* Dovolí scrollovat jen kód, ne celou stránku */
+  max-width: 100%;
+}
+pre { margin: 0; }
+code { font-family: "JetBrains Mono", monospace; color: #334155; font-size: 13px; white-space: pre; }
+@media (max-width: 400px) { code { font-size: 11px; } }
+
 .k-klic { color: var(--akcent); font-weight: bold; }
 .stitek-mrizka { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px; }
-.stitek { font-size: 12px; background: #fff; padding: 5px 10px; border-radius: 99px; font-weight: 600; color: var(--text-2); border: 1px solid rgba(0,0,0,0.05); }
+.stitek { font-size: 11px; background: #fff; padding: 4px 10px; border-radius: 99px; font-weight: 600; color: var(--text-2); border: 1px solid rgba(0,0,0,0.05); }
 
-/* === SEKCE A KARTY === */
-.sekce { padding: clamp(60px, 8vw, 90px) 0; }
-.nadpis-sekce { font-size: var(--h2); margin: 0 0 10px; font-weight: 800; }
+
+/* === SEKCE === */
+.sekce { padding: clamp(50px, 8vw, 90px) 0; }
+.nadpis-sekce { font-size: var(--h2); margin: 0 0 10px; font-weight: 800; line-height: 1.2; }
 .popis-sekce { color: var(--text-2); max-width: 60ch; margin-bottom: 30px; font-size: 17px; }
 
-.mřížka-karet { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+/* KARTY SLUŽEB */
+.mřížka-karet { 
+  display: grid; 
+  gap: 20px; 
+  grid-template-columns: 1fr; /* Mobil default */
+}
+@media (min-width: 650px) { .mřížka-karet { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } }
+
 .karta {
-  padding: 24px; display: flex; flex-direction: column; transition: transform 0.2s;
+  padding: 24px; display: flex; flex-direction: column; transition: transform 0.2s; height: 100%;
 }
 .karta:hover { transform: translateY(-5px); border-color: var(--akcent); }
 .karta__nadpis { margin: 0 0 10px; font-size: 20px; font-weight: 700; }
-.karta__text { margin: 0 0 15px; color: var(--text-2); line-height: 1.5; }
-.seznam-odrazky { margin: 0; padding-left: 20px; color: var(--text-2); }
-.seznam-odrazky li { margin-bottom: 5px; }
-.odkaz-sipka { margin-top: auto; color: var(--akcent); font-weight: 700; padding-top: 15px; }
+.karta__text { margin: 0 0 15px; color: var(--text-2); line-height: 1.5; font-size: 15px; }
+.seznam-odrazky { margin: 0; padding-left: 20px; color: var(--text-2); font-size: 14px; }
+.seznam-odrazky li { margin-bottom: 6px; }
+.odkaz-sipka { margin-top: auto; color: var(--akcent); font-weight: 700; padding-top: 15px; display: inline-block;}
 
-/* === KONTAKT (OPRAVENO) === */
-/* Grid pro kontakt - aby formulář nebyl pod textem */
-.kontakt { 
+
+/* === CENÍK === */
+.cenik-mrizka { 
   display: grid; 
-  gap: 40px; 
-  grid-template-columns: 1fr; /* Mobil: pod sebou */
+  gap: 24px; 
+  grid-template-columns: 1fr; 
+}
+@media (min-width: 900px) { .cenik-mrizka { grid-template-columns: 1fr 1.1fr 1fr; align-items: flex-start; } }
+
+.cenik-karta { padding: 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; height: 100%; }
+.cenik-karta--doporučeno { 
+  border: 2px solid var(--akcent); 
+  background: #fff; 
+  position: relative; 
+  order: -1; /* Na mobilu doporučené první */
 }
 @media (min-width: 900px) { 
-  .kontakt { grid-template-columns: 1fr 1fr; align-items: start; } /* PC: vedle sebe */
+  .cenik-karta--doporučeno { transform: scale(1.05); z-index: 2; order: unset; } 
 }
 
-/* Kartičky v kontaktu */
-.kontakt__karty{
-  display: grid;
-  gap: 10px;
-  grid-template-columns: 1fr 1fr;
-  margin: 20px 0;
+.cenik-karta__odznak {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--akcent); color: #fff; font-size: 12px; font-weight: 700;
+  padding: 4px 12px; border-radius: 99px; text-transform: uppercase;
 }
 
-.mini-karta{
-  padding: 15px;
-  text-align: center;
-  border-radius: 12px;
-  background: #fff;
-}
-
-.mini-karta__titulek{
-  font-size: 11px;
-  text-transform: uppercase;
-  color: var(--text-2);
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-/* jen typografie hodnoty */
-.mini-karta__hodnota{
-  font-weight: 700;
-  margin-top: 4px;
-  font-size: 14px;
-}
-
-/* řádek (ikona + text) na střed */
-.mini-karta__row{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  text-align: center;
-}
-
-/* když je uvnitř odkaz, ať se chová stejně a je celý klikací */
-.mini-karta__hodnota a{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  text-align: center;
-}
-
-/* zalamování dlouhého emailu, ale pořád na střed */
-.mini-karta__row,
-.mini-karta__hodnota a{
-  flex-wrap: wrap;
-}
-/* === FORMULÁŘ (OPRAVENO CSS) === */
-.formular {
-  padding: 30px;
-  border-radius: 20px;
-  background: #fff; /* Čisté pozadí pro formulář */
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* Mezery mezi řádky */
-}
-
-.formular__radek { display: flex; flex-direction: column; gap: 6px; }
-.stitky { font-size: 14px; font-weight: 700; color: var(--text-2); margin-left: 2px; }
-
-/* Stylování inputů */
-.vstup {
-  width: 100%;
-  padding: 12px 15px;
-  border-radius: 10px;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-  font-size: 15px;
-  font-family: inherit;
-  outline: none;
-  transition: all 0.2s;
-}
-.vstup:focus {
-  border-color: var(--akcent);
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-textarea.vstup { resize: vertical; min-height: 100px; }
-
-.formular__spodni { margin-top: 10px; }
-.formular__drobne { font-size: 12px; color: #94a3b8; text-align: center; margin-top: 10px; }
-
-/* === PRÁVNÍ SEKCE (NENÁPADNÁ) === */
-/* Specifické ID pro právní sekci, aby to nebyly velké karty */
-#legalni {
-  padding: 40px 0;
-  border-top: 1px solid rgba(0,0,0,0.06);
-  background: transparent;
-}
-
-/* Zúžení kontejneru pro právní věci */
-#legalni .kontejner { max-width: 800px; }
-
-/* Přepsání stylu FAQ položky jen pro tuto sekci */
-#legalni .faq__polozka {
-  background: transparent;
-  box-shadow: none;
-  border: none;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  border-radius: 0;
-  padding: 12px 0;
-  margin: 0;
-}
-
-#legalni .faq__otazka {
-  font-size: 14px;
-  color: var(--text-2);
-  font-weight: 600;
-  opacity: 0.8;
-}
-#legalni .faq__otazka:hover { opacity: 1; color: var(--akcent); }
-
-/* Text uvnitř právních věcí */
-.legalni-text { 
-  font-size: 13px; 
-  color: #64748b; 
-  padding-top: 10px; 
-  line-height: 1.6;
-}
-.legalni-text h4 { margin: 15px 0 5px; color: var(--text); font-size: 14px; }
-
-/* === CENÍK, KROKY, FAQ === */
-.cenik-mrizka { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-.cenik-karta { padding: 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; }
-.cenik-karta--doporučeno { border: 2px solid var(--akcent); background: #fff; transform: scale(1.02); }
-.cenik-karta__cislo { font-size: 36px; font-weight: 800; color: var(--text); display: block; margin: 15px 0; }
-.cenik-karta__seznam { text-align: left; margin-bottom: 25px; font-size: 15px; color: var(--text-2); }
+.cenik-karta__cislo { font-size: 32px; font-weight: 800; color: var(--text); display: block; margin: 15px 0; }
+.cenik-karta__seznam { text-align: left; margin-bottom: 25px; font-size: 15px; color: var(--text-2); padding-left: 20px; }
+.cenik-karta__seznam li { margin-bottom: 8px; }
 .cenik-karta__tlacitko { margin-top: auto; width: 100%; }
-/* --- PROCES --- */
-.process-steps{
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  align-items: stretch;
-}
 
-@media (min-width: 900px){
-  .process-steps{
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.step{
-  position: relative;
-  padding: 22px;
-  border-radius: 16px;
-  border: 1px solid rgba(0,0,0,0.06); /* místo var(--border) */
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  box-shadow: var(--sklo-stín), var(--sklo-lesk);
-  overflow: hidden;
-  min-height: 160px;
-}
-
-.step__number{
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  font-size: 2.6rem;
-  font-weight: 800;
-  line-height: 1;
-  color: rgba(15,23,42,0.07);
-  pointer-events: none;
-  user-select: none;
-}
-
-.step__title{
-  font-size: 1.1rem;
-  margin: 0 0 8px;
-}
-
-.step__text{
-  margin: 0;
-  color: var(--text-2); /* místo var(--text-muted) */
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-/* === OPRAVA DOPLŇKOVÝCH SLUŽEB (CENÍK) === */
-
+/* Doplňkové služby - tabulka */
 .cenik-doplnky {
   margin-top: 40px;
-  padding: 30px;
-  /* Jemný kontejner okolo doplňků */
+  padding: 20px;
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 20px;
 }
+@media(min-width: 600px) { .cenik-doplnky { padding: 30px; } }
 
-.cenik-doplnky__nadpis {
-  margin: 0 0 20px 0;
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--text);
-}
+.cenik-doplnky__nadpis { margin: 0 0 20px 0; font-size: 20px; font-weight: 800; }
+.cenik-doplnky__tabulka { display: flex; flex-direction: column; gap: 10px; }
 
-.cenik-doplnky__tabulka {
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* Mezera mezi kartičkami */
-}
-
-/* Styl pro jednotlivé řádky - vzhled malé karty */
 .cenik-radek {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  
-  /* Vzhled */
-  background: #fff;
-  border: 1px solid rgba(255, 255, 255, 1);
-  padding: 16px 20px;
-  border-radius: 12px;
-  
-  /* Stín a efekt */
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-  transition: transform 0.2s, border-color 0.2s;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  background: #fff; border: 1px solid #fff; padding: 16px; border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+/* Na větším displeji řádek vedle sebe */
+@media (min-width: 500px) {
+  .cenik-radek { flex-direction: row; justify-content: space-between; align-items: center; }
 }
 
-.cenik-radek:hover {
-  transform: translateY(-2px);
-  border-color: var(--akcent); /* Při najetí zmodrá rámeček */
-  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.1);
-}
+.cenik-radek strong { color: var(--akcent); font-weight: 800; white-space: nowrap; }
 
-/* Texty uvnitř */
-.cenik-radek span {
-  font-weight: 600;
-  color: var(--text-2);
-  font-size: 15px;
-}
 
-.cenik-radek strong {
-  color: var(--akcent);
-  font-weight: 800;
-  white-space: nowrap; /* Aby se cena nelámala */
+/* === PROCES (KROKY) === */
+.process-steps {
+  display: grid; gap: 16px; grid-template-columns: 1fr;
 }
+@media (min-width: 600px) { .process-steps { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .process-steps { grid-template-columns: repeat(4, 1fr); } }
 
-.cenik-doplnky__poznamka {
-  margin-top: 20px;
-  font-size: 13px;
-  color: var(--text-2);
-  opacity: 0.8;
-  text-align: center;
+.step {
+  position: relative; padding: 22px; border-radius: 16px;
+  background: rgba(255,255,255,0.55);
+  box-shadow: var(--sklo-stín);
+  border: 1px solid rgba(255,255,255,0.8);
 }
-
-/* Mobilní úprava - pokud je text dlouhý */
-@media (max-width: 500px) {
-  .cenik-radek {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-  .cenik-radek strong {
-    align-self: flex-end; /* Cena skočí doprava dolů */
-  }
+.step__number {
+  position: absolute; top: 14px; right: 16px;
+  font-size: 2.6rem; font-weight: 800; line-height: 1;
+  color: rgba(15,23,42,0.07); pointer-events: none;
 }
-.kroky { display: grid; gap: 20px; padding: 0; }
-.krok { display: flex; gap: 20px; padding: 20px; align-items: flex-start; }
-.krok__cislo { min-width: 40px; height: 40px; background: var(--akcent); color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+.step__title { font-size: 1.1rem; margin: 0 0 8px; font-weight: 700;}
 
-.faq { display: grid; gap: 10px; }
-.faq__polozka { padding: 20px; cursor: pointer; }
-.faq__otazka { font-weight: 700; list-style: none; }
-.faq__odpoved { margin-top: 10px; color: var(--text-2); line-height: 1.5; }
+
+/* === FAQ === */
+.faq { display: grid; gap: 12px; }
+.faq__polozka { padding: 16px 20px; cursor: pointer; border-radius: 12px; }
+.faq__otazka { font-weight: 700; list-style: none; font-size: 16px; padding-right: 20px; position: relative; }
+.faq__otazka::-webkit-details-marker { display: none; }
+.faq__otazka::after {
+  content: '+'; position: absolute; right: 0; top: 0; font-weight: 400; font-size: 20px; color: var(--akcent);
+}
+details[open] .faq__otazka::after { content: '−'; }
+.faq__odpoved { margin-top: 10px; color: var(--text-2); line-height: 1.6; font-size: 15px; }
+
+
+/* === KONTAKT === */
+.kontakt { display: grid; gap: 40px; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .kontakt { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+.kontakt__karty { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; margin: 20px 0; }
+/* Na hodně malých mobilech pod sebe */
+@media (max-width: 350px) { .kontakt__karty { grid-template-columns: 1fr; } }
+
+.mini-karta { padding: 15px; text-align: center; border-radius: 12px; background: #fff; }
+.mini-karta__row { display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.mini-karta__hodnota { font-weight: 700; font-size: 13px; margin-top: 5px; word-break: break-all; } /* Break all pro dlouhé emaily */
+
+
+/* FORMULÁŘ */
+.formular { padding: 24px; border-radius: 20px; background: #fff; display: flex; flex-direction: column; gap: 16px; }
+.vstup {
+  width: 100%; padding: 12px 15px; border-radius: 10px;
+  border: 1px solid #cbd5e1; background: #f8fafc;
+  font-size: 16px; /* 16px zabrání zoomování na iOS */
+  font-family: inherit; outline: none;
+}
+.vstup:focus { border-color: var(--akcent); background: #fff; }
+
 
 /* === PATIČKA === */
 .paticka { margin-top: 60px; padding: 40px 0; border-top: 1px solid rgba(0,0,0,0.05); color: var(--text-2); font-size: 14px; text-align: center; }
-.paticka a { color: var(--text-2); margin: 0 10px; }
+.paticka__vnitr { display: flex; flex-direction: column; gap: 20px; align-items: center; }
+@media (min-width: 600px) { 
+  .paticka__vnitr { flex-direction: row; justify-content: space-between; text-align: left; }
+}
 
-/* Helpery */
+.paticka__pravo { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+.paticka__odkaz { color: var(--text-2); font-weight: normal; }
+.paticka__odkaz:hover { text-decoration: underline; color: var(--akcent); }
+
+
+/* === PRÁVNÍ MODAL (ZACHOVÁNO, JEN FIX PRO MOBIL) === */
+.legal-modal { position: fixed; inset: 0; z-index: 9999; display: none; }
+.legal-modal[aria-hidden="false"] { display: block; }
+.legal-modal__backdrop { position: absolute; inset: 0; background: rgba(15, 23, 42, .72); backdrop-filter: blur(4px); }
+.legal-modal__panel {
+  position: relative;
+  margin: 2vh auto;
+  width: min(920px, calc(100% - 24px)); /* Margin po stranách na mobilu */
+  max-height: 96vh;
+  overflow-y: auto;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 16px;
+}
+/* Zbytek stylů pro modal je v HTML <style>, to je ok */
+
+
+/* === HELPERY A ANIMACE === */
 .honeypot { position: absolute; left: -9999px; }
 .preskocit-odkaz { position: absolute; left: -999px; }
-.animace { opacity: 0; transform: translateY(20px); transition: 0.6s; }
+
+/* Animace - vypnout na mobilu pro lepší výkon, nebo nechat jemné */
+.animace { opacity: 0; transform: translateY(20px); transition: 0.6s ease-out; }
 .animace--videt { opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce) { .animace { transition: none; opacity: 1; transform: none; } }
 
-/* =========================================================
-   RESPONZIVITA (MOBILE/TABLET) – KOMPLETNÍ OPRAVA
-   Pozn.: tento blok je záměrně na KONCI souboru, aby přebil
-   desktop styly jen tam, kde je to potřeba.
-   ========================================================= */
-
-/* iOS/Android drobnosti */
-html { -webkit-text-size-adjust: 100%; }
-body { overflow-x: hidden; }
-
-/* Skip link – ať je skutečně použitelný */
-.preskocit-odkaz:focus{
-  left: 16px;
-  top: 16px;
-  padding: 10px 12px;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,.12);
-  border-radius: 10px;
-  z-index: 9999;
-}
-
-/* -------------------------
-   TABLET + MOBIL (<= 899px)
-   ------------------------- */
-@media (max-width: 899px){
-
-  /* méně “desktop” vzduchu */
-  :root{ --mezera: 16px; }
-
-  /* Background fixed na mobilech často seká */
-  body{ background-attachment: scroll; }
-
-  /* HLAVIČKA: značka + burger */
-  .hlavicka__vnitr{ gap: 12px; }
-
-  .znacka{ min-width: 0; }
-  .znacka__text{
-    font-size: 15px;
-    line-height: 1.15;
-    max-width: 72vw;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .menu-tlacitko{
-    min-width: 44px;
-    min-height: 44px;
-    padding: 12px;
-  }
-
-  /* MOBILNÍ MENU – JS přidává .navigace--otevrena, CSS to musí umět */
-  .navigace{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: calc(100% + 10px);
-
-    /* default zavřeno */
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-
-    width: min(var(--max), calc(100% - (var(--mezera) * 2)));
-    margin: 0 auto;
-    padding: 10px;
-
-    gap: 6px;
-    border-radius: 16px;
-
-    background: rgba(255,255,255,0.96);
-    backdrop-filter: var(--blur);
-    -webkit-backdrop-filter: var(--blur);
-    border: 1px solid rgba(0,0,0,0.08);
-    box-shadow: 0 18px 45px rgba(2,6,23,0.18);
-    z-index: 60;
-  }
-  .navigace.navigace--otevrena{ display: flex; }
-
-  .navigace__odkaz{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 12px 12px;
-    border-radius: 12px;
-    font-size: 16px;
-  }
-
-  .navigace .tlacitko{
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* HERO – mobilnější pocit */
-  .hero{ padding: 44px 0; }
-  .hero__mřížka{ gap: 22px; }
-
-  /* CTA: na mobilu radši pod sebe */
-  .hero__cta{
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-  .hero__cta .tlacitko{
-    width: 100%;
-    justify-content: center;
-    padding: 12px 16px;
-  }
-
-  /* Rychlá fakta – ať to není “desktop lišta” */
-  .hero__rychla-fakta{ gap: 12px; }
-
-  /* Sekce obecně: o trochu menší padding */
-  .sekce{ padding: 52px 0; }
-
-  /* Kontakt layout: na tabletu/mobilu pod sebe (pokud je 2-sloupcový na desktopu) */
-  .kontakt{
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
-
-  /* Footer mřížka pod sebe */
-  .paticka__mřížka{
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-}
-
-/* -------------------------
-   TELEFON (<= 600px)
-   ------------------------- */
-@media (max-width: 600px){
-
-  /* typografie čitelněji a kratší řádky */
-  .hero__nadpis{
-    font-size: clamp(28px, 7vw, 40px);
-    letter-spacing: -0.6px;
-    margin-bottom: 14px;
-  }
-  .hero__popis{
-    font-size: 16px;
-    margin-bottom: 18px;
-  }
-
-  .popis-sekce{ font-size: 16px; }
-
-  /* karty a panely: menší padding */
-  .karta{ padding: 18px; }
-  .panel__telo{ padding: 14px; }
-
-  /* kódový blok: ať na mobilu nedominuje a dá se scrollovat */
-  .kodovy-blok{
-    max-height: 220px;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  code{ font-size: 12px; }
-
-  /* ceník: mírně zmenšit “číslo” */
-  .cenik-karta{ padding: 20px; }
-  .cenik-karta__cislo{ font-size: 30px; }
-
-  /* formulář: iOS zoom fix + příjemnější velikost */
-  .formular{ padding: 18px; border-radius: 16px; }
-  .vstup{ font-size: 16px; }
-
-  /* FAQ: větší tap target */
-  .faq__polozka{ padding: 16px; }
-  .faq__otazka{ font-size: 16px; }
-
-  /* Legal modal: na mobilu ať není “desktop” */
-  .legal-modal__panel{
-    margin: 2vh auto;
-    width: calc(100% - 16px);
-  }
-  .legal-tabs{ flex-wrap: wrap; }
-  .legal-tab{
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* -------------------------
-   EXTRA ÚZKÉ MOBILY (<= 420px)
-   ------------------------- */
-@media (max-width: 420px){
-
-  /* kontakt mini-karty: 2 sloupce jsou moc natěsno */
-  .kontakt__karty{
-    grid-template-columns: 1fr;
-  }
-
-  .karta, .cenik-karta, .formular{
-    padding: 16px;
-    border-radius: 16px;
-  }
+@media (prefers-reduced-motion: reduce) { 
+  .animace { transition: none; opacity: 1; transform: none; } 
 }
