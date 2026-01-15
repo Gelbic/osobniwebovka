@@ -1,76 +1,32 @@
-{
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Jan Galba",
-    "description": "Tvorba moderních webových stránek a menších aplikací, servis PC a domácí servery. Svitavy a okolí / online po celé ČR.",
-    "url": "https://jangalba.eu/",
-    "image": "https://jangalba.eu/og.jpg",
-    "email": "mailto:info@jangalba.eu",
-    "telephone": "+420775600674",
-    "priceRange": "od 7 000 Kč",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Antonína Slavíčka 705/31",
-      "postalCode": "568 02",
-      "addressLocality": "Svitavy",
-      "addressRegion": "Pardubický kraj",
-      "addressCountry": "CZ"
-    },
-    "areaServed": [
-      { "@type": "AdministrativeArea", "name": "Pardubický kraj" },
-      { "@type": "Country", "name": "Česká republika" },
-      "Online"
-    ],
-    "contactPoint": [
-      {
-        "@type": "ContactPoint",
-        "contactType": "customer support",
-        "email": "info@jangalba.eu",
-        "telephone": "+420775600674",
-        "availableLanguage": [ "cs" ]
-      }
-    ],
-    "founder": { "@type": "Person", "name": "Jan Galba" },
-    "serviceType": [
-      "Tvorba webových stránek",
-      "Menší webové aplikace a nástroje",
-      "Doména, DNS a e-mail na doméně",
-      "Nasazení webu na hosting",
-      "Servis PC a upgrade",
-      "Domácí servery (NAS)"
-    ],
-    "makesOffer": [
-      { "@type": "Offer", "name": "Tvorba webových stránek (onepage, prezentace, landing page)" },
-      { "@type": "Offer", "name": "Menší webové aplikace a nástroje (formuláře, kalkulačky, automatizace)" },
-      { "@type": "Offer", "name": "Kompletní zajištění domény, DNS, e-mailu a nasazení na hosting" },
-      { "@type": "Offer", "name": "Instalace, opravy a upgrade PC (HW/SW), domácí servery" }
-    ],
-    "sameAs": [],
-    "identifier": { "@type": "PropertyValue", "propertyID": "IČO", "value": "24367699" },
-    "legalName": "Jan Galba"
-}
-
 (() => {
   const html = document.documentElement;
   const body = document.body;
 
-  // Rok v patičce
-  const rok = document.getElementById("rok");
-  if (rok) rok.textContent = String(new Date().getFullYear());
-
-  // Mobilní menu toggle (FIXED)
-  const tlacitkoMenu = document.querySelector("[data-menu-tlacitko]");
-  const navigace = document.querySelector("[data-navigace]");
-  const mqDesktop = window.matchMedia("(min-width: 900px)");
-
+  // =========================
+  // Helpers: scroll lock
+  // =========================
   const zamknoutScroll = (zamknout) => {
     html.classList.toggle("menu-locked", zamknout);
     body.classList.toggle("menu-locked", zamknout);
   };
 
+  // =========================
+  // Rok v patičce
+  // =========================
+  const rok = document.getElementById("rok");
+  if (rok) rok.textContent = String(new Date().getFullYear());
+
+  // =========================
+  // Mobilní menu (burger + overlay + křížek)
+  // =========================
+  const tlacitkoMenu = document.querySelector("[data-menu-tlacitko]");
+  const navigace = document.querySelector("[data-navigace]");
+  const tlacitkoZavrit = document.querySelector("[data-zavrit-menu]");
+  const mqDesktop = window.matchMedia("(min-width: 900px)");
+
   if (tlacitkoMenu && navigace) {
     const nastavitStav = (otevreno) => {
-      // Desktop: menu je vždy "normální" (žádný off-canvas)
+      // Desktop: navigace je normálně vidět, bez overlay režimu
       if (mqDesktop.matches) {
         navigace.classList.remove("navigace--otevrena");
         tlacitkoMenu.setAttribute("aria-expanded", "false");
@@ -80,7 +36,7 @@
         return;
       }
 
-      // Mobil: off-canvas
+      // Mobil: overlay režim
       navigace.classList.toggle("navigace--otevrena", otevreno);
       tlacitkoMenu.setAttribute("aria-expanded", String(otevreno));
       tlacitkoMenu.setAttribute("aria-label", otevreno ? "Zavřít menu" : "Otevřít menu");
@@ -89,36 +45,58 @@
     };
 
     const prepnout = (otevrit) => {
-      // když někdo zavolá prepnout(true/false), respektuj to
-      // jinak přepni podle aktuálního stavu
       const jeOtevrene = otevrit ?? !navigace.classList.contains("navigace--otevrena");
       nastavitStav(jeOtevrene);
     };
 
-    // Klik na burger
+    // Burger
     tlacitkoMenu.addEventListener("click", () => prepnout());
 
-    // Zavřít menu po kliknutí na odkaz (mobil) – FIX: closest("a")
+    // Křížek – zavřít
+    if (tlacitkoZavrit) {
+      tlacitkoZavrit.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        prepnout(false);
+      });
+    }
+
+    // Klik v overlay:
+    // - klik mimo bílý panel = zavřít
+    // - klik na odkaz uvnitř panelu = zavřít
     navigace.addEventListener("click", (e) => {
-      const a = e.target instanceof HTMLElement ? e.target.closest("a") : null;
+      const obal = navigace.querySelector(".navigace__obal");
+      const target = e.target;
+
+      const klikUvnitPanelu =
+        !!obal && (target instanceof Node) && obal.contains(target);
+
+      if (!klikUvnitPanelu) {
+        prepnout(false);
+        return;
+      }
+
+      const a = target instanceof HTMLElement ? target.closest("a") : null;
       if (a) prepnout(false);
     });
 
-    // Zavřít po ESC
+    // ESC zavře menu (jen když je otevřené)
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") prepnout(false);
     });
 
-    // FIX: místo resize → matchMedia change (mobil se nebude náhodně zavírat při scrollu)
+    // Změna breakpointu: při přepnutí na desktop/menu zavřít
     const onMqChange = () => prepnout(false);
     if (mqDesktop.addEventListener) mqDesktop.addEventListener("change", onMqChange);
     else mqDesktop.addListener(onMqChange); // starší Safari
 
-    // počáteční stav
+    // init
     prepnout(false);
   }
 
+  // =========================
   // Animace při scrollu (IntersectionObserver)
+  // =========================
   const prvky = Array.from(document.querySelectorAll(".animace"));
   if (prvky.length && "IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
@@ -134,53 +112,61 @@
     );
     prvky.forEach((el) => observer.observe(el));
   } else {
-    // fallback
     prvky.forEach((el) => el.classList.add("animace--videt"));
   }
 
+  // =========================
   // Zvýraznění aktivní sekce v navigaci
+  // =========================
   const odkazy = Array.from(document.querySelectorAll(".navigace__odkaz"))
-    .filter(a => a.getAttribute("href")?.startsWith("#"));
+    .filter((a) => a.getAttribute("href")?.startsWith("#"));
 
   const sekce = odkazy
-    .map(a => document.querySelector(a.getAttribute("href")))
+    .map((a) => document.querySelector(a.getAttribute("href")))
     .filter(Boolean);
 
   if (odkazy.length && sekce.length && "IntersectionObserver" in window) {
     const aktivni = (id) => {
-      odkazy.forEach(a => {
+      odkazy.forEach((a) => {
         const je = a.getAttribute("href") === `#${id}`;
         a.classList.toggle("navigace__odkaz--aktivni", je);
       });
     };
 
-    const obs = new IntersectionObserver((entries) => {
-      const viditelne = entries
-        .filter(e => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const viditelne = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-      if (viditelne?.target?.id) aktivni(viditelne.target.id);
-    }, { threshold: [0.15, 0.35, 0.55] });
+        if (viditelne?.target?.id) aktivni(viditelne.target.id);
+      },
+      { threshold: [0.15, 0.35, 0.55] }
+    );
 
-    sekce.forEach(s => obs.observe(s));
+    sekce.forEach((s) => obs.observe(s));
   }
 
-  // Portfolio filtr
+  // =========================
+  // Portfolio filtr (pokud existuje)
+  // =========================
   const tlacitkaFiltru = Array.from(document.querySelectorAll("[data-filtr]"));
   const polozkyPortfolia = Array.from(document.querySelectorAll(".portfolio-karta"));
 
   if (tlacitkaFiltru.length && polozkyPortfolia.length) {
     const nastavitFiltr = (filtr) => {
-      tlacitkaFiltru.forEach(t => t.classList.toggle("portfolio-filtr--aktivni", t.dataset.filtr === filtr));
+      tlacitkaFiltru.forEach((t) =>
+        t.classList.toggle("portfolio-filtr--aktivni", t.dataset.filtr === filtr)
+      );
 
-      polozkyPortfolia.forEach(karta => {
+      polozkyPortfolia.forEach((karta) => {
         const kategorie = (karta.getAttribute("data-kategorie") || "").trim();
         const videt = filtr === "vse" || kategorie === filtr;
         karta.classList.toggle("portfolio-karta--skryta", !videt);
       });
     };
 
-    tlacitkaFiltru.forEach(tl => {
+    tlacitkaFiltru.forEach((tl) => {
       tl.addEventListener("click", () => nastavitFiltr(tl.dataset.filtr || "vse"));
     });
 
@@ -189,7 +175,7 @@
 
   // Klikací celé portfolio karty (data-url)
   const klikaciKarty = Array.from(document.querySelectorAll(".portfolio-karta[data-url]"));
-  klikaciKarty.forEach(karta => {
+  klikaciKarty.forEach((karta) => {
     karta.addEventListener("click", (e) => {
       const target = e.target;
       if (target instanceof HTMLElement && target.closest("a")) return;
@@ -207,7 +193,9 @@
     });
   });
 
+  // =========================
   // Formspree odeslání přes fetch (bez přesměrování)
+  // =========================
   const formular = document.getElementById("formular");
   const stav = document.querySelector("[data-formular-stav]");
 
@@ -239,7 +227,7 @@
         const res = await fetch(formular.action, {
           method: "POST",
           body: data,
-          headers: { "Accept": "application/json" }
+          headers: { Accept: "application/json" },
         });
 
         if (res.ok) {
@@ -247,43 +235,54 @@
           stav.textContent = "Hotovo! Zpráva byla odeslána. Ozvu se co nejdřív.";
         } else {
           const json = await res.json().catch(() => null);
-          const chyba = json?.errors?.[0]?.message || "Nepodařilo se odeslat zprávu. Zkuste to prosím později.";
+          const chyba =
+            json?.errors?.[0]?.message ||
+            "Nepodařilo se odeslat zprávu. Zkuste to prosím později.";
           stav.textContent = chyba;
         }
       } catch {
-        stav.textContent = "Nepodařilo se odeslat zprávu. Zkontrolujte připojení a zkuste to znovu.";
+        stav.textContent =
+          "Nepodařilo se odeslat zprávu. Zkontrolujte připojení a zkuste to znovu.";
       }
     });
   }
 
-  // Automatické otevírání <details> podle URL hashe (pro GDPR / obchodní podmínky)
+  // =========================
+  // Automatické otevírání <details> podle URL hashe
+  // =========================
   const otevritPodleHashe = () => {
     const hash = window.location.hash;
-    if (hash) {
-      const cil = document.querySelector(hash);
+    if (!hash) return;
 
-      if (cil && cil.tagName === "DETAILS") {
-        cil.open = true;
-        setTimeout(() => {
-          cil.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100);
-      }
+    const cil = document.querySelector(hash);
+    if (cil && cil.tagName === "DETAILS") {
+      cil.open = true;
+      setTimeout(() => {
+        cil.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
     }
   };
 
   window.addEventListener("load", otevritPodleHashe);
   window.addEventListener("hashchange", otevritPodleHashe);
 
-  // Legal modal – basic open/close + tabs
-  const modal = document.querySelector(".legal-modal");
+  // =========================
+  // Legal modal – open/close + tabs (sjednoceno)
+  // =========================
+  const modal = document.getElementById("legalModal");
+
   if (modal) {
+    const panel = modal.querySelector(".legal-modal__panel");
     const closeBtns = Array.from(modal.querySelectorAll("[data-legal-close]"));
     const tabBtns = Array.from(modal.querySelectorAll("[data-legal-tab]"));
-    const panels = Array.from(modal.querySelectorAll("[data-legal-panel]"));
+    const panelOp = modal.querySelector("#panel-op");
+    const panelGdpr = modal.querySelector("#panel-gdpr");
 
-    const otevritModal = () => {
+    const otevritModal = (which) => {
       modal.setAttribute("aria-hidden", "false");
       zamknoutScroll(true);
+      aktivovatTab(which || "op");
+      setTimeout(() => panel?.focus(), 0);
     };
 
     const zavritModal = () => {
@@ -291,95 +290,39 @@
       zamknoutScroll(false);
     };
 
-    const openTriggers = Array.from(document.querySelectorAll("[data-legal-open]"));
-    openTriggers.forEach(btn => btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      otevritModal();
-    }));
+    const aktivovatTab = (which) => {
+      const key = which === "gdpr" ? "gdpr" : "op";
 
-    closeBtns.forEach(b => b.addEventListener("click", zavritModal));
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") zavritModal();
-    });
-
-    const aktivovatTab = (klic) => {
-      tabBtns.forEach(b => b.setAttribute("aria-selected", String(b.dataset.legalTab === klic)));
-      panels.forEach(p => {
-        const je = p.dataset.legalPanel === klic;
-        p.toggleAttribute("hidden", !je);
+      tabBtns.forEach((b) => {
+        b.setAttribute("aria-selected", String(b.dataset.legalTab === key));
       });
+
+      if (panelOp) panelOp.hidden = key !== "op";
+      if (panelGdpr) panelGdpr.hidden = key !== "gdpr";
     };
 
-    tabBtns.forEach(b => b.addEventListener("click", () => aktivovatTab(b.dataset.legalTab)));
+    // Otevírací triggery (paticka)
+    Array.from(document.querySelectorAll("[data-legal-open]")).forEach((a) => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        otevritModal(a.getAttribute("data-legal-open") || "op");
+      });
+    });
 
-    // init
-    aktivovatTab("gdpr");
+    // Zavírání
+    closeBtns.forEach((b) => b.addEventListener("click", zavritModal));
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.getAttribute("aria-hidden") === "false") {
+        zavritModal();
+      }
+    });
+
+    // Taby
+    tabBtns.forEach((b) => {
+      b.addEventListener("click", () => aktivovatTab(b.dataset.legalTab));
+    });
+
+    // Init: výchozí tab (nechávám OP jako default)
+    aktivovatTab("op");
   }
 })();
-
-(function () {
-      const modal = document.getElementById('legalModal');
-      const panel = modal?.querySelector('.legal-modal__panel');
-      const tabButtons = modal?.querySelectorAll('[data-legal-tab]');
-      const panels = {
-        op: modal?.querySelector('#panel-op'),
-        gdpr: modal?.querySelector('#panel-gdpr')
-      };
-
-      const setYear = () => {
-        const el = document.getElementById('rok');
-        if (el) el.textContent = new Date().getFullYear();
-      };
-
-      const openModal = (which) => {
-        if (!modal) return;
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        switchTab(which || 'op');
-        // fokus
-        setTimeout(() => panel?.focus(), 0);
-      };
-
-      const closeModal = () => {
-        if (!modal) return;
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      };
-
-      const switchTab = (which) => {
-        const key = (which === 'gdpr') ? 'gdpr' : 'op';
-        // tabs
-        tabButtons?.forEach(btn => {
-          const isActive = btn.getAttribute('data-legal-tab') === key;
-          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        });
-        // panels
-        if (panels.op) panels.op.hidden = (key !== 'op');
-        if (panels.gdpr) panels.gdpr.hidden = (key !== 'gdpr');
-      };
-
-      // open triggers
-      document.querySelectorAll('[data-legal-open]').forEach(a => {
-        a.addEventListener('click', (e) => {
-          e.preventDefault();
-          openModal(a.getAttribute('data-legal-open'));
-        });
-      });
-
-      // close triggers
-      modal?.querySelectorAll('[data-legal-close]').forEach(el => {
-        el.addEventListener('click', closeModal);
-      });
-
-      // tab switching
-      tabButtons?.forEach(btn => {
-        btn.addEventListener('click', () => switchTab(btn.getAttribute('data-legal-tab')));
-      });
-
-      // ESC / click outside handled by backdrop + esc
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal?.getAttribute('aria-hidden') === 'false') closeModal();
-      });
-
-      setYear();
-    })();

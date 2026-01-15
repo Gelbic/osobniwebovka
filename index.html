@@ -33,19 +33,76 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style_redesign.css" />
 
   
 
   
+
+  <!-- Structured data (Schema.org) -->
+  <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Jan Galba",
+    "description": "Tvorba moderních webových stránek a menších aplikací, servis PC a domácí servery. Svitavy a okolí / online po celé ČR.",
+    "url": "https://jangalba.eu/",
+    "image": "https://jangalba.eu/og.jpg",
+    "email": "mailto:info@jangalba.eu",
+    "telephone": "+420775600674",
+    "priceRange": "od 7 000 Kč",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Antonína Slavíčka 705/31",
+      "postalCode": "568 02",
+      "addressLocality": "Svitavy",
+      "addressRegion": "Pardubický kraj",
+      "addressCountry": "CZ"
+    },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "Pardubický kraj" },
+      { "@type": "Country", "name": "Česká republika" },
+      "Online"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "info@jangalba.eu",
+        "telephone": "+420775600674",
+        "availableLanguage": [ "cs" ]
+      }
+    ],
+    "founder": { "@type": "Person", "name": "Jan Galba" },
+    "serviceType": [
+      "Tvorba webových stránek",
+      "Menší webové aplikace a nástroje",
+      "Doména, DNS a e-mail na doméně",
+      "Nasazení webu na hosting",
+      "Servis PC a upgrade",
+      "Domácí servery (NAS)"
+    ],
+    "makesOffer": [
+      { "@type": "Offer", "name": "Tvorba webových stránek (onepage, prezentace, landing page)" },
+      { "@type": "Offer", "name": "Menší webové aplikace a nástroje (formuláře, kalkulačky, automatizace)" },
+      { "@type": "Offer", "name": "Kompletní zajištění domény, DNS, e-mailu a nasazení na hosting" },
+      { "@type": "Offer", "name": "Instalace, opravy a upgrade PC (HW/SW), domácí servery" }
+    ],
+    "sameAs": [],
+    "identifier": { "@type": "PropertyValue", "propertyID": "IČO", "value": "24367699" },
+    "legalName": "Jan Galba"
+}
+  </script>
+
 </head>
 
 <body>
   <a class="preskocit-odkaz" href="#obsah">Přeskočit na obsah</a>
 
   <header class="hlavicka" id="nahoru">
+    <div class="hlavicka__bg"></div>
     <div class="kontejner hlavicka__vnitr">
       <a class="znacka" href="#obsah" aria-label="Jan Galba – domů">
         <span class="znacka__tecka" aria-hidden="true"></span>
@@ -57,14 +114,21 @@
         <span class="menu-tlacitko__cara" aria-hidden="true"></span>
         <span class="menu-tlacitko__cara" aria-hidden="true"></span>
       </button>
-
-      <nav class="navigace" aria-label="Hlavní navigace" data-navigace>
-        <a class="navigace__odkaz" href="#sluzby">Služby</a>
-        <a class="navigace__odkaz" href="#cenik">Ceník</a>
-        <a class="navigace__odkaz" href="#proces">Postup</a>
-        <a class="navigace__odkaz" href="#faq">FAQ</a>
-        <a class="navigace__odkaz tlacitko tlacitko--male" href="#kontakt">Kontakt</a>
-      </nav>
+ <nav class="navigace" aria-label="Hlavní navigace" data-navigace>
+  <div class="navigace__obal">
+    <button type="button" class="navigace__zavrit" aria-label="Zavřít menu" data-zavrit-menu>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <a class="navigace__odkaz" href="#sluzby">Služby</a>
+    <a class="navigace__odkaz" href="#cenik">Ceník</a>
+    <a class="navigace__odkaz" href="#proces">Postup</a>
+    <a class="navigace__odkaz" href="#faq">FAQ</a>
+    <a class="navigace__odkaz tlacitko tlacitko--male" href="#kontakt">Kontakt</a>
+  </div>
+</nav>
     </div>
   </header>
 
@@ -475,7 +539,8 @@
         <div class="kontakt__formular animace animace--zprava">
           <!-- Formspree: sem vlož svůj endpoint -->
           <!-- Např. https://formspree.io/f/abcdwxyz -->
-          <form class="formular" id="formular" action="FORM_ACTION_URL" method="POST">
+          <form class="formular" id="formular" action="https://formspree.io/f/mgoovnva" method="POST">
+
             <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
             <div class="formular__radek">
