@@ -85,14 +85,23 @@ a:hover { color: var(--akcent); }
   justify-content: space-between; 
   padding: 10px 0; 
   height: 64px;
+  min-width: 0;
 }
 
-.znacka { display: flex; align-items: center; gap: 10px; z-index: 102; position: relative; }
+.znacka { display: flex; align-items: center; gap: 10px; z-index: 102; position: relative;   min-width: 0;
+}
+
 .znacka__tecka {
   width: 14px; height: 14px; border-radius: 50%;
   background: linear-gradient(135deg, var(--akcent), var(--akcent-2));
 }
-.znacka__text { font-weight: 800; font-size: 16px; color: var(--text); }
+.znacka__text { font-weight: 800; font-size: 16px; color: var(--text);   min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 70vw;
+}
+
 @media (min-width: 400px) { .znacka__text { font-size: 18px; } }
 
 /* === NAVIGACE & BURGER (UPDATED) === */
@@ -115,10 +124,10 @@ a:hover { color: var(--akcent); }
   transition: transform 0.3s, opacity 0.3s;
 }
 
-/* Animace burgeru */
-.navigace--otevrena + .menu-tlacitko .menu-tlacitko__cara:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.navigace--otevrena + .menu-tlacitko .menu-tlacitko__cara:nth-child(2) { opacity: 0; }
-.navigace--otevrena + .menu-tlacitko .menu-tlacitko__cara:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+/* Animace burgeru (FIX: podle aria-expanded, nezávislé na pořadí v DOM) */
+.menu-tlacitko[aria-expanded="true"] .menu-tlacitko__cara:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.menu-tlacitko[aria-expanded="true"] .menu-tlacitko__cara:nth-child(2) { opacity: 0; }
+.menu-tlacitko[aria-expanded="true"] .menu-tlacitko__cara:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
 /* Mobilní menu */
 .navigace {
@@ -136,10 +145,16 @@ a:hover { color: var(--akcent); }
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
   padding: 20px;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
 }
 
 .navigace.navigace--otevrena {
   transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
 }
 
 .navigace__odkaz { 
@@ -431,3 +446,15 @@ details[open] .faq__otazka::after { content: '−'; }
 .animace--videt { opacity: 1; transform: translateY(0); }
 @media (prefers-reduced-motion: reduce) { .animace { transition: none; opacity: 1; transform: none; } }
                            
+
+
+@media (min-width: 900px) {
+  .znacka__text { max-width: none; }
+}
+
+@media (max-width: 420px) {
+  .hero__nadpis-zvýraznění { white-space: normal; }
+}
+
+/* Zamknutí scrollu při otevřeném menu */
+html.menu-locked, body.menu-locked { overflow: hidden; }
