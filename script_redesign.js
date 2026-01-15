@@ -6,9 +6,10 @@
   const rok = document.getElementById("rok");
   if (rok) rok.textContent = String(new Date().getFullYear());
 
-  // Mobilní menu toggle
+  // Mobilní menu toggle (FIXED)
   const tlacitkoMenu = document.querySelector("[data-menu-tlacitko]");
   const navigace = document.querySelector("[data-navigace]");
+  const mqDesktop = window.matchMedia("(min-width: 900px)");
 
   const zamknoutScroll = (zamknout) => {
     html.classList.toggle("menu-locked", zamknout);
@@ -16,20 +17,39 @@
   };
 
   if (tlacitkoMenu && navigace) {
-    const prepnout = (otevrit) => {
-      const jeOtevrene = otevrit ?? !navigace.classList.contains("navigace--otevrena");
-      navigace.classList.toggle("navigace--otevrena", jeOtevrene);
-      tlacitkoMenu.setAttribute("aria-expanded", String(jeOtevrene));
-      navigace.setAttribute("aria-hidden", String(!jeOtevrene));
-      zamknoutScroll(jeOtevrene);
+    const nastavitStav = (otevreno) => {
+      // Desktop: menu je vždy "normální" (žádný off-canvas)
+      if (mqDesktop.matches) {
+        navigace.classList.remove("navigace--otevrena");
+        tlacitkoMenu.setAttribute("aria-expanded", "false");
+        tlacitkoMenu.setAttribute("aria-label", "Menu");
+        navigace.setAttribute("aria-hidden", "false");
+        zamknoutScroll(false);
+        return;
+      }
+
+      // Mobil: off-canvas
+      navigace.classList.toggle("navigace--otevrena", otevreno);
+      tlacitkoMenu.setAttribute("aria-expanded", String(otevreno));
+      tlacitkoMenu.setAttribute("aria-label", otevreno ? "Zavřít menu" : "Otevřít menu");
+      navigace.setAttribute("aria-hidden", String(!otevreno));
+      zamknoutScroll(otevreno);
     };
 
+    const prepnout = (otevrit) => {
+      // když někdo zavolá prepnout(true/false), respektuj to
+      // jinak přepni podle aktuálního stavu
+      const jeOtevrene = otevrit ?? !navigace.classList.contains("navigace--otevrena");
+      nastavitStav(jeOtevrene);
+    };
+
+    // Klik na burger
     tlacitkoMenu.addEventListener("click", () => prepnout());
 
-    // Zavřít menu po kliknutí na odkaz (mobil)
+    // Zavřít menu po kliknutí na odkaz (mobil) – FIX: closest("a")
     navigace.addEventListener("click", (e) => {
-      const cil = e.target;
-      if (cil instanceof HTMLElement && cil.matches("a")) prepnout(false);
+      const a = e.target instanceof HTMLElement ? e.target.closest("a") : null;
+      if (a) prepnout(false);
     });
 
     // Zavřít po ESC
@@ -37,13 +57,13 @@
       if (e.key === "Escape") prepnout(false);
     });
 
-    // Zavřít při resize na desktop
-    window.addEventListener("resize", () => {
-      if (window.innerWidth >= 900) prepnout(false);
-    });
+    // FIX: místo resize → matchMedia change (mobil se nebude náhodně zavírat při scrollu)
+    const onMqChange = () => prepnout(false);
+    if (mqDesktop.addEventListener) mqDesktop.addEventListener("change", onMqChange);
+    else mqDesktop.addListener(onMqChange); // starší Safari
 
-    // počáteční stav aria-hidden (menu je defaultně zavřené)
-    navigace.setAttribute("aria-hidden", "true");
+    // počáteční stav
+    prepnout(false);
   }
 
   // Animace při scrollu (IntersectionObserver)
@@ -202,7 +222,7 @@
   window.addEventListener("load", otevritPodleHashe);
   window.addEventListener("hashchange", otevritPodleHashe);
 
-  // Legal modal – basic open/close + tabs (obsah je placeholder, reálný obsah máš v <details>)
+  // Legal modal – basic open/close + tabs
   const modal = document.querySelector(".legal-modal");
   if (modal) {
     const closeBtns = Array.from(modal.querySelectorAll("[data-legal-close]"));
@@ -219,7 +239,6 @@
       zamknoutScroll(false);
     };
 
-    // pokud budeš chtít modal otevírat z odkazů, stačí přidat data-legal-open na tlačítko/link
     const openTriggers = Array.from(document.querySelectorAll("[data-legal-open]"));
     openTriggers.forEach(btn => btn.addEventListener("click", (e) => {
       e.preventDefault();
