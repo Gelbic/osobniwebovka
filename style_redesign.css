@@ -160,21 +160,7 @@ a:hover { color: var(--akcent); }
   opacity: 1;
 }
 /* --- FIX: spolehlivé pozadí pro mobilní off-canvas menu --- */
-.navigace {
-  /* ponech co už máš, jen doplň: */
-  background: transparent;       /* pozadí bude řešit ::before */
-  isolation: isolate;            /* zajistí správné vrstvení */
-}
 
-.navigace::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  z-index: -1;
-}
 /* když bys chtěl ještě “tmavší overlay” kvůli čitelnosti */
 @supports not (backdrop-filter: blur(1px)) {
   .navigace::before {
