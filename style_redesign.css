@@ -448,22 +448,17 @@ textarea.vstup { resize: vertical; min-height: 100px; }
 @media (prefers-reduced-motion: reduce) { .animace { transition: none; opacity: 1; transform: none; } }
 
 /* =========================================================
-   MOBILE FIX PACK (vložit na KONEC style_redesign.css)
+   RESPONZIVITA (MOBILE/TABLET) – KOMPLETNÍ OPRAVA
+   Pozn.: tento blok je záměrně na KONCI souboru, aby přebil
+   desktop styly jen tam, kde je to potřeba.
    ========================================================= */
 
-/* 0) drobnosti použitelnosti */
+/* iOS/Android drobnosti */
 html { -webkit-text-size-adjust: 100%; }
 body { overflow-x: hidden; }
-pre, code { max-width: 100%; }
-.kodovy-blok { -webkit-overflow-scrolling: touch; }
 
-/* Na mobilech dělá background-attachment: fixed často “lag/jank” */
-@media (max-width: 900px) {
-  body { background-attachment: scroll; }
-}
-
-/* Skip link ať je použitelný (teď je navždy mimo obraz) */
-.preskocit-odkaz:focus {
+/* Skip link – ať je skutečně použitelný */
+.preskocit-odkaz:focus{
   left: 16px;
   top: 16px;
   padding: 10px 12px;
@@ -473,36 +468,56 @@ pre, code { max-width: 100%; }
   z-index: 9999;
 }
 
-/* 1) HLAVIČKA + MOBIL MENU (největší průšvih: chybí .navigace--otevrena) */
-@media (max-width: 899px) {
-  /* aby se do řádku vešla značka i burger */
-  .hlavicka__vnitr { gap: 12px; }
+/* -------------------------
+   TABLET + MOBIL (<= 899px)
+   ------------------------- */
+@media (max-width: 899px){
 
-  /* dlouhý text značky: zmenšit, zalomit, ať netlačí burger */
-  .znacka { min-width: 0; }
+  /* méně “desktop” vzduchu */
+  :root{ --mezera: 16px; }
+
+  /* Background fixed na mobilech často seká */
+  body{ background-attachment: scroll; }
+
+  /* HLAVIČKA: značka + burger */
+  .hlavicka__vnitr{ gap: 12px; }
+
+  .znacka{ min-width: 0; }
   .znacka__text{
     font-size: 15px;
     line-height: 1.15;
+    max-width: 72vw;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    max-width: 72vw;
   }
 
-  /* NAV jako dropdown panel pod headerem */
+  .menu-tlacitko{
+    min-width: 44px;
+    min-height: 44px;
+    padding: 12px;
+  }
+
+  /* MOBILNÍ MENU – JS přidává .navigace--otevrena, CSS to musí umět */
   .navigace{
     position: absolute;
     left: 0;
     right: 0;
     top: calc(100% + 10px);
-    margin: 0 auto;
-    width: min(var(--max), calc(100% - (var(--mezera) * 2)));
-    display: none;                 /* default zavřeno */
+
+    /* default zavřeno */
+    display: none;
     flex-direction: column;
-    gap: 6px;
+    align-items: stretch;
+
+    width: min(var(--max), calc(100% - (var(--mezera) * 2)));
+    margin: 0 auto;
     padding: 10px;
+
+    gap: 6px;
     border-radius: 16px;
+
     background: rgba(255,255,255,0.96);
     backdrop-filter: var(--blur);
     -webkit-backdrop-filter: var(--blur);
@@ -510,11 +525,8 @@ pre, code { max-width: 100%; }
     box-shadow: 0 18px 45px rgba(2,6,23,0.18);
     z-index: 60;
   }
-
-  /* otevřený stav – JS to přidává */
   .navigace.navigace--otevrena{ display: flex; }
 
-  /* odkazy v menu: celé klikací, pohodlné */
   .navigace__odkaz{
     display: flex;
     align-items: center;
@@ -524,78 +536,112 @@ pre, code { max-width: 100%; }
     font-size: 16px;
   }
 
-  /* poslední “Kontakt” (je tam tlacitko + tlacitko--male) ať je full-width */
   .navigace .tlacitko{
     width: 100%;
     justify-content: center;
   }
 
-  /* burger trochu větší “tap target” */
-  .menu-tlacitko{
-    padding: 12px;
-    min-width: 44px;
-    min-height: 44px;
+  /* HERO – mobilnější pocit */
+  .hero{ padding: 44px 0; }
+  .hero__mřížka{ gap: 22px; }
+
+  /* CTA: na mobilu radši pod sebe */
+  .hero__cta{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
   }
-}
-
-/* 2) HERO – typografie/rozestupy + CTA tlačítka */
-@media (max-width: 600px) {
-  .hero { padding: 44px 0; }
-  .hero__mřížka { gap: 22px; }
-  .hero__popis { font-size: 16px; margin-bottom: 18px; }
-
-  /* CTA: na úzkých mobilech radši 2 řádky / full width */
-  .hero__cta { gap: 10px; margin-bottom: 22px; }
   .hero__cta .tlacitko{
     width: 100%;
+    justify-content: center;
     padding: 12px 16px;
   }
 
-  /* fakt-karty: méně paddingu */
-  .karta-fakt{ padding: 14px; }
-  .karta-fakt__cislo{ font-size: 16px; }
-  .karta-fakt__text{ font-size: 13px; }
+  /* Rychlá fakta – ať to není “desktop lišta” */
+  .hero__rychla-fakta{ gap: 12px; }
 
-  /* panel vpravo ať není “přerostlý” */
-  .panel__telo{ padding: 14px; }
-  code{ font-size: 12px; }
-}
+  /* Sekce obecně: o trochu menší padding */
+  .sekce{ padding: 52px 0; }
 
-/* 3) SEKCE / KARTY – trochu míň “vzduchu” na mobilu */
-@media (max-width: 600px) {
-  .sekce { padding: 52px 0; }
-  .popis-sekce{ font-size: 16px; }
-  .karta { padding: 18px; }
-  .cenik-karta { padding: 20px; }
-  .cenik-karta__cislo { font-size: 32px; }
-}
+  /* Kontakt layout: na tabletu/mobilu pod sebe (pokud je 2-sloupcový na desktopu) */
+  .kontakt{
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
 
-/* 4) KONTAKT – hlavně mini-karty (2 sloupce jsou na 320–380px moc natěsno) */
-@media (max-width: 420px) {
-  .kontakt__karty { grid-template-columns: 1fr; }
-  .mini-karta { text-align: left; }
-  .mini-karta__row,
-  .mini-karta__hodnota a{
-    justify-content: flex-start;
-    text-align: left;
+  /* Footer mřížka pod sebe */
+  .paticka__mřížka{
+    grid-template-columns: 1fr;
+    gap: 18px;
   }
 }
 
-/* 5) FORMULÁŘ – ať je příjemnější na mobilu */
-@media (max-width: 600px) {
-  .formular { padding: 18px; border-radius: 16px; }
-  .vstup { font-size: 16px; } /* iOS: zabrání auto-zoomu při focusu */
+/* -------------------------
+   TELEFON (<= 600px)
+   ------------------------- */
+@media (max-width: 600px){
+
+  /* typografie čitelněji a kratší řádky */
+  .hero__nadpis{
+    font-size: clamp(28px, 7vw, 40px);
+    letter-spacing: -0.6px;
+    margin-bottom: 14px;
+  }
+  .hero__popis{
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+
+  .popis-sekce{ font-size: 16px; }
+
+  /* karty a panely: menší padding */
+  .karta{ padding: 18px; }
+  .panel__telo{ padding: 14px; }
+
+  /* kódový blok: ať na mobilu nedominuje a dá se scrollovat */
+  .kodovy-blok{
+    max-height: 220px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  code{ font-size: 12px; }
+
+  /* ceník: mírně zmenšit “číslo” */
+  .cenik-karta{ padding: 20px; }
+  .cenik-karta__cislo{ font-size: 30px; }
+
+  /* formulář: iOS zoom fix + příjemnější velikost */
+  .formular{ padding: 18px; border-radius: 16px; }
+  .vstup{ font-size: 16px; }
+
+  /* FAQ: větší tap target */
+  .faq__polozka{ padding: 16px; }
+  .faq__otazka{ font-size: 16px; }
+
+  /* Legal modal: na mobilu ať není “desktop” */
+  .legal-modal__panel{
+    margin: 2vh auto;
+    width: calc(100% - 16px);
+  }
+  .legal-tabs{ flex-wrap: wrap; }
+  .legal-tab{
+    width: 100%;
+    justify-content: center;
+  }
 }
 
-/* 6) FAQ – větší klikací plocha summary */
-@media (max-width: 600px) {
-  .faq__polozka { padding: 16px; }
-  .faq__otazka { font-size: 16px; }
-}
+/* -------------------------
+   EXTRA ÚZKÉ MOBILY (<= 420px)
+   ------------------------- */
+@media (max-width: 420px){
 
-/* 7) Legal modal – na mobilu menší mezery a tabs ať se nezalamují divně */
-@media (max-width: 520px) {
-  .legal-modal__panel { margin: 2vh auto; width: calc(100% - 16px); }
-  .legal-tabs { flex-wrap: wrap; }
-  .legal-tab { width: 100%; justify-content: center; }
+  /* kontakt mini-karty: 2 sloupce jsou moc natěsno */
+  .kontakt__karty{
+    grid-template-columns: 1fr;
+  }
+
+  .karta, .cenik-karta, .formular{
+    padding: 16px;
+    border-radius: 16px;
+  }
 }
