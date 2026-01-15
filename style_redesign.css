@@ -130,24 +130,34 @@ a:hover { color: var(--akcent); }
 .menu-tlacitko[aria-expanded="true"] .menu-tlacitko__cara:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
 /* Mobilní menu */
+/* Mobilní menu – jisté pozadí */
 .navigace {
   position: fixed;
   inset: 0;
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(10px);
   z-index: 101;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 24px;
-  transform: translateX(100%); /* Schováno vpravo */
+
+  transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-  padding: 20px;
   visibility: hidden;
   pointer-events: none;
   opacity: 0;
+
+  /* DŮLEŽITÉ */
+  background: rgba(255, 255, 255, 0.96); /* pevné světlé pozadí */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.navigace.navigace--otevrena {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
 }
 /* --- FIX: spolehlivé pozadí pro mobilní off-canvas menu --- */
 .navigace {
@@ -171,12 +181,7 @@ a:hover { color: var(--akcent); }
     background: rgba(255, 255, 255, 0.98);
   }
 }
-.navigace.navigace--otevrena {
-  transform: translateX(0);
-  visibility: visible;
-  pointer-events: auto;
-  opacity: 1;
-}
+
 
 .navigace__odkaz { 
   color: var(--text); 
