@@ -182,7 +182,40 @@ a:hover { color: var(--akcent); }
 /* Desktop menu */
 @media (min-width: 900px) { 
   .menu-tlacitko { display: none; }
-  
+  @media (min-width: 900px) { 
+  .menu-tlacitko { display: none; }
+
+  .navigace {
+    position: static;
+    inset: auto;
+    transform: none;
+
+    /* DŮLEŽITÉ: odmaskovat mobilní schování */
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+
+    background: transparent;
+    flex-direction: row;
+    padding: 0;
+    height: auto;
+    justify-content: flex-end;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    gap: 8px;
+    z-index: auto;
+  }
+
+  /* Kdyby zůstala třída otevření, desktop to ignoruje */
+  .navigace.navigace--otevrena { transform: none; }
+
+  .navigace__odkaz {
+    font-size: 15px;
+    color: var(--text-2);
+    padding: 8px 16px;
+    border-radius: 99px;
+  }
+  }
   .navigace {
     position: static;
     transform: none;
