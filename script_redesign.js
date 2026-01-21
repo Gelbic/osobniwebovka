@@ -326,3 +326,20 @@
     aktivovatTab("op");
   }
 })();
+
+// Kód pro automatické otevření modalu podle URL adresy
+document.addEventListener("DOMContentLoaded", () => {
+  // Zjistíme, co je za křížkem v URL (např. #obchodni-podminky)
+  const hash = window.location.hash;
+
+  if (hash === "#obchodni-podminky") {
+    // Najdeme tlačítko, které otevírá OP, a "klikneme" na něj
+    const btnOp = document.querySelector('[data-legal-open="op"]');
+    if (btnOp) btnOp.click();
+  } 
+  else if (hash === "#gdpr") {
+    // Najdeme tlačítko pro GDPR a "klikneme" na něj
+    const btnGdpr = document.querySelector('[data-legal-open="gdpr"]');
+    if (btnGdpr) btnGdpr.click();
+  }
+});
