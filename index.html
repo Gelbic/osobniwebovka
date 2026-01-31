@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
   <meta name="theme-color" content="#f8fafc" />
 
   <title>Moderní weby, aplikace a servis PC | Jan Galba</title>
@@ -10,10 +10,55 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://jangalba.eu/" />
 
-  <!-- Fonts -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="cs_CZ" />
+  <meta property="og:title" content="Jan Galba – weby, aplikace a servis PC | Svitavy" />
+  <meta property="og:description" content="Rychlé moderní weby (onepage, prezentace, landing page) a menší webové aplikace. Servis a upgrade PC. Doména, e-mail, hosting a nasazení – Svitavy i online." />
+  <meta property="og:url" content="https://jangalba.eu/" />
+  <meta property="og:image" content="https://jangalba.eu/Screenshot_20260124-142116.png" />
+  <meta property="og:image:alt" content="Jan Galba – weby a servis PC" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jan Galba – weby, aplikace a servis PC | Svitavy" />
+  <meta name="twitter:description" content="Rychlé moderní weby (onepage, prezentace, landing page) a menší webové aplikace. Servis a upgrade PC. Doména, e-mail, hosting a nasazení – Svitavy i online." />
+  <meta name="twitter:image" content="https://jangalba.eu/Screenshot_20260124-142116.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Jan Galba",
+    "description": "Tvorba moderních webových stránek a menších aplikací, servis PC a domácí servery. Svitavy a okolí / online po celé ČR.",
+    "url": "https://jangalba.eu/",
+    "image": "https://jangalba.eu/Screenshot_20260124-142116.png",
+    "email": "mailto:info@jangalba.eu",
+    "telephone": "+420775600674",
+    "priceRange": "od 8 500 Kč",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Antonína Slavíčka 705/31",
+      "postalCode": "568 02",
+      "addressLocality": "Svitavy",
+      "addressRegion": "Pardubický kraj",
+      "addressCountry": "CZ"
+    },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "Pardubický kraj" },
+      { "@type": "Country", "name": "Česká republika" },
+      "Online"
+    ],
+    "founder": { "@type": "Person", "name": "Jan Galba" },
+    "serviceType": [ "Tvorba webových stránek", "Servis PC", "Webové aplikace", "Domácí servery" ]
+}
+  </script>
 
   <style>
     :root {
@@ -24,44 +69,40 @@
       --text-light: #94a3b8;
       
       /* Brand barvy */
-      --primary: #2563eb;      /* Jasná modrá */
+      --primary: #2563eb;
       --primary-dark: #1d4ed8;
-      --accent: #06b6d4;       /* Tyrkysová */
+      --accent: #06b6d4;
       --success: #10b981;
       
       /* UI prvky */
-      --radius-sm: 8px;
       --radius-md: 16px;
       --radius-lg: 24px;
       
       --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
       --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
 
-      /* Glassmorphism - vylepšený */
+      /* Glassmorphism */
       --glass-bg: rgba(255, 255, 255, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.8);
       --glass-blur: blur(12px);
 
-      /* Layout */
       --max-width: 1120px;
       --header-height: 70px;
     }
 
     /* === RESET & BASE === */
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
     body {
       margin: 0;
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--pozadi);
-      /* Jemné globální pozadí ponecháno */
+      /* Jemná mřížka na pozadí */
       background-image: 
-        radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.03) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.03) 0px, transparent 50%);
-      background-attachment: fixed;
+        linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
       color: var(--text);
       line-height: 1.6;
+      width: 100%;
       overflow-x: hidden;
     }
 
@@ -71,7 +112,7 @@
     p { margin: 0; margin-bottom: 1rem; }
     a { text-decoration: none; color: inherit; transition: all 0.2s; }
     ul { list-style: none; padding: 0; margin: 0; }
-    img { max-width: 100%; display: block; }
+    img { max-width: 100%; height: auto; display: block; }
     
     .kontejner {
       width: 100%;
@@ -86,7 +127,7 @@
       top: 0;
       z-index: 100;
       height: var(--header-height);
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -97,7 +138,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
     }
 
     .logo {
@@ -106,12 +146,12 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      white-space: nowrap;
     }
     .logo__dot {
       width: 10px; height: 10px;
       background: var(--primary);
       border-radius: 50%;
-      box-shadow: 0 0 10px var(--primary);
     }
 
     /* Desktop Nav */
@@ -125,10 +165,8 @@
       padding: 8px 16px;
       border-radius: 99px;
     }
-    .nav-link:hover, .nav-link.active {
-      color: var(--primary);
-      background: rgba(37, 99, 235, 0.05);
-    }
+    .nav-link:hover { color: var(--primary); background: rgba(37, 99, 235, 0.05); }
+    
     .nav-btn {
       background: var(--text);
       color: white;
@@ -137,96 +175,63 @@
       font-weight: 600;
       margin-left: 12px;
     }
-    .nav-btn:hover {
-      background: var(--primary);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-    }
+    .nav-btn:hover { background: var(--primary); }
 
-    /* Mobile Nav Toggle */
+    /* Mobile Toggle */
     .menu-toggle {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 5px;
+      display: flex; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 10px;
     }
     @media(min-width: 900px) { .menu-toggle { display: none; } }
     .menu-toggle span {
       width: 24px; height: 2px; background: var(--text); border-radius: 2px;
     }
 
-    /* === HERO SECTION UPDATED === */
+    /* === HERO SECTION (OPRAVA RESPONZIVITY) === */
     .hero {
-      padding: 80px 0;
+      padding: 60px 0;
       position: relative;
-      overflow: hidden;
-      /* Mřížka (Grid) Pozadí */
-      background-color: #f8fafc;
-      background-image: 
-        linear-gradient(rgba(37, 99, 235, 0.07) 1px, transparent 1px), 
-        linear-gradient(90deg, rgba(37, 99, 235, 0.07) 1px, transparent 1px);
-      background-size: 50px 50px; /* Velikost čtverečků */
-      
-      /* Jemná vinětace (ztmavnutí k okrajům pro hloubku) */
-      mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+      overflow: hidden; /* Důležité: zabrání přetečení */
     }
-    
-    /* Přidání "Glow" efektu pod Hero */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%;
-      height: 80%;
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(37, 99, 235, 0.05) 40%, transparent 70%);
-      z-index: 0;
-      pointer-events: none;
-      filter: blur(60px);
-    }
+    @media(min-width: 900px) { .hero { padding: 120px 0 100px; } }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr; /* Mobil: 1 sloupec */
+      gap: 50px;
       align-items: center;
-      position: relative;
-      z-index: 1; /* Obsah nad mřížkou */
     }
     @media(min-width: 900px) {
-      .hero-grid { grid-template-columns: 1.1fr 0.9fr; }
-      .hero { padding: 120px 0 120px; }
+      .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 40px; }
     }
 
-    .hero__content { z-index: 2; position: relative; }
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      text-align: center; /* Mobil: na střed */
+    }
+    @media(min-width: 900px) { .hero__content { text-align: left; } }
     
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(37, 99, 235, 0.15);
+      gap: 8px;
+      background: white;
+      border: 1px solid #e2e8f0;
       padding: 6px 12px;
       border-radius: 99px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      color: var(--primary-dark);
+      color: var(--text-muted);
       margin-bottom: 24px;
-      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.05);
-      backdrop-filter: blur(4px);
     }
-    .badge__dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
+    .badge__dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; flex-shrink: 0; }
 
     .hero__title {
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2.2rem, 8vw, 3.8rem);
       font-weight: 800;
       line-height: 1.1;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       color: var(--text);
     }
     .hero__title span {
@@ -237,14 +242,26 @@
     }
 
     .hero__text {
-      font-size: 1.125rem;
+      font-size: 1.05rem;
       color: var(--text-muted);
       margin-bottom: 32px;
-      max-width: 540px;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.8); /* Lepší čitelnost na mřížce */
+      max-width: 600px;
+      margin-left: auto; margin-right: auto; /* Centr na mobilu */
     }
+    @media(min-width: 900px) { .hero__text { margin-left: 0; margin-right: 0; } }
 
-    .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      justify-content: center;
+    }
+    @media(min-width: 450px) {
+      .btn-group { flex-direction: row; width: auto; }
+    }
+    @media(min-width: 900px) { .btn-group { justify-content: flex-start; } }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -256,303 +273,266 @@
       transition: all 0.2s;
       cursor: pointer;
       border: none;
+      width: 100%;
     }
+    @media(min-width: 450px) { .btn { width: auto; } }
+
     .btn--primary {
-      background: var(--primary);
-      color: white;
+      background: var(--primary); color: white;
       box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
     }
-    .btn--primary:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-    }
     .btn--secondary {
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--text);
-      border: 1px solid rgba(0,0,0,0.1);
-      backdrop-filter: blur(4px);
-    }
-    .btn--secondary:hover {
-      border-color: var(--text-light);
-      background: #fff;
+      background: white; color: var(--text);
+      border: 1px solid #cbd5e1;
     }
 
-    .hero__visual { position: relative; }
+    /* Hero Visual (Fix 3D na mobilu) */
+    .hero__visual {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
     .code-window {
-      background: #1e293b; /* Slate 800 */
+      background: #1e293b;
       border-radius: 12px;
       box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
       border: 1px solid rgba(255,255,255,0.1);
       overflow: hidden;
       font-family: 'JetBrains Mono', monospace;
-      transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
-      transition: transform 0.5s ease;
+      /* Na mobilu bez rotace */
+      transform: none; 
+      width: 100%;
     }
-    .hero__visual:hover .code-window {
-      transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+    @media(min-width: 900px) {
+      .code-window {
+        transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+        transition: transform 0.5s ease;
+      }
+      .hero__visual:hover .code-window {
+        transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+      }
     }
     
     .window-header {
-      background: #0f172a;
-      padding: 12px 16px;
-      display: flex;
-      gap: 8px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: #0f172a; padding: 10px 14px;
+      display: flex; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .win-btn { width: 12px; height: 12px; border-radius: 50%; }
-    .win-close { background: #ef4444; }
-    .win-min { background: #f59e0b; }
-    .win-max { background: #22c55e; }
+    .win-btn { width: 10px; height: 10px; border-radius: 50%; }
+    .win-close { background: #ef4444; } .win-min { background: #f59e0b; } .win-max { background: #22c55e; }
     
-    .code-content { padding: 20px; font-size: 0.9rem; color: #e2e8f0; line-height: 1.6; }
-    .c-tag { color: #f472b6; }
-    .c-attr { color: #93c5fd; }
-    .c-str { color: #86efac; }
-    .c-comment { color: #64748b; font-style: italic; }
+    .code-content { 
+      padding: 16px; 
+      font-size: 0.8rem;
+      color: #e2e8f0; 
+      line-height: 1.6;
+      overflow-x: auto; /* Scroll kód místo stránky */ 
+    }
+    @media(min-width: 600px) { .code-content { font-size: 0.9rem; padding: 20px; } }
 
-    /* === SECTIONS GENERAL === */
-    .section { padding: 80px 0; }
-    .section-header { text-align: center; max-width: 600px; margin: 0 auto 60px; }
-    .section-title { font-size: 2.25rem; font-weight: 800; margin-bottom: 16px; }
-    .section-desc { color: var(--text-muted); font-size: 1.1rem; }
+    .c-tag { color: #f472b6; } .c-attr { color: #93c5fd; } .c-str { color: #86efac; } .c-comment { color: #64748b; font-style: italic; }
 
-    /* === SLUŽBY (GRID) === */
+    .hero-features {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      justify-items: center; /* Center na mobilu */
+    }
+    @media(min-width: 500px) {
+      .hero-features { grid-template-columns: repeat(3, auto); justify-content: start; gap: 24px; justify-items: start; }
+    }
+    .hero-feat-item { display: flex; align-items: center; gap: 8px; }
+
+    /* === SECTIONS === */
+    .section { padding: 60px 0; }
+    .section-header { text-align: center; max-width: 600px; margin: 0 auto 40px; }
+    .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 12px; }
+    .section-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.6; }
+
+    /* === SLUŽBY (Grid 6 karet) === */
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+      grid-template-columns: 1fr;
+      gap: 20px;
     }
+    @media(min-width: 600px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(min-width: 900px) { .services-grid { grid-template-columns: repeat(3, 1fr); } }
+
     .service-card {
       background: white;
       border: 1px solid rgba(0,0,0,0.05);
       border-radius: var(--radius-md);
-      padding: 32px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-      border-color: rgba(37, 99, 235, 0.2);
-    }
-    .icon-box {
-      width: 56px; height: 56px;
-      background: #eff6ff;
-      color: var(--primary);
-      border-radius: 12px;
+      padding: 24px;
+      text-align: center; /* Mobil center */
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      height: 100%;
+      transition: transform 0.2s;
     }
-    .icon-box svg { width: 28px; height: 28px; }
-    .service-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
-    .service-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
-    .service-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-    .service-list li::before {
-      content: "✓";
-      color: var(--primary);
-      font-weight: bold;
+    .service-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+    
+    @media(min-width: 900px) {
+      .service-card { text-align: left; align-items: flex-start; padding: 28px; }
     }
 
-    /* === PRICING === */
+    .service-card h3 { font-size: 1.2rem; margin-bottom: 10px; font-weight: 700; }
+    .service-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px; flex-grow: 1; }
+    .service-list { width: 100%; text-align: left; margin-top: auto; }
+    .service-list li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;
+    }
+    .service-list li::before { content: "•"; color: var(--primary); font-weight: bold; flex-shrink: 0; }
+
+    .service-card.highlight { border: 1px solid var(--accent); background: #f0f9ff; }
+
+    /* === CENÍK === */
     .pricing-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 30px;
-      align-items: start;
+      display: grid; grid-template-columns: 1fr; gap: 30px; align-items: start;
     }
-    @media(min-width: 900px) {
-      .pricing-grid { grid-template-columns: 1fr 1.1fr 1fr; }
-    }
+    @media(min-width: 900px) { .pricing-grid { grid-template-columns: 1fr 1.1fr 1fr; } }
 
     .price-card {
-      background: white;
-      padding: 32px;
+      background: white; padding: 30px 24px;
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
       text-align: center;
       position: relative;
     }
     .price-card.popular {
-      background: #1e293b; /* Dark theme for popular */
-      color: white;
-      box-shadow: 0 20px 40px -10px rgba(30, 41, 59, 0.4);
+      background: #1e293b; color: white;
       border: none;
-      transform: scale(1.02);
-      z-index: 10;
+      box-shadow: 0 20px 40px -10px rgba(30, 41, 59, 0.4);
+      z-index: 2;
     }
-    .price-card.popular .section-desc, 
-    .price-card.popular .price, 
-    .price-card.popular li { color: #e2e8f0; }
-    .price-card.popular li::before { color: #38bdf8; } /* Light blue check */
+    .price-card.popular .section-desc, .price-card.popular .price-tag, .price-card.popular li { color: #f1f5f9; }
     
-    .price-tag {
-      display: block;
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin: 16px 0;
-      color: var(--text);
-    }
+    .price-tag { display: block; font-size: 2.2rem; font-weight: 800; margin: 16px 0; color: var(--text); }
     .price-card.popular .price-tag { color: white; }
-    .price-card ul { text-align: left; margin: 24px 0; padding-left: 10px; }
-    .price-card li { margin-bottom: 12px; font-size: 0.95rem; display: flex; gap: 10px; }
-    .price-card li::before { content: "•"; color: var(--primary); font-size: 1.2rem; line-height: 1; }
     
     .badge-pop {
-      position: absolute;
-      top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--accent);
-      color: white;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 99px;
-      letter-spacing: 0.5px;
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: white; font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 99px;
     }
 
-    /* === PROCESS (TIMELINE) === */
-    .process-wrap {
-      position: relative;
-      padding: 20px 0;
+    /* === DOPLŇKOVÉ SLUŽBY (OPRAVA TABULKY) === */
+    .pricing-table {
+      max-width: 800px; margin: 60px auto 0;
+      background: white; border-radius: 12px;
+      border: 1px solid #e2e8f0; overflow: hidden;
     }
-    .process-line {
-      display: none;
-      position: absolute;
-      top: 50px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-image: linear-gradient(to right, #cbd5e1 50%, transparent 50%);
-      background-size: 20px 100%;
-      z-index: 0;
+    .pricing-row {
+      display: flex;
+      flex-direction: column; /* Mobil: pod sebou */
+      padding: 16px 20px;
+      border-bottom: 1px solid #f1f5f9;
+      gap: 5px;
     }
-    @media(min-width: 900px) { .process-line { display: block; } }
+    @media(min-width: 550px) {
+      .pricing-row {
+        flex-direction: row; /* Tablet+: vedle sebe */
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+    }
+    .pricing-row:last-child { border-bottom: none; }
+    .pricing-row span { font-size: 0.95rem; font-weight: 600; color: var(--text-muted); }
+    .pricing-row strong { color: var(--primary); font-weight: 800; white-space: nowrap; }
 
+    /* === PROCES === */
     .process-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
+      display: grid; grid-template-columns: 1fr; gap: 24px; position: relative;
     }
     @media(min-width: 600px) { .process-grid { grid-template-columns: 1fr 1fr; } }
     @media(min-width: 900px) { .process-grid { grid-template-columns: repeat(4, 1fr); } }
 
     .step-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.6);
-      padding: 24px;
-      border-radius: var(--radius-md);
-      position: relative;
-      z-index: 1;
-      box-shadow: var(--shadow-sm);
+      background: rgba(255,255,255,0.8);
+      padding: 24px; border-radius: 16px;
+      border: 1px solid white; box-shadow: var(--shadow-sm);
     }
     .step-num {
-      width: 40px; height: 40px;
-      background: var(--primary);
-      color: white;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+      width: 40px; height: 40px; background: var(--primary); color: white;
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; margin-bottom: 16px; font-size: 1.2rem;
     }
+    .step-card h3 { font-size: 1.1rem; margin-bottom: 8px; font-weight: 700; }
+    .step-card p { font-size: 0.9rem; color: var(--text-muted); }
 
-    /* === CONTACT & FAQ === */
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 60px;
+    /* === FAQ & CONTACT === */
+    details {
+      background: white; padding: 20px; border-radius: 12px; cursor: pointer; border: 1px solid #e2e8f0;
     }
-    @media(min-width: 900px) { .contact-layout { grid-template-columns: 1fr 1fr; } }
-    
-    .contact-info { padding-right: 20px; }
+    summary { font-weight: 700; list-style: none; position: relative; padding-right: 20px; }
+    summary::after { content: "+"; position: absolute; right: 0; color: var(--primary); font-weight: bold; }
+    details[open] summary::after { content: "-"; }
+    .faq-answer { margin-top: 10px; color: var(--text-muted); font-size: 0.95rem; }
+
+    .contact-layout { display: grid; grid-template-columns: 1fr; gap: 40px; }
+    @media(min-width: 900px) { .contact-layout { grid-template-columns: 1fr 1fr; gap: 60px; } }
+
     .contact-box {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: white;
-      padding: 16px;
-      border-radius: 12px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow-sm);
+      display: flex; align-items: center; gap: 16px;
+      background: white; padding: 16px; border-radius: 12px; margin-bottom: 16px;
+      box-shadow: var(--shadow-sm); border: 1px solid #f1f5f9;
     }
     .c-icon {
-      width: 40px; height: 40px;
-      background: #eff6ff;
-      color: var(--primary);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; background: #eff6ff; color: var(--primary);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
 
     .form-wrapper {
-      background: white;
-      padding: 32px;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-lg);
+      background: white; padding: 24px; border-radius: 20px; box-shadow: var(--shadow-lg);
     }
+    @media(min-width: 600px) { .form-wrapper { padding: 32px; } }
+    
     .form-group { margin-bottom: 16px; }
-    .form-label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+    .form-label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
     .form-input {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #e2e8f0;
-      border-radius: 8px;
-      font-family: inherit;
-      transition: border-color 0.2s;
+      width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px;
+      font-family: inherit; font-size: 16px;
     }
     .form-input:focus { outline: none; border-color: var(--primary); }
-    textarea.form-input { min-height: 120px; resize: vertical; }
 
-    /* === FOOTER === */
+    /* === FOOTER (CENTER MOBILE) === */
     .footer {
-      background: white;
-      border-top: 1px solid #e2e8f0;
-      padding: 60px 0 30px;
-      margin-top: 80px;
-      font-size: 0.9rem;
-      color: var(--text-muted);
+      background: white; border-top: 1px solid #e2e8f0;
+      padding: 40px 0 20px; margin-top: 60px;
+      font-size: 0.9rem; color: var(--text-muted);
     }
     .footer-top {
       display: flex;
       flex-direction: column;
-      gap: 30px;
-      margin-bottom: 40px;
+      gap: 24px;
+      align-items: center; /* Mobil center */
+      text-align: center;
+      margin-bottom: 30px;
     }
-    @media(min-width: 600px) {
-      .footer-top { flex-direction: row; justify-content: space-between; align-items: center; }
+    @media(min-width: 700px) {
+      .footer-top { 
+        flex-direction: row; 
+        justify-content: space-between; 
+        align-items: flex-start; 
+        text-align: left; 
+      }
     }
-    .footer-links a { margin-left: 20px; font-weight: 600; }
-    .footer-links a:hover { color: var(--primary); }
+    
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    @media(min-width: 500px) { .footer-links { flex-direction: row; gap: 20px; } }
+    
+    .footer-links a:hover { color: var(--primary); text-decoration: underline; }
 
-    /* === UTILS & ANIMATION === */
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-      70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-    }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-
-    /* === MOBILE MENU OVERLAY === */
+    /* === MOBILE MENU === */
     .mobile-menu {
-      position: fixed; inset: 0; z-index: 99;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(10px);
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(255,255,255,0.98);
       display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 24px;
       opacity: 0; pointer-events: none; transition: 0.3s;
@@ -560,42 +540,24 @@
     .mobile-menu.open { opacity: 1; pointer-events: auto; }
     .mobile-link { font-size: 1.5rem; font-weight: 700; color: var(--text); }
 
-    /* Legal Modal Styles */
-    .legal-modal { display: none; position: fixed; inset: 0; z-index: 1000; }
+    /* === LEGAL MODAL === */
+    .legal-modal { display: none; position: fixed; inset: 0; z-index: 1000; padding: 20px; }
     .legal-modal[aria-hidden="false"] { display: flex; align-items: center; justify-content: center; }
     .legal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
     .legal-content-box {
-      position: relative;
-      background: white;
-      width: 90%; max-width: 800px;
-      max-height: 90vh;
-      border-radius: 16px;
-      display: flex; flex-direction: column;
+      position: relative; background: white; width: 100%; max-width: 800px;
+      max-height: 85vh; border-radius: 16px; display: flex; flex-direction: column;
       box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
     }
-    .legal-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .legal-header { padding: 16px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
     .legal-body { padding: 20px; overflow-y: auto; }
-    .legal-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-    .tab-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid #ddd; background: #f8fafc; cursor: pointer; font-weight: 600; }
+    .legal-tabs { display: flex; gap: 10px; margin-bottom: 20px; padding-bottom: 5px; border-bottom: 1px solid #f1f5f9; }
+    .tab-btn { padding: 8px 16px; border-radius: 99px; border: 1px solid #e2e8f0; background: #fff; cursor: pointer; font-weight: 600; color: var(--text-muted); }
     .tab-btn[aria-selected="true"] { background: var(--primary); color: white; border-color: var(--primary); }
-    
+    .legalni-text { font-size: 14px; color: #334155; line-height: 1.7; }
+    .legalni-text h4 { margin-top: 20px; margin-bottom: 10px; color: var(--text); }
+
   </style>
-  
-  <script type="application/ld+json">
-  {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Jan Galba",
-      "description": "Tvorba moderních webových stránek a menších aplikací, servis PC a domácí servery.",
-      "url": "https://jangalba.eu/",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Svitavy",
-        "addressCountry": "CZ"
-      },
-      "priceRange": "od 8 500 Kč"
-  }
-  </script>
 </head>
 
 <body>
@@ -618,7 +580,7 @@
       </nav>
 
       <!-- Mobile Toggle -->
-      <button class="menu-toggle" aria-label="Menu">
+      <button class="menu-toggle" aria-label="Menu" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
@@ -628,12 +590,12 @@
 
   <!-- MOBILE OVERLAY -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#sluzby" class="mobile-link">Služby</a>
-    <a href="#cenik" class="mobile-link">Ceník</a>
-    <a href="#proces" class="mobile-link">Postup</a>
-    <a href="#faq" class="mobile-link">FAQ</a>
-    <a href="#kontakt" class="mobile-link" style="color: var(--primary)">Kontaktovat</a>
-    <button class="btn btn--secondary" id="closeMenu" style="margin-top: 20px;">Zavřít</button>
+    <a href="#sluzby" class="mobile-link" onclick="toggleMenu()">Služby</a>
+    <a href="#cenik" class="mobile-link" onclick="toggleMenu()">Ceník</a>
+    <a href="#proces" class="mobile-link" onclick="toggleMenu()">Postup</a>
+    <a href="#faq" class="mobile-link" onclick="toggleMenu()">FAQ</a>
+    <a href="#kontakt" class="mobile-link" style="color: var(--primary)" onclick="toggleMenu()">Kontaktovat</a>
+    <button class="btn btn--secondary" onclick="toggleMenu()" style="margin-top: 20px;">Zavřít</button>
   </div>
 
   <main>
@@ -641,7 +603,7 @@
     <section class="hero">
       <div class="kontejner">
         <div class="hero-grid">
-          <div class="hero__content reveal active">
+          <div class="hero__content reveal">
             <div class="badge">
               <span class="badge__dot"></span>
               Svitavy & Online po celé ČR
@@ -651,27 +613,27 @@
               <span>rychle, čistě, profi</span>
             </h1>
             <p class="hero__text">
-              Jmenuji se <strong>Jan Galba</strong>. Vytvořím vám moderní a rychlý web (HTML/CSS/JS), nebo pomohu
-              se servisem a upgradem PC. Zajistím také doménu, e-mail na doméně, hosting a nasazení.
+               Jmenuji se <strong>Jan Galba</strong>. Vytvořím vám moderní a rychlý web (HTML/CSS/JS), nebo pomohu
+               se servisem a upgradem PC. Zajistím také doménu, e-mail na doméně, hosting a nasazení.
             </p>
             <div class="btn-group">
               <a href="#kontakt" class="btn btn--primary">Nezávazně poptat</a>
               <a href="#cenik" class="btn btn--secondary">Zobrazit ceník</a>
             </div>
             
-            <div style="margin-top: 40px; display: flex; gap: 20px; font-size: 0.9rem; color: var(--text-muted);">
-               <span style="display: flex; align-items: center; gap: 6px;">
-                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 
+            <div class="hero-features">
+               <div class="hero-feat-item">
+                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 
                  SEO Základ
-               </span>
-               <span style="display: flex; align-items: center; gap: 6px;">
-                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 
+               </div>
+               <div class="hero-feat-item">
+                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 
                  Výkon & Čistý kód
-               </span>
-               <span style="display: flex; align-items: center; gap: 6px;">
-                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 
+               </div>
+               <div class="hero-feat-item">
+                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 
                  Kompletní zajištění
-               </span>
+               </div>
             </div>
           </div>
 
@@ -708,9 +670,6 @@
         <div class="services-grid">
           <!-- Karta 1 -->
           <article class="service-card reveal">
-            <div class="icon-box">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-            </div>
             <h3>Tvorba webů</h3>
             <p>Onepage, prezentace nebo landing page – moderně, rychle a mobile-first.</p>
             <ul class="service-list">
@@ -722,9 +681,6 @@
 
           <!-- Karta 2 -->
           <article class="service-card reveal">
-            <div class="icon-box">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-            </div>
             <h3>Webové aplikace</h3>
             <p>Vytvářím menší webové aplikace a nástroje (kalkulačky, formuláře, konfigurátory, automatizace) – ne velké informační systémy.</p>
             <ul class="service-list">
@@ -736,9 +692,6 @@
 
           <!-- Karta 3 -->
           <article class="service-card reveal">
-            <div class="icon-box">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
-            </div>
             <h3>Servis PC & upgrade</h3>
             <p>Diagnostika, instalace, čištění, zrychlení PC a výměny komponent (HW/SW).</p>
             <ul class="service-list">
@@ -746,6 +699,35 @@
               <li>Upgrade a sestavy PC</li>
               <li>Zálohy a bezpečnost</li>
             </ul>
+          </article>
+
+          <!-- Karta 4 -->
+          <article class="service-card reveal">
+            <h3>Domácí servery (NAS)</h3>
+            <p>Nastavení NAS/mini-serveru, sdílení dat, vzdálený přístup a zálohy.</p>
+            <ul class="service-list">
+              <li>NAS / server setup</li>
+              <li>Remote přístup</li>
+              <li>Pravidelné zálohy</li>
+            </ul>
+          </article>
+
+          <!-- Karta 5 -->
+          <article class="service-card highlight reveal">
+            <h3>Web od A do Z</h3>
+            <p>Doména, DNS záznamy, e-mail na doméně, hosting a nasazení – vyřeším kompletně.</p>
+            <div style="margin-top:auto; width:100%">
+               <a href="#kontakt" style="font-weight:700; color:var(--primary)">Napište mi zadání →</a>
+            </div>
+          </article>
+
+          <!-- Karta 6 -->
+          <article class="service-card reveal">
+            <h3>Konzultace</h3>
+            <p>Nevíte co vybrat? Porovnám možnosti, navrhnu postup a ušetřím slepé uličky.</p>
+            <div style="margin-top:auto; width:100%">
+               <a href="#faq" style="font-weight:700; color:var(--primary)">Časté otázky →</a>
+            </div>
           </article>
         </div>
       </div>
@@ -775,11 +757,11 @@
             <a href="#kontakt" class="btn btn--secondary" style="width: 100%;">Poptat Start</a>
           </div>
 
-          <!-- Standard (Highlighted) -->
+          <!-- Standard -->
           <div class="price-card popular reveal">
             <div class="badge-pop">Nejčastější</div>
             <h3>Standard</h3>
-            <p class="section-desc" style="font-size: 0.9rem;">Rozšířená onepage pro firmu a služby</p>
+            <p class="section-desc">Rozšířená onepage pro firmu a služby</p>
             <span class="price-tag">12 500 Kč</span>
             <p style="font-size: 0.85rem; color: #64748b;">od</p>
             <ul>
@@ -795,7 +777,7 @@
           <!-- Premium -->
           <div class="price-card reveal">
             <h3>Premium</h3>
-            <p class="section-desc" style="font-size: 0.9rem;">Web s rozšířenými funkcemi a individuálním řešením</p>
+            <p class="section-desc">Web s rozšířenými funkcemi a individuálním řešením</p>
             <span class="price-tag">16 000 Kč</span>
             <p style="font-size: 0.85rem; color: #94a3b8;">od</p>
             <ul>
@@ -808,44 +790,48 @@
           </div>
         </div>
 
-        <!-- Servis tabulka zjednodušená -->
-        <div class="reveal" style="margin-top: 60px; max-width: 800px; margin-inline: auto;">
+        <!-- Servis tabulka -->
+        <div style="margin-top: 60px;">
           <h3 style="text-align: center; margin-bottom: 20px;">Doplňkové služby a Servis PC</h3>
-          <div style="background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0;">
-             <div style="display: flex; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #f1f5f9;">
+          <div class="pricing-table">
+             <div class="pricing-row">
                <span>Registrace domény + nastavení DNS</span>
                <strong>od 800 Kč</strong>
              </div>
-             <div style="display: flex; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #f1f5f9;">
+             <div class="pricing-row" style="background: #f8fafc;">
+               <span>E-mail na doméně (zřízení + propojení zařízení)</span>
+               <strong>od 900 Kč</strong>
+             </div>
+             <div class="pricing-row">
                <span>Nasazení na hosting (včetně HTTPS)</span>
                <strong>od 900 Kč</strong>
              </div>
-             <div style="display: flex; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #f1f5f9; background: #f8fafc;">
+             <div class="pricing-row" style="background: #f8fafc;">
                <span>Čistá instalace Windows 10/11 (bez zálohy dat)</span>
                <strong>550 Kč</strong>
              </div>
-             <div style="display: flex; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #f1f5f9;">
+             <div class="pricing-row">
                <span>Instalace Windows + ovladače + základní programy</span>
                <strong>650 Kč</strong>
              </div>
-             <div style="display: flex; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #f1f5f9; background: #f8fafc;">
+             <div class="pricing-row" style="background: #f8fafc;">
                <span>Čištění od prachu (profylaxe chlazení)</span>
                <strong>290 Kč</strong>
              </div>
-             <div style="display: flex; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #f1f5f9;">
+             <div class="pricing-row">
                <span>Přepastování procesoru + čištění</span>
                <strong>490 Kč</strong>
              </div>
-             <div style="display: flex; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #f1f5f9; background: #f8fafc;">
+             <div class="pricing-row" style="background: #f8fafc;">
                <span>Upgrade SSD / RAM (práce + klonování)</span>
                <strong>450 Kč</strong>
              </div>
-             <div style="display: flex; justify-content: space-between; padding: 15px 20px;">
+             <div class="pricing-row">
                 <span>Diagnostika závady (při opravě ZDARMA)</span>
                 <strong>200 Kč</strong>
              </div>
           </div>
-          <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 15px;">
+          <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; padding: 0 10px;">
              Ceny jsou orientační. Finální nabídka je vždy upřesněna podle konkrétního zadání. U servisu PC nezahrnují cenu nových dílů.
           </p>
         </div>
@@ -861,30 +847,27 @@
           <p class="section-desc">Jasný postup a průběžná komunikace. Od zadání po spuštění webu budete mít přehled o každém kroku.</p>
         </div>
         
-        <div class="process-wrap">
-          <div class="process-line"></div>
-          <div class="process-grid">
+        <div class="process-grid">
             <div class="step-card reveal">
-              <div class="step-num">1</div>
+              <div class="step-num">01</div>
               <h3>Zadání a cíle</h3>
-              <p style="font-size: 0.9rem; color: var(--text-muted);">Upřesníme cíl webu, cílovou skupinu, styl a rozsah. Domluvíme se na potřebných podkladech a termínech.</p>
+              <p>Upřesníme cíl webu, cílovou skupinu, styl a rozsah. Domluvíme se na potřebných podkladech a termínech.</p>
             </div>
             <div class="step-card reveal">
-              <div class="step-num">2</div>
+              <div class="step-num">02</div>
               <h3>Struktura a obsah</h3>
-              <p style="font-size: 0.9rem; color: var(--text-muted);">Navrhnu strukturu stránek a doporučím obsah tak, aby byl web přehledný a srozumitelný pro návštěvníky.</p>
+              <p>Navrhnu strukturu stránek a doporučím obsah tak, aby byl web přehledný a srozumitelný pro návštěvníky.</p>
             </div>
             <div class="step-card reveal">
-              <div class="step-num">3</div>
+              <div class="step-num">03</div>
               <h3>Design a realizace</h3>
-              <p style="font-size: 0.9rem; color: var(--text-muted);">Vytvořím moderní vzhled, responzivitu a funkční kód. Průběžně zapracovávám připomínky.</p>
+              <p>Vytvořím moderní vzhled, responzivitu a funkční kód. Průběžně zapracovávám připomínky.</p>
             </div>
             <div class="step-card reveal">
-              <div class="step-num">4</div>
+              <div class="step-num">04</div>
               <h3>SEO a nasazení</h3>
-              <p style="font-size: 0.9rem; color: var(--text-muted);">Nastavím technický základ pro vyhledávače, nasadím web na hosting a pomohu s doménou, DNS a e-mailem.</p>
+              <p>Nastavím technický základ pro vyhledávače, nasadím web na hosting a pomohu s doménou, DNS a e-mailem.</p>
             </div>
-          </div>
         </div>
       </div>
     </section>
@@ -896,30 +879,30 @@
           <h2 class="section-title">FAQ</h2>
           <p class="section-desc">Rychlé odpovědi na časté dotazy.</p>
         </div>
-        <div style="max-width: 800px; margin: 0 auto; display: grid; gap: 16px;">
-          <details style="background: var(--pozadi); padding: 20px; border-radius: 12px; cursor: pointer;">
-            <summary style="font-weight: 700; list-style: none;">Zařídíte i doménu, e-mail a hosting?</summary>
-            <p style="margin-top: 10px; color: var(--text-muted);">Ano. Zařídím doménu, DNS záznamy, e-mail na doméně i nasazení webu na hosting.</p>
+        <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
+          <details>
+            <summary>Zařídíte i doménu, e-mail a hosting?</summary>
+            <p class="faq-answer">Ano. Zařídím doménu, DNS záznamy, e-mail na doméně i nasazení webu na hosting.</p>
           </details>
-          <details style="background: var(--pozadi); padding: 20px; border-radius: 12px; cursor: pointer;">
-            <summary style="font-weight: 700; list-style: none;">Bude web rychlý a mobilně vyladěný?</summary>
-            <p style="margin-top: 10px; color: var(--text-muted);">Mobile-first je základ. Dělám čistý HTML/CSS/JS a rozumné animace tak, aby web zůstal rychlý.</p>
+          <details>
+            <summary>Bude web rychlý a mobilně vyladěný?</summary>
+            <p class="faq-answer">Mobile-first je základ. Dělám čistý HTML/CSS/JS a rozumné animace tak, aby web zůstal rychlý.</p>
           </details>
-          <details style="background: var(--pozadi); padding: 20px; border-radius: 12px; cursor: pointer;">
-            <summary style="font-weight: 700; list-style: none;">Jak dlouho to typicky trvá?</summary>
-            <p style="margin-top: 10px; color: var(--text-muted);">Záleží na rozsahu a podkladech. Onepage obvykle zvládneme v řádu dnů až 1–2 týdnů, u větších věcí dle domluvy.</p>
+          <details>
+            <summary>Jak dlouho to typicky trvá?</summary>
+            <p class="faq-answer">Záleží na rozsahu a podkladech. Onepage obvykle zvládneme v řádu dnů až 1–2 týdnů, u větších věcí dle domluvy.</p>
           </details>
-          <details style="background: var(--pozadi); padding: 20px; border-radius: 12px; cursor: pointer;">
-            <summary style="font-weight: 700; list-style: none;">Umíte i úpravy a servis existujícího webu?</summary>
-            <p style="margin-top: 10px; color: var(--text-muted);">Ano. Od drobných oprav přes zrychlení až po redesign. Stačí poslat odkaz a stručně popsat, co je potřeba.</p>
+          <details>
+            <summary>Umíte i úpravy a servis existujícího webu?</summary>
+            <p class="faq-answer">Ano. Od drobných oprav přes zrychlení až po redesign. Stačí poslat odkaz a stručně popsat, co je potřeba.</p>
           </details>
-          <details style="background: var(--pozadi); padding: 20px; border-radius: 12px; cursor: pointer;">
-            <summary style="font-weight: 700; list-style: none;">Děláte i opravy a upgrade PC?</summary>
-            <p style="margin-top: 10px; color: var(--text-muted);">Ano. HW/SW opravy, instalace, diagnostika, upgrady komponent a nastavení domácích serverů (NAS).</p>
+          <details>
+            <summary>Děláte i opravy a upgrade PC?</summary>
+            <p class="faq-answer">Ano. HW/SW opravy, instalace, diagnostika, upgrady komponent a nastavení domácích serverů (NAS).</p>
           </details>
-          <details style="background: var(--pozadi); padding: 20px; border-radius: 12px; cursor: pointer;">
-            <summary style="font-weight: 700; list-style: none;">Bude web fungovat bez měsíčního poplatku?</summary>
-            <p style="margin-top: 10px; color: var(--text-muted);">Ano – samotný web může běžet i bez „správy“. Platí se jen doména/hosting (pokud ho používáte) a případné úpravy podle potřeby.</p>
+          <details>
+            <summary>Bude web fungovat bez měsíčního poplatku?</summary>
+            <p class="faq-answer">Ano – samotný web může běžet i bez „správy“. Platí se jen doména/hosting (pokud ho používáte) a případné úpravy podle potřeby.</p>
           </details>
         </div>
       </div>
@@ -931,7 +914,7 @@
         <div class="contact-layout">
           <div class="contact-info reveal">
             <h2 class="section-title">Kontakt</h2>
-            <p class="section-desc" style="margin-bottom: 40px;">
+            <p class="section-desc" style="margin-bottom: 30px;">
               Napište mi krátce, co potřebujete. Ozvu se a domluvíme postup.
               <br><br>
               <small>Do zprávy ideálně napište: <strong>co</strong> potřebujete, <strong>do kdy</strong> a <strong>rozpočet</strong>.</small>
@@ -960,16 +943,16 @@
 
           <div class="form-wrapper reveal">
             <form id="formular" action="https://formspree.io/f/mgoovnva" method="POST">
-              <input type="text" name="_gotcha" style="display:none">
+              <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;" />
               
               <div class="form-group">
                 <label class="form-label" for="jmeno">Jméno</label>
-                <input class="form-input" type="text" id="jmeno" name="jmeno" required placeholder="Např. Petr Novák">
+                <input class="form-input" type="text" id="jmeno" name="jmeno" autocomplete="name" placeholder="Např. Petr Novák" required>
               </div>
               
               <div class="form-group">
                 <label class="form-label" for="email">E-mail</label>
-                <input class="form-input" type="email" id="email" name="email" required placeholder="napriklad@email.cz">
+                <input class="form-input" type="email" id="email" name="email" autocomplete="email" required placeholder="napriklad@email.cz">
               </div>
 
               <div class="form-group">
@@ -985,8 +968,12 @@
 
               <div class="form-group">
                 <label class="form-label" for="zprava">Zpráva</label>
-                <textarea class="form-input" id="zprava" name="zprava" required placeholder="Stručně popište zadání..."></textarea>
+                <textarea class="form-input" id="zprava" name="zprava" required placeholder="Stručně popište zadání..." style="min-height: 120px; resize: vertical;"></textarea>
               </div>
+
+              <input type="hidden" name="_subject" value="Nová poptávka z webu – Jan Galba" />
+              <input type="hidden" name="_format" value="plain" />
+              <input type="hidden" name="_replyto" value="%email%" />
 
               <button type="submit" class="btn btn--primary" style="width: 100%;">Odeslat poptávku</button>
               <p id="form-status" style="margin-top: 10px; font-size: 0.9rem; text-align: center;"></p>
@@ -1000,13 +987,13 @@
     </section>
   </main>
 
-  <!-- LEGAL MODAL (Hidden by default) -->
+  <!-- LEGAL MODAL -->
   <div class="legal-modal" id="legalModal" aria-hidden="true">
     <div class="legal-backdrop" data-close-modal></div>
     <div class="legal-content-box">
       <div class="legal-header">
-        <h3 style="margin:0;">Právní dokumenty</h3>
-        <button data-close-modal style="background:none; border:none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+        <h3 style="margin:0; font-size: 1.2rem;">Právní dokumenty</h3>
+        <button data-close-modal style="background:none; border:none; font-size: 1.5rem; cursor: pointer; padding: 5px;">&times;</button>
       </div>
       <div class="legal-body">
         <div class="legal-tabs">
@@ -1015,7 +1002,7 @@
         </div>
         
         <div id="content-op">
-          <div style="font-size: 14px; color: #334155; line-height: 1.6;">
+          <div class="legalni-text">
             <p>
               <strong>Poskytovatel:</strong> Jan Galba, OSVČ<br>
               <strong>IČO:</strong> 24367699<br>
@@ -1111,7 +1098,7 @@
         </div>
         
         <div id="content-gdpr" hidden>
-          <div style="font-size: 14px; color: #334155; line-height: 1.6;">
+           <div class="legalni-text">
             <p>
               Tyto zásady popisují, jak zpracovávám osobní údaje v souladu s obecným nařízením o ochraně osobních údajů (GDPR).
             </p>
@@ -1197,7 +1184,7 @@
             </ul>
 
             <p><em>Platnost od: 1. 1. 2026</em></p>
-          </div>
+           </div>
         </div>
       </div>
     </div>
@@ -1206,7 +1193,7 @@
   <footer class="footer">
     <div class="kontejner">
       <div class="footer-top">
-        <div>
+        <div style="text-align: center;">
           <div style="font-weight: 800; color: var(--text); margin-bottom: 8px;">Jan Galba</div>
           <div>Weby • Aplikace • Servis PC</div>
         </div>
@@ -1227,6 +1214,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
+          observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1 });
@@ -1234,36 +1222,25 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // === MOBILE MENU ===
-    const menuToggle = document.querySelector('.menu-toggle');
     const mobileMenu = document.getElementById('mobileMenu');
-    const closeMenu = document.getElementById('closeMenu');
-
     function toggleMenu() {
       mobileMenu.classList.toggle('open');
-      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+      const isOpen = mobileMenu.classList.contains('open');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     }
 
-    menuToggle.addEventListener('click', toggleMenu);
-    closeMenu.addEventListener('click', toggleMenu);
-    
-    // Close menu on link click
-    document.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', toggleMenu);
-    });
-
     // === YEAR ===
-    document.getElementById('rok').textContent = new Date().getFullYear();
+    const rokEl = document.getElementById('rok');
+    if (rokEl) rokEl.textContent = new Date().getFullYear();
 
     // === FORM HANDLING ===
     const form = document.getElementById('formular');
     const status = document.getElementById('form-status');
-
     if(form) {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const data = new FormData(form);
         status.textContent = "Odesílám...";
-        
         try {
             const response = await fetch(form.action, {
                 method: form.method,
@@ -1271,10 +1248,10 @@
                 headers: { 'Accept': 'application/json' }
             });
             if (response.ok) {
-                status.textContent = "Díky! Zpráva byla odeslána.";
+                status.textContent = "Zpráva odeslána. Brzy se ozvu.";
                 form.reset();
             } else {
-                status.textContent = "Chyba při odesílání. Zkuste to prosím znovu.";
+                status.textContent = "Chyba. Zkuste to prosím znovu.";
             }
         } catch (error) {
             status.textContent = "Chyba připojení.";
@@ -1316,8 +1293,28 @@
         btn.addEventListener('click', closeModal);
     });
     
+    // Close on click outside
+    const backdrop = document.querySelector('.legal-backdrop');
+    if(backdrop) {
+        backdrop.addEventListener('click', closeModal);
+    }
+    
+    // ESC key close
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+            closeModal();
+        }
+    });
+    
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+
+    // Auto-open from URL hash
+    window.addEventListener('load', () => {
+        const hash = window.location.hash;
+        if(hash === '#obchodni-podminky') openModal('op');
+        if(hash === '#gdpr') openModal('gdpr');
     });
 
   </script>
