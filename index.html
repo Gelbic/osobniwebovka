@@ -1,856 +1,908 @@
-<!doctype html>
-<html lang="cs">
+<!DOCTYPE html>
+<html lang="cs" class="scroll-smooth">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f8fafc" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jan Galba: Web & PC</title>
+    <meta name="description" content="Moderní webové stránky a servis PC ve Svitavách rychle, čistě, profi. Tvorba webů, webové aplikace, servis PC, domácí servery.">
+    <meta name="author" content="Jan Galba">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
-  <title>Moderní weby, aplikace a servis PC | Jan Galba</title>
-  <meta name="description" content="Rychlé moderní weby (onepage, prezentace, landing page) a menší webové aplikace. Servis a upgrade PC. Doména, e-mail, hosting a nasazení – Svitavy i online." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://jangalba.eu/" />
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            400: '#22d3ee', // Cyan
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            dark: '#0f172a', // Slate 900
+                            card: '#1e293b', // Slate 800
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-  <!-- Icons -->
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+        /* Custom Utilities */
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="cs_CZ" />
-  <meta property="og:title" content="Jan Galba – weby, aplikace a servis PC | Svitavy" />
-  <meta property="og:description" content="Rychlé moderní weby (onepage, prezentace, landing page) a menší webové aplikace. Servis a upgrade PC. Doména, e-mail, hosting a nasazení – Svitavy i online." />
-  <meta property="og:url" content="https://jangalba.eu/" />
-  <meta property="og:image" content="https://jangalba.eu/og.jpg" />
-  <meta property="og:image:alt" content="Jan Galba – weby a servis PC" />
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #22d3ee;
+        }
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Jan Galba – weby, aplikace a servis PC | Svitavy" />
-  <meta name="twitter:description" content="Rychlé moderní weby (onepage, prezentace, landing page) a menší webové aplikace. Servis a upgrade PC. Doména, e-mail, hosting a nasazení – Svitavy i online." />
-  <meta name="twitter:image" content="https://jangalba.eu/og.jpg" />
+        /* Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet" />
+        /* Brutal Card Hover */
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px -10px rgba(34, 211, 238, 0.2);
+            border-color: #22d3ee;
+        }
 
-  <link rel="stylesheet" href="style_redesign.css" />
-
-  
-
-  
-
-  <!-- Structured data (Schema.org) -->
-  <script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Jan Galba",
-    "description": "Tvorba moderních webových stránek a menších aplikací, servis PC a domácí servery. Svitavy a okolí / online po celé ČR.",
-    "url": "https://jangalba.eu/",
-    "image": "https://jangalba.eu/og.jpg",
-    "email": "mailto:info@jangalba.eu",
-    "telephone": "+420775600674",
-    "priceRange": "od 8 500 Kč",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Antonína Slavíčka 705/31",
-      "postalCode": "568 02",
-      "addressLocality": "Svitavy",
-      "addressRegion": "Pardubický kraj",
-      "addressCountry": "CZ"
-    },
-    "areaServed": [
-      { "@type": "AdministrativeArea", "name": "Pardubický kraj" },
-      { "@type": "Country", "name": "Česká republika" },
-      "Online"
-    ],
-    "contactPoint": [
-      {
-        "@type": "ContactPoint",
-        "contactType": "customer support",
-        "email": "info@jangalba.eu",
-        "telephone": "+420775600674",
-        "availableLanguage": [ "cs" ]
-      }
-    ],
-    "founder": { "@type": "Person", "name": "Jan Galba" },
-    "serviceType": [
-      "Tvorba webových stránek",
-      "Menší webové aplikace a nástroje",
-      "Doména, DNS a e-mail na doméně",
-      "Nasazení webu na hosting",
-      "Servis PC a upgrade",
-      "Domácí servery (NAS)"
-    ],
-    "makesOffer": [
-      { "@type": "Offer", "name": "Tvorba webových stránek (onepage, prezentace, landing page)" },
-      { "@type": "Offer", "name": "Menší webové aplikace a nástroje (formuláře, kalkulačky, automatizace)" },
-      { "@type": "Offer", "name": "Kompletní zajištění domény, DNS, e-mailu a nasazení na hosting" },
-      { "@type": "Offer", "name": "Instalace, opravy a upgrade PC (HW/SW), domácí servery" }
-    ],
-    "sameAs": [],
-    "identifier": { "@type": "PropertyValue", "propertyID": "IČO", "value": "24367699" },
-    "legalName": "Jan Galba"
-}
-  </script>
-
+        /* Mobile Menu Transition */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+        
+        /* Modal Styling */
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal.open .modal-content {
+            transform: scale(1);
+        }
+        
+        /* Legal Text Typography in Modal */
+        .legal-text h4 {
+            color: white;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .legal-text p {
+            margin-bottom: 0.75rem;
+        }
+        .legal-text ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .legal-text li {
+            margin-bottom: 0.25rem;
+        }
+    </style>
 </head>
+<body class="antialiased">
 
-<body>
-  <a class="preskocit-odkaz" href="#obsah">Přeskočit na obsah</a>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-brand-dark/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-400 rounded-lg flex items-center justify-center text-brand-dark font-black text-xl">JG</div>
+                    <a href="#" class="font-bold text-xl tracking-wide text-white">Jan Galba: Web & PC</a>
+                </div>
 
-  <header class="hlavicka" id="nahoru">
-    <div class="hlavicka__bg"></div>
-    <div class="kontejner hlavicka__vnitr">
-      <a class="znacka" href="#obsah" aria-label="Jan Galba – domů">
-        <span class="znacka__tecka" aria-hidden="true"></span>
-        <span class="znacka__text">Jan Galba: Web & PC</span>
-      </a>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#sluzby" class="text-slate-300 hover:text-brand-400 transition font-medium">Služby</a>
+                    <a href="#cenik" class="text-slate-300 hover:text-brand-400 transition font-medium">Ceník</a>
+                    <a href="#postup" class="text-slate-300 hover:text-brand-400 transition font-medium">Postup</a>
+                    <a href="#faq" class="text-slate-300 hover:text-brand-400 transition font-medium">FAQ</a>
+                    <a href="#kontakt" class="bg-brand-400 text-brand-dark px-5 py-2 rounded-full font-bold hover:bg-white transition transform hover:scale-105">Kontakt</a>
+                </div>
 
-      <button class="menu-tlacitko" type="button" aria-label="Otevřít menu" aria-expanded="false" data-menu-tlacitko>
-        <span class="menu-tlacitko__cara" aria-hidden="true"></span>
-        <span class="menu-tlacitko__cara" aria-hidden="true"></span>
-        <span class="menu-tlacitko__cara" aria-hidden="true"></span>
-      </button>
- <nav class="navigace" aria-label="Hlavní navigace" data-navigace>
-  <div class="navigace__obal">
-    <button type="button" class="navigace__zavrit" aria-label="Zavřít menu" data-zavrit-menu>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
-    <a class="navigace__odkaz" href="#sluzby">Služby</a>
-    <a class="navigace__odkaz" href="#cenik">Ceník</a>
-    <a class="navigace__odkaz" href="#proces">Postup</a>
-    <a class="navigace__odkaz" href="#faq">FAQ</a>
-    <a class="navigace__odkaz tlacitko tlacitko--male" href="#kontakt">Kontakt</a>
-  </div>
-</nav>
-    </div>
-  </header>
-
-  <main id="obsah">
-    <!-- HERO -->
-    <section class="hero" aria-label="Úvod">
-      <div class="kontejner hero__mřížka">
-        <div class="hero__text animace animace--zleva">
-          <p class="odznak">
-            <span class="odznak__tecka" aria-hidden="true"></span>
-            Svitavy • online po celé ČR
-          </p>
-
-          <h1 class="hero__nadpis">
-             Moderní webové stránky a servis PC ve Svitavách
-            <span class="hero__nadpis-zvýraznění">rychle, čistě, profi</span>
-          </h1>
-
-          <p class="hero__popis">
-           Jmenuji se <strong>Jan Galba</strong>. Vytvořím vám moderní a rychlý web (HTML/CSS/JS), nebo pomohu
-  se servisem a upgradem PC. Zajistím také doménu, e-mail na doméně, hosting a nasazení.
-          </p>
-
-          <div class="hero__cta">
-            <a class="tlacitko" href="#kontakt">Nezávazně poptat</a>
-            <a class="tlacitko tlacitko--sekundarni" href="#cenik">Zobrazit ceník</a>
-          </div>
-
-          <div class="hero__rychla-fakta">
-          <div class="karta-fakt">
-  <div class="karta-fakt__cislo">SEO základ</div>
-  <div class="karta-fakt__text">Title, popis, struktura, indexace a technický základ</div>
-</div>
-<div class="karta-fakt">
-  <div class="karta-fakt__cislo">Výkon</div>
-  <div class="karta-fakt__text">Čistý kód, komprese, optimalizace načítání a Core Web Vitals</div>
-</div>
-<div class="karta-fakt">
-  <div class="karta-fakt__cislo">Kompletní zajištění</div>
-  <div class="karta-fakt__text">Doména, DNS, e-mail, hosting a nasazení bez starostí</div>
-</div>
-          </div>
-        </div>
-
-        <div class="hero__vizual animace animace--zprava">
-          <div class="panel">
-            <div class="panel__hlava">
-              <span class="tecka tecka--cervena" aria-hidden="true"></span>
-              <span class="tecka tecka--zluta" aria-hidden="true"></span>
-              <span class="tecka tecka--zelena" aria-hidden="true"></span>
-              <span class="panel__titulek"></span>
+                <!-- Mobile Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
             </div>
+        </div>
 
-            <div class="panel__telo">
-              <div class="kodovy-blok" role="img" aria-label="Stylizovaný náhled HTML">
-<pre><code><span class="k-klic">&lt;section</span> <span class="k-attr">class</span><span class="k-tecka">=</span><span class="k-hodnota">"hero"</span><span class="k-klic">&gt;</span>
-  <span class="k-klic">&lt;h1&gt;</span>Rychlý web pro vaši firmu<span class="k-klic">&lt;/h1&gt;</span>
-  <span class="k-klic">&lt;p&gt;</span>SEO základ, rychlost, mobilní verze, nasazení<span class="k-klic">&lt;/p&gt;</span>
-  <span class="k-klic">&lt;a</span> <span class="k-attr">href</span><span class="k-tecka">=</span><span class="k-hodnota">"#kontakt"</span> <span class="k-attr">class</span><span class="k-tecka">=</span><span class="k-hodnota">"btn"</span><span class="k-klic">&gt;</span>Poptat<span class="k-klic">&lt;/a&gt;</span>
-<span class="k-klic">&lt;/section&gt;</span></code></pre>
-              </div>
-
-              <div class="stitek-mrizka">
-                <span class="stitek">Tvorba webů</span>
-                <span class="stitek">Menší webové aplikace</span>
-                <span class="stitek">PC servis</span>
-                <span class="stitek">Konzultace HW/SW</span>
-                <span class="stitek">Domácí servery (NAS)</span>
-                <span class="stitek">DNS & e-mail</span>
-              </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-slate-800 border-t border-slate-700">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#sluzby" class="block px-3 py-2 text-base font-medium text-white hover:bg-slate-700 rounded-md" onclick="toggleMenu()">Služby</a>
+                <a href="#cenik" class="block px-3 py-2 text-base font-medium text-white hover:bg-slate-700 rounded-md" onclick="toggleMenu()">Ceník</a>
+                <a href="#postup" class="block px-3 py-2 text-base font-medium text-white hover:bg-slate-700 rounded-md" onclick="toggleMenu()">Postup</a>
+                <a href="#faq" class="block px-3 py-2 text-base font-medium text-white hover:bg-slate-700 rounded-md" onclick="toggleMenu()">FAQ</a>
+                <a href="#kontakt" class="block px-3 py-2 text-base font-medium text-brand-400 font-bold hover:bg-slate-700 rounded-md" onclick="toggleMenu()">Kontakt</a>
             </div>
-          </div>
-
-          <div class="hero__pozadi" aria-hidden="true"></div>
         </div>
-      </div>
-    </section>
+    </nav>
 
-    <!-- SLUŽBY -->
-    <section class="sekce" id="sluzby" aria-label="Služby">
-      <div class="kontejner">
-        <div class="hlavicka-sekce animace animace--zleva">
-          <h2 class="nadpis-sekce">S čím vám pomůžu</h2>
-          <p class="popis-sekce">
-            Jednoduché a funkční řešení bez zbytečné složitosti. Vždy budete vědět, co je součástí dodání a proč.
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-brand-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+        <div class="absolute top-0 left-0 -ml-20 -mt-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
 
-          </p>
-        </div>
-
-        <div class="mřížka-karet">
-          <article class="karta animace animace--zleva">
-            <h3 class="karta__nadpis">Tvorba webů</h3>
-            <p class="karta__text">
-              Onepage, prezentace nebo landing page – moderně, rychle a mobile-first.
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 text-sm font-medium text-brand-400 mb-8 reveal">
+                <i class="fas fa-map-marker-alt"></i> Svitavy • online po celé ČR
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight text-white mb-6 leading-tight reveal">
+                Moderní webové stránky a servis PC ve Svitavách
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purple-400">rychle, čistě, profi</span>
+            </h1>
+            
+            <p class="mt-6 max-w-2xl mx-auto text-lg text-slate-300 reveal leading-relaxed">
+                Jmenuji se Jan Galba. Vytvořím vám moderní a rychlý web (HTML/CSS/JS), nebo pomohu se servisem a upgradem PC. Zajistím také doménu, e-mail na doméně, hosting a nasazení.
             </p>
-            <ul class="seznam-odrazky">
-              <li>Struktura sekcí, CTA, obsah</li>
-              <li>Responzivita a optimalizace</li>
-              <li>SEO základ + HTTPS</li>
-            </ul>
-          </article>
 
-          <article class="karta animace animace--zprava">
-            <h3 class="karta__nadpis">Webové aplikace</h3>
-            <p class="karta__text">
-              Vytvářím <strong>menší webové aplikace a nástroje</strong> (kalkulačky, formuláře, konfigurátory, automatizace) – ne velké informační systémy.
-            </p>
-            <ul class="seznam-odrazky">
-              <li>Kalkulačky a konfigurátory</li>
-              <li>Integrace e-mailu / formulářů</li>
-              <li>Nasazení a základní údržba</li>
-            </ul>
-          </article>
-
-          <article class="karta animace animace--zleva">
-            <h3 class="karta__nadpis">Servis PC & upgrade</h3>
-            <p class="karta__text">
-              Diagnostika, instalace, čištění, zrychlení PC a výměny komponent (HW/SW).
-            </p>
-            <ul class="seznam-odrazky">
-              <li>Řešení problémů a nastavení</li>
-              <li>Upgrade a sestavy PC</li>
-              <li>Zálohy a bezpečnost</li>
-            </ul>
-          </article>
-
-          <article class="karta animace animace--zprava">
-            <h3 class="karta__nadpis">Domácí servery (NAS)</h3>
-            <p class="karta__text">
-              Nastavení NAS/mini-serveru, sdílení dat, vzdálený přístup a zálohy.
-            </p>
-            <ul class="seznam-odrazky">
-              <li>NAS / server setup</li>
-              <li>Remote přístup</li>
-              <li>Pravidelné zálohy</li>
-            </ul>
-          </article>
-
-          <article class="karta karta--presah animace animace--zleva">
-            <h3 class="karta__nadpis">Web od A do Z</h3>
-            <p class="karta__text">
-              Doména, DNS záznamy, e-mail na doméně, hosting a nasazení – vyřeším kompletně.
-            </p>
-            <div class="karta__spodni">
-              <a class="odkaz-sipka" href="#kontakt">Napište mi zadání <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-
-          <article class="karta karta--presah animace animace--zprava">
-            <h3 class="karta__nadpis">Konzultace</h3>
-            <p class="karta__text">
-              Nevíte co vybrat? Porovnám možnosti, navrhnu postup a ušetřím slepé uličky.
-            </p>
-            <div class="karta__spodni">
-              <a class="odkaz-sipka" href="#faq">Časté otázky <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- CENÍK -->
-<section class="sekce" id="cenik" aria-label="Ceník">
-  <div class="kontejner">
-    <div class="hlavicka-sekce animace animace--zleva">
-      <h2 class="nadpis-sekce">Ceník</h2>
-      <p class="popis-sekce">
-        Přehledné balíčky i individuální nabídka. Cena se odvíjí od rozsahu, dodaných podkladů, požadovaných funkcí a termínu dodání.
-      </p>
-    </div>
-
-    <div class="cenik-mrizka">
-
-      <!-- START -->
-      <article class="cenik-karta animace animace--zleva">
-        <div class="cenik-karta__hlava">
-          <h3 class="cenik-karta__nazev">Start</h3>
-          <p class="cenik-karta__prokoho">Základní prezentační web (onepage)</p>
-        </div>
-
-        <div class="cenik-karta__cena">
-          <span class="cenik-karta__od">od</span>
-          <span class="cenik-karta__cislo">8 500 Kč</span>
-        </div>
-
-        <ul class="cenik-karta__seznam">
-          <li>Moderní onepage, responzivní (mobile-first)</li>
-          <li>Základní struktura sekcí + výzvy k akci (CTA)</li>
-          <li>SEO základ (title, meta popis, nadpisy)</li>
-          <li>Kontaktní sekce (e-mail, telefon)</li>
-        </ul>
-
-        <a class="tlacitko tlacitko--sekundarni cenik-karta__tlacitko" href="#kontakt">Poptat Start</a>
-      </article>
-
-      <!-- STANDARD -->
-      <article class="cenik-karta cenik-karta--doporučeno animace animace--zprava">
-        <div class="cenik-karta__odznak" aria-label="Doporučeno">Nejčastější</div>
-
-        <div class="cenik-karta__hlava">
-          <h3 class="cenik-karta__nazev">Standard</h3>
-          <p class="cenik-karta__prokoho">Rozšířená onepage pro firmu a služby</p>
-        </div>
-
-        <div class="cenik-karta__cena">
-          <span class="cenik-karta__od">od</span>
-          <span class="cenik-karta__cislo">12 500 Kč</span>
-        </div>
-
-        <ul class="cenik-karta__seznam">
-          <li>Více sekcí (služby, ceník, postup, FAQ, kontakt)</li>
-          <li>Kontaktní formulář (Formspree / e-mail)</li>
-          <li>Pokročilejší layout a jemné animace</li>
-          <li>Optimalizace rychlosti (obrázky, načítání)</li>
-          <li>Nasazení + základní nastavení (HTTPS, indexace)</li>
-        </ul>
-
-        <a class="tlacitko cenik-karta__tlacitko" href="#kontakt">Poptat Standard</a>
-      </article>
-
-      <!-- PREMIUM -->
-      <article class="cenik-karta animace animace--zleva">
-        <div class="cenik-karta__hlava">
-          <h3 class="cenik-karta__nazev">Premium</h3>
-          <p class="cenik-karta__prokoho">Web s rozšířenými funkcemi a individuálním řešením</p>
-        </div>
-
-        <div class="cenik-karta__cena">
-          <span class="cenik-karta__od">od</span>
-          <span class="cenik-karta__cislo">16 000 Kč</span>
-        </div>
-
-        <ul class="cenik-karta__seznam">
-          <li>Interaktivní prvky (kalkulačka, konfigurátor, formulář s logikou)</li>
-          <li>Další stránky (podmínky, GDPR, reference, blog apod.)</li>
-          <li>Propojení služeb a automatizace (e-mail, externí systémy)</li>
-          <li>Detailní ladění UX a struktury obsahu</li>
-          <li>Rezerva na úpravy podle zpětné vazby</li>
-        </ul>
-
-        <a class="tlacitko tlacitko--sekundarni cenik-karta__tlacitko" href="#kontakt">Poptat Premium</a>
-      </article>
-
-    </div>
-
-    <!-- DOPLŇKOVÉ SLUŽBY -->
-    <div class="cenik-doplnky animace animace--zprava" aria-label="Doplňkové služby">
-      <h3 class="cenik-doplnky__nadpis">Doplňkové služby</h3>
-      <div class="cenik-doplnky__tabulka">
-        <div class="cenik-radek">
-          <span>Registrace domény + nastavení DNS</span>
-          <strong>od 800 Kč</strong>
-        </div>
-        <div class="cenik-radek">
-          <span>E-mail na doméně (zřízení + propojení zařízení)</span>
-          <strong>od 900 Kč</strong>
-        </div>
-        <div class="cenik-radek">
-          <span>Nasazení na hosting (včetně HTTPS)</span>
-          <strong>od 900 Kč</strong>
-        </div>
-        <div class="cenik-radek">
-          <span>Úpravy / servis webu</span>
-          <strong>od 500 Kč / hod</strong>
-        </div>
-        <div class="cenik-radek">
-          <span>Servis PC (diagnostika / oprava / instalace)</span>
-          <strong>od 500 Kč / hod</strong>
-        </div>
-      </div>
-
-      <p class="cenik-doplnky__poznamka">
-        Ceny jsou orientační. Finální nabídka je vždy upřesněna podle konkrétního zadání.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- POSTUP -->
-<section class="sekce" id="proces" aria-label="Postup">
-  <div class="kontejner">
-    <div class="hlavicka-sekce animace animace--zleva">
-      <h2 class="nadpis-sekce">Jak to probíhá</h2>
-      <p class="popis-sekce">
-        Jasný postup a průběžná komunikace. Od zadání po spuštění webu budete mít přehled o každém kroku.
-      </p>
-    </div>
-
-    <div class="process-steps">
-      <article class="step animace animace--zleva">
-        <div class="step__number">01</div>
-        <h3 class="step__title">Zadání a cíle</h3>
-        <p class="step__text">
-          Upřesníme cíl webu, cílovou skupinu, styl a rozsah. Domluvíme se na potřebných podkladech a termínech.
-        </p>
-      </article>
-
-      <article class="step animace animace--zprava">
-        <div class="step__number">02</div>
-        <h3 class="step__title">Struktura a obsah</h3>
-        <p class="step__text">
-          Navrhnu strukturu stránek a doporučím obsah tak, aby byl web přehledný a srozumitelný pro návštěvníky.
-        </p>
-      </article>
-
-      <article class="step animace animace--zleva">
-        <div class="step__number">03</div>
-        <h3 class="step__title">Design a realizace</h3>
-        <p class="step__text">
-          Vytvořím moderní vzhled, responzivitu a funkční kód. Průběžně zapracovávám připomínky.
-        </p>
-      </article>
-
-      <article class="step animace animace--zprava">
-        <div class="step__number">04</div>
-        <h3 class="step__title">SEO a nasazení</h3>
-        <p class="step__text">
-          Nastavím technický základ pro vyhledávače, nasadím web na hosting a pomohu s doménou, DNS a e-mailem.
-        </p>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-
-
-    <!-- FAQ -->
-    <section class="sekce" id="faq" aria-label="Časté otázky">
-      <div class="kontejner">
-        <div class="hlavicka-sekce animace animace--zleva">
-          <h2 class="nadpis-sekce">FAQ</h2>
-          <p class="popis-sekce">Rychlé odpovědi na časté dotazy.</p>
-        </div>
-
-        <div class="faq">
-          <details class="faq__polozka animace animace--zleva">
-            <summary class="faq__otazka">Zařídíte i doménu, e-mail a hosting?</summary>
-            <div class="faq__odpoved">
-              Ano. Zařídím doménu, DNS záznamy, e-mail na doméně i nasazení webu na hosting.
-            </div>
-          </details>
-
-          <details class="faq__polozka animace animace--zprava">
-            <summary class="faq__otazka">Bude web rychlý a mobilně vyladěný?</summary>
-            <div class="faq__odpoved">
-              Mobile-first je základ. Dělám čistý HTML/CSS/JS a rozumné animace tak, aby web zůstal rychlý.
-            </div>
-          </details>
-
-          <details class="faq__polozka animace animace--zleva">
-            <summary class="faq__otazka">Jak dlouho to typicky trvá?</summary>
-            <div class="faq__odpoved">
-              Záleží na rozsahu a podkladech. Onepage obvykle zvládneme v řádu dnů až 1–2 týdnů, u větších věcí dle domluvy.
-            </div>
-          </details>
-
-          <details class="faq__polozka animace animace--zprava">
-            <summary class="faq__otazka">Umíte i úpravy a servis existujícího webu?</summary>
-            <div class="faq__odpoved">
-              Ano. Od drobných oprav přes zrychlení až po redesign. Stačí poslat odkaz a stručně popsat, co je potřeba.
-            </div>
-          </details>
-
-          <details class="faq__polozka animace animace--zleva">
-            <summary class="faq__otazka">Děláte i opravy a upgrade PC?</summary>
-            <div class="faq__odpoved">
-              Ano. HW/SW opravy, instalace, diagnostika, upgrady komponent a nastavení domácích serverů (NAS).
-            </div>
-          </details>
-
-          <details class="faq__polozka animace animace--zprava">
-            <summary class="faq__otazka">Bude web fungovat bez měsíčního poplatku?</summary>
-            <div class="faq__odpoved">
-              Ano – samotný web může běžet i bez „správy“. Platí se jen doména/hosting (pokud ho používáte) a případné úpravy podle potřeby.
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- KONTAKT -->
-    <section class="sekce sekce--kontakt" id="kontakt" aria-label="Kontakt">
-      <div class="kontejner kontakt">
-        <div class="kontakt__text animace animace--zleva">
-          <h2 class="nadpis-sekce">Kontakt</h2>
-          <p class="popis-sekce">
-            Napište mi krátce, co potřebujete. Ozvu se a domluvíme postup.
-          </p>
-
-          <div class="kontakt__karty">
-            <div class="mini-karta">
-              <div class="mini-karta__titulek"></div>
-              <div class="mini-karta__hodnota">
-                <a href="mailto:info@jangalba.eu" aria-label="Napsat e-mail na info@jangalba.eu">
-                  <span class="mini-karta__row">
-                    <svg class="ikona" viewBox="0 0 24 24" aria-hidden="true" fill="none">
-                      <path d="M4 6.5h16v11H4v-11Z" stroke="currentColor" stroke-width="1.8" />
-                      <path d="m5 7.5 7 5 7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>info@jangalba.eu</span>
-                  </span>
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 reveal">
+                <a href="#kontakt" class="px-8 py-4 bg-brand-400 text-brand-dark rounded-lg font-bold text-lg hover:bg-white transition shadow-lg shadow-brand-500/20 transform hover:-translate-y-1">
+                    Nezávazně poptat
                 </a>
-              </div>
-            </div>
-
-            <div class="mini-karta">
-              <div class="mini-karta__titulek"></div>
-              <div class="mini-karta__hodnota">
-                <a href="tel:+420775600674" aria-label="Zavolat na +420 775 600 674">
-                  <span class="mini-karta__row">
-                    <svg class="ikona" viewBox="0 0 24 24" aria-hidden="true" fill="none">
-                      <path d="M8.5 3.5 6.6 4.2c-.7.3-1.1 1.1-.9 1.9 1 3.8 4.4 7.2 8.2 8.2.8.2 1.6-.2 1.9-.9l.7-1.9c.2-.6 0-1.3-.6-1.6l-2.2-1.3c-.5-.3-1.2-.2-1.6.3l-.5.7c-.2.3-.6.5-.9.4-1.5-.5-3-2-3.5-3.5-.1-.3.1-.7.4-.9l.7-.5c.5-.4.6-1.1.3-1.6L10.1 4c-.3-.6-1-.8-1.6-.6Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>775 600 674</span>
-                  </span>
+                <a href="#cenik" class="px-8 py-4 bg-slate-800 text-white border border-slate-700 rounded-lg font-bold text-lg hover:bg-slate-700 transition">
+                    Zobrazit ceník
                 </a>
-              </div>
             </div>
-          </div>
 
-          <p class="kontakt__poznamka">
-            Do zprávy ideálně napište: <strong>co</strong> potřebujete, <strong>do kdy</strong> a <strong>rozpočet</strong>.
-          </p>
+            <!-- Trust Indicators -->
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-slate-800 pt-8 reveal">
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-search text-brand-400 text-2xl mb-2"></i>
+                    <h3 class="font-bold text-white">SEO základ</h3>
+                    <p class="text-xs text-slate-500 mt-1">Title, popis, struktura, indexace a technický základ</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-bolt text-brand-400 text-2xl mb-2"></i>
+                    <h3 class="font-bold text-white">Výkon</h3>
+                    <p class="text-xs text-slate-500 mt-1">Čistý kód, komprese, optimalizace načítání a Core Web Vitals</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-check-circle text-brand-400 text-2xl mb-2"></i>
+                    <h3 class="font-bold text-white">Kompletní zajištění</h3>
+                    <p class="text-xs text-slate-500 mt-1">Doména, DNS, e-mail, hosting a nasazení bez starostí</p>
+                </div>
+            </div>
         </div>
-
-        <div class="kontakt__formular animace animace--zprava">
-          <!-- Formspree: sem vlož svůj endpoint -->
-          <!-- Např. https://formspree.io/f/abcdwxyz -->
-          <form class="formular" id="formular" action="https://formspree.io/f/mgoovnva" method="POST">
-
-            <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
-
-            <div class="formular__radek">
-              <label class="stitky" for="jmeno">Jméno</label>
-              <input class="vstup" id="jmeno" name="jmeno" autocomplete="name" placeholder="Např. Petr Novák" required />
-            </div>
-
-            <div class="formular__radek">
-              <label class="stitky" for="email">E-mail</label>
-              <input class="vstup" id="email" name="email" type="email" autocomplete="email" placeholder="napriklad@email.cz" required />
-            </div>
-
-            <div class="formular__radek">
-              <label class="stitky" for="tema">Co potřebujete?</label>
-              <select class="vstup" id="tema" name="tema">
-                <option value="web">Web / onepage / prezentace</option>
-                <option value="aplikace">Menší webová aplikace / nástroj</option>
-                <option value="pc">Oprava / upgrade PC</option>
-                <option value="server">Domácí server / nastavení</option>
-                <option value="konzultace">Konzultace</option>
-              </select>
-            </div>
-
-            <div class="formular__radek">
-              <label class="stitky" for="zprava">Zpráva</label>
-              <textarea class="vstup" id="zprava" name="zprava" rows="5" placeholder="Stručně popište zadání..." required></textarea>
-            </div>
-
-            <input type="hidden" name="_subject" value="Nová poptávka z webu – Jan Galba" />
-            <input type="hidden" name="_format" value="plain" />
-            <input type="hidden" name="_replyto" value="%email%" />
-
-            <div class="formular__spodni">
-              <button class="tlacitko tlacitko--plne" type="submit">Odeslat poptávku</button>
-              <p class="formular__stav" role="status" aria-live="polite" data-formular-stav></p>
-            </div>
-
-            <p class="formular__drobne">
-              Odesláním souhlasíte se zpracováním údajů pro účely kontaktování.
-            </p>
-          </form>
-        </div>
-      </div>
     </section>
-  </main>
 
-  <!-- LEGAL MODAL (otevírá se z patičky) -->
-  <section class="legal-modal" id="legalModal" aria-hidden="true" aria-label="Právní dokumenty">
-    <div class="legal-modal__backdrop" data-legal-close></div>
+    <!-- Services Section -->
+    <section id="sluzby" class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">S čím vám pomůžu</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Jednoduché a funkční řešení bez zbytečné složitosti. Vždy budete vědět, co je součástí dodání a proč.
+                </p>
+            </div>
 
-    <div class="legal-modal__panel" role="dialog" aria-modal="true" aria-labelledby="legalTitle" tabindex="-1">
-      <div class="legal-modal__header">
-        <h2 class="legal-modal__title" id="legalTitle">Právní dokumenty</h2>
-        <button class="legal-modal__close" type="button" aria-label="Zavřít" data-legal-close>
-          <svg class="ikona" viewBox="0 0 24 24" aria-hidden="true" fill="none">
-            <path d="M7 7l10 10M17 7 7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-      </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-slate-800 border border-slate-700 p-8 rounded-2xl transition duration-300 reveal">
+                    <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center mb-6 text-brand-400 text-2xl border border-slate-700">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Tvorba webů</h3>
+                    <p class="text-slate-300 mb-4 text-sm leading-relaxed">
+                        Onepage, prezentace nebo landing page – moderně, rychle a mobile-first.
+                    </p>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li class="flex items-center"><i class="fas fa-check text-brand-400 mr-2 text-xs"></i> Struktura sekcí, CTA, obsah</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-400 mr-2 text-xs"></i> Responzivita a optimalizace</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-400 mr-2 text-xs"></i> SEO základ + HTTPS</li>
+                    </ul>
+                </div>
 
-      <div class="legal-tabs" role="tablist" aria-label="Přepínání dokumentů">
-        <button class="legal-tab" type="button" role="tab" id="tab-op" aria-controls="panel-op" aria-selected="true" data-legal-tab="op">
-          Obchodní podmínky
-        </button>
-        <button class="legal-tab" type="button" role="tab" id="tab-gdpr" aria-controls="panel-gdpr" aria-selected="false" data-legal-tab="gdpr">
-          GDPR
-        </button>
-      </div>
+                <!-- Service 2 -->
+                <div class="service-card bg-slate-800 border border-slate-700 p-8 rounded-2xl transition duration-300 reveal">
+                    <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center mb-6 text-purple-400 text-2xl border border-slate-700">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Webové aplikace</h3>
+                    <p class="text-slate-300 mb-4 text-sm leading-relaxed">
+                        Vytvářím menší webové aplikace a nástroje (kalkulačky, formuláře, konfigurátory, automatizace) – ne velké informační systémy.
+                    </p>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li class="flex items-center"><i class="fas fa-check text-purple-400 mr-2 text-xs"></i> Kalkulačky a konfigurátory</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-400 mr-2 text-xs"></i> Integrace e-mailu / formulářů</li>
+                        <li class="flex items-center"><i class="fas fa-check text-purple-400 mr-2 text-xs"></i> Nasazení a základní údržba</li>
+                    </ul>
+                </div>
 
-      <div class="legal-content">
+                <!-- Service 3 -->
+                <div class="service-card bg-slate-800 border border-slate-700 p-8 rounded-2xl transition duration-300 reveal">
+                    <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center mb-6 text-green-400 text-2xl border border-slate-700">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Servis PC & upgrade</h3>
+                    <p class="text-slate-300 mb-4 text-sm leading-relaxed">
+                        Diagnostika, instalace, čištění, zrychlení PC a výměny komponent (HW/SW).
+                    </p>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i> Řešení problémů a nastavení</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i> Upgrade a sestavy PC</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2 text-xs"></i> Zálohy a bezpečnost</li>
+                    </ul>
+                </div>
 
-        <div id="panel-op" role="tabpanel" aria-labelledby="tab-op">
-  <div class="legalni-text">
-    <p>
-      <strong>Poskytovatel:</strong> Jan Galba, OSVČ<br>
-      <strong>IČO:</strong> 24367699<br>
-      <strong>Sídlo / místo podnikání:</strong> Antonína Slavíčka 705/31, 568 02 Svitavy, Česká republika<br>
-      <strong>E-mail:</strong> <a href="mailto:info@jangalba.eu">info@jangalba.eu</a><br>
-      <strong>Telefon:</strong> <a href="tel:+420775600674">+420 775 600 674</a><br>
-      <strong>DPH:</strong> Poskytovatel není plátcem DPH dle § 6 zákona č. 235/2004 Sb., o dani z přidané hodnoty. Uvedené ceny jsou konečné.
-    </p>
-    <p>Fyzická osoba zapsaná v živnostenském rejstříku.</p>
+                <!-- Service 4 -->
+                <div class="service-card bg-slate-800 border border-slate-700 p-8 rounded-2xl transition duration-300 reveal">
+                    <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center mb-6 text-orange-400 text-2xl border border-slate-700">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Domácí servery (NAS)</h3>
+                    <p class="text-slate-300 mb-4 text-sm leading-relaxed">
+                        Nastavení NAS/mini-serveru, sdílení dat, vzdálený přístup a zálohy.
+                    </p>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li class="flex items-center"><i class="fas fa-check text-orange-400 mr-2 text-xs"></i> NAS / server setup</li>
+                        <li class="flex items-center"><i class="fas fa-check text-orange-400 mr-2 text-xs"></i> Remote přístup</li>
+                        <li class="flex items-center"><i class="fas fa-check text-orange-400 mr-2 text-xs"></i> Pravidelné zálohy</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 5 (Web od A do Z) -->
+                <div class="service-card bg-slate-800 border border-slate-700 p-8 rounded-2xl transition duration-300 reveal">
+                    <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center mb-6 text-brand-400 text-2xl border border-slate-700">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Web od A do Z</h3>
+                    <p class="text-slate-300 mb-4 text-sm leading-relaxed">
+                        Doména, DNS záznamy, e-mail na doméně, hosting a nasazení – vyřeším kompletně.
+                    </p>
+                    <a href="#kontakt" class="text-brand-400 font-bold hover:text-white transition inline-flex items-center text-sm">
+                        Napište mi zadání <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
 
-    <p>
-      Tyto všeobecné obchodní podmínky („<strong>Podmínky</strong>“) upravují poskytování služeb a dodání díla,
-      zejména tvorbu webových stránek (onepage, prezentace, landing page), tvorbu menších webových aplikací/nástrojů,
-      dále servis/upgrade PC, domácí servery (NAS) a související konzultace.
-      Podmínky se vztahují jak na vztahy <strong>B2B</strong> (podnikatel), tak na <strong>spotřebitele</strong>.
-    </p>
-
-    <h4>1. Vymezení pojmů</h4>
-    <ul>
-      <li><strong>Klient / Objednatel</strong> – osoba, která objednává služby Poskytovatele.</li>
-      <li><strong>Spotřebitel</strong> – fyzická osoba, která mimo rámec své podnikatelské činnosti nebo výkonu povolání uzavírá smlouvu s Poskytovatelem.</li>
-      <li><strong>Podnikatel (B2B)</strong> – osoba jednající v rámci své podnikatelské činnosti.</li>
-      <li><strong>Dílo</strong> – výsledek činnosti Poskytovatele (např. web, kód, grafické prvky vytvořené Poskytovatelem, případně nastavení domény/hostingu/e-mailu dle dohody).</li>
-      <li><strong>Služby</strong> – zejména konzultace, úpravy webu, nasazení, údržba, servis PC apod.</li>
-    </ul>
-
-    <h4>2. Objednávka a uzavření smlouvy</h4>
-    <ol>
-      <li>Objednávka může být učiněna e-mailem, telefonicky, přes kontaktní formulář nebo jiným dohodnutým způsobem.</li>
-      <li>Smlouva je uzavřena okamžikem, kdy Poskytovatel objednávku potvrdí e-mailem nebo zahájí plnění dle dohody.</li>
-      <li>Rozsah plnění je určen zejména nabídkou, objednávkou a e-mailovou komunikací.</li>
-    </ol>
-
-    <h4>3. Součinnost Klienta, podklady a termíny</h4>
-    <ol>
-      <li>Klient je povinen poskytnout součinnost (podklady, texty, přístupy, schválení) v přiměřené době.</li>
-      <li>Termíny dodání se odvíjí od rozsahu a součinnosti Klienta. Prodlení Klienta prodlužuje termíny přiměřeně.</li>
-      <li>Pokud Klient nedodá podklady včas, může Poskytovatel pozastavit práce do jejich dodání.</li>
-    </ol>
-
-    <h4>4. Rozsah plnění, změny a vícepráce</h4>
-    <ol>
-      <li>V ceně jsou zahrnuty pouze výslovně dohodnuté práce.</li>
-      <li>Požadavky nad dohodnutý rozsah jsou <strong>vícepráce</strong> a budou účtovány nad rámec sjednané ceny dle hodinové sazby nebo nové dohody.</li>
-      <li>Ceny uvedené v ceníku (označené „od …“) se vztahují pouze na základní rozsah. Dodatečné požadavky mohou vést k navýšení ceny po odsouhlasení Klientem.</li>
-      <li>Poskytovatel může odmítnout požadavky, které jsou technicky neproveditelné, neúměrně nákladné, nebo v rozporu s právními předpisy.</li>
-    </ol>
-
-    <h4>5. Cena a platební podmínky</h4>
-    <ol>
-      <li>Cena je sjednána individuálně nebo dle orientačního ceníku na webu.</li>
-      <li>Poskytovatel může požadovat zálohu až <strong>50 %</strong> z ceny.</li>
-      <li><strong>Nevratnost zálohy:</strong> V případě zrušení objednávky ze strany Klienta nebo nemožnosti dokončení díla z důvodů na straně Klienta (např. neposkytnutí součinnosti po dobu delší než 30 dnů) je uhrazená záloha nevratná a slouží k pokrytí již vynaložených nákladů a rezervace kapacit.</li>
-      <li>Doplatek je splatný po předání díla / dokončení služby, není-li dohodnuto jinak.</li>
-      <li>Do úplného zaplacení ceny není Poskytovatel povinen předat zdrojové soubory, přístupy ani udělit licenci k užití díla.</li>
-    </ol>
-
-    <h4>6. Předání díla, akceptace</h4>
-    <ol>
-      <li>Předání probíhá předáním odkazu (URL), nasazením na doménu/hosting, nebo předáním souborů dle dohody.</li>
-      <li>Klient je povinen dílo bez zbytečného odkladu zkontrolovat.</li>
-      <li>Pokud Klient do <strong>7 dnů</strong> od předání neuplatní výhrady, má se za to, že dílo převzal a akceptoval. To neplatí u skrytých vad.</li>
-    </ol>
-
-    <h4>7. Autorská práva a licence</h4>
-    <ol>
-      <li>Licence k užití díla vzniká Klientovi až <strong>úplným zaplacením celé ceny</strong> dle všech vystavených faktur.</li>
-      <li>Do té doby není Klient oprávněn dílo ani jeho části užívat v ostrém provozu, zveřejňovat ani poskytovat třetím osobám.</li>
-      <li>V díle mohou být použity knihovny/komponenty třetích stran s vlastní licencí.</li>
-      <li>Poskytovatel je oprávněn uvést dílo jako referenci, pokud se strany nedohodnou jinak.</li>
-    </ol>
-
-    <h3>8. Specifika vývoje webu a aplikací</h3>
-        <ol>
-             <li><strong>Kompatibilita:</strong> Webové stránky a aplikace jsou optimalizovány pro aktuální verze běžných prohlížečů (Chrome, Firefox, Safari, Edge). Plná zpětná kompatibilita se staršími verzemi není garantována.</li>
-             <li><strong>Právní náležitosti (GDPR, Cookies):</strong> Poskytovatel neposkytuje právní služby. Za zajištění zákonných náležitostí provozu webu (zejména Obchodní podmínky, Zásady ochrany osobních údajů/GDPR, textace Cookies lišty) odpovídá výhradně Klient. Pokud Klient tyto podklady nedodá nebo si neobjedná jejich technické zapracování (např. nasazení cookie lišty), Poskytovatel nenese odpovědnost za případné sankce ze strany dozorových orgánů.</li>
-             <li><strong>Třetí strany:</strong> Poskytovatel neodpovídá za funkčnost a výpadky služeb třetích stran (hosting, registrátoři domén, API, platební brány).</li>
-             <li><strong>Odpovědnost za obsah:</strong> Za faktickou a právní správnost podkladů (texty, obrázky) dodaných Klientem odpovídá výhradně Klient.</li>
-        </ol>
-
-    <h4>9. Zvláštní ustanovení pro servis a hardware</h4>
-    <ol>
-      <li><strong>Záloha dat:</strong> Poskytovatel neodpovídá za data uložená na zařízeních (PC, notebooky, disky, NAS) předaných k servisu či úpravě. Klient je povinen si veškerá data před předáním <strong>zálohovat</strong>.</li>
-      <li><strong>Diagnostika:</strong> Pokud Klient po provedení diagnostiky závady odmítne realizaci opravy, je povinen uhradit poplatek za diagnostiku dle platného ceníku nebo hodinové sazby.</li>
-      <li><strong>Nevyzvednuté zakázky:</strong> Pokud si Klient nevyzvedne zařízení do 30 dnů od výzvy k vyzvednutí (např. e-mailem či SMS), je Poskytovatel oprávněn účtovat <strong>skladné</strong> ve výši 50 Kč za každý započatý den prodlení.</li>
-    </ol>
-    
-    <h4>10. Odpovědnost za škodu</h4>
-    <p>V případě vztahů B2B (s podnikateli) odpovídá Poskytovatel za případnou škodu způsobenou porušením povinností pouze do výše ceny sjednané za konkrétní dílo či službu.</p>
-
-    <p><em>Platnost od: 1. 1. 2026</em></p>
-  </div>
-</div>
-
-        <!-- GDPR -->
-        <div id="panel-gdpr" role="tabpanel" aria-labelledby="tab-gdpr" hidden>
-          <div class="legalni-text">
-            <p>
-              Tyto zásady popisují, jak zpracovávám osobní údaje v souladu s obecným nařízením o ochraně osobních údajů (GDPR).
-            </p>
-
-            <h4>1. Správce osobních údajů</h4>
-            <p>
-              <strong>Jan Galba, OSVČ</strong><br>
-              <strong>IČO:</strong> 24367699<br>
-              <strong>E-mail:</strong> <a href="mailto:info@jangalba.eu">info@jangalba.eu</a><br>
-              <strong>Telefon:</strong> <a href="tel:+420775600674">+420 775 600 674</a>
-            </p>
-
-            <h4>2. Jaké údaje zpracovávám</h4>
-            <ul>
-              <li>Identifikační údaje (jméno, příjmení).</li>
-              <li>Kontaktní údaje (e-mail, telefon).</li>
-              <li>Údaje o poptávce/objednávce (obsah zprávy, požadavky, případně URL webu).</li>
-              <li>Fakturační údaje (adresa, IČO/DIČ, údaje na dokladech).</li>
-              <li>Technické údaje související s provozem webu (např. logy serveru, IP adresa v rámci bezpečnosti a provozu).</li>
-            </ul>
-
-            <h4>3. Účely zpracování a právní základ</h4>
-            <p><strong>A) Poptávka a komunikace</strong><br>
-              Účel: vyřízení poptávky, komunikace, příprava nabídky.<br>
-              Právní základ: plnění smlouvy / předsmluvní jednání (čl. 6 odst. 1 písm. b GDPR).
-            </p>
-
-            <p><strong>B) Plnění smlouvy</strong><br>
-              Účel: realizace zakázky, předání díla, domluvená technická podpora související se zakázkou.<br>
-              Právní základ: plnění smlouvy (čl. 6 odst. 1 písm. b GDPR).
-            </p>
-
-            <p><strong>C) Účetnictví a daňové povinnosti</strong><br>
-              Účel: vystavení faktury, účetnictví/daňová evidence.<br>
-              Právní základ: právní povinnost (čl. 6 odst. 1 písm. c GDPR).
-            </p>
-
-            <p><strong>D) Ochrana práv a právních nároků</strong><br>
-              Účel: evidence komunikace, prokázání plnění, řešení reklamací a sporů.<br>
-              Právní základ: oprávněný zájem (čl. 6 odst. 1 písm. f GDPR) – ochrana právních nároků.
-            </p>
-
-            <h4>4. Příjemci a zpracovatelé</h4>
-            <p>
-              Osobní údaje neprodávám. Přístup k nim mohou mít pouze subjekty, které zajišťují technický provoz webu/e-mailu,
-              případně zpracování zpráv z kontaktního formuláře a účetní agendu, a to v nezbytném rozsahu.
-              Osobní údaje mohou být dále poskytnuty orgánům veřejné moci, pokud mi to ukládá právní předpis.
-            </p>
-
-            <h4>5. Předávání mimo EU/EEA</h4>
-            <p>
-              Pokud využívám služby, u nichž může docházet k předání dat mimo EU/EEA, děje se tak pouze při splnění podmínek GDPR
-              (např. na základě standardních smluvních doložek nebo jiného odpovídajícího mechanismu).
-            </p>
-
-            <h4>6. Doba uchování</h4>
-            <ul>
-              <li>Poptávky a komunikace: po dobu nezbytnou k vyřízení, následně obvykle max. <strong>12 měsíců</strong>, pokud z nich nevznikne zakázka.</li>
-              <li>Zakázková dokumentace a komunikace: přiměřeně po dokončení (typicky <strong>3–5 let</strong>) kvůli ochraně právních nároků.</li>
-              <li>Účetní a daňové doklady: dle právních předpisů (obvykle <strong>10 let</strong>).</li>
-            </ul>
-
-            <h4>7. Vaše práva</h4>
-            <p>
-              Máte právo na přístup k údajům, opravu, výmaz (pokud jsou splněny podmínky), omezení zpracování,
-              přenositelnost (u smluvního základu) a právo vznést námitku proti zpracování založenému na oprávněném zájmu.
-              Dále máte právo podat stížnost u dozorového úřadu: <strong>Úřad pro ochranu osobních údajů (ÚOOÚ)</strong>.
-            </p>
-
-            <h4>8. Povinnost poskytnout údaje</h4>
-            <p>
-              Poskytnutí údajů je dobrovolné, ale bez základních údajů (zejména kontaktu a popisu požadavku) nemohu poptávku vyřídit ani uzavřít a plnit smlouvu.
-            </p>
-
-            <h4>9. Automatizované rozhodování</h4>
-            <p>Neprovádím automatizované rozhodování ani profilování ve smyslu GDPR.</p>
-
-            <h4>10. Cookies a externí obsah</h4>
-            <ul>
-              <li>Web může používat <strong>technické cookies</strong> nezbytné pro funkčnost a bezpečnost (např. ochrana formuláře). Tyto cookies nevyžadují souhlas, pokud jsou skutečně nezbytné.</li>
-              <li>Marketingové cookies nepoužívám.</li>
-              <li>Web využívá Google Fonts (načítané z domény Google), což může znamenat předání technických údajů poskytovateli služby. Pokud chceš „nejčistší“ řešení, fonty je vhodné self-hostnout.</li>
-            </ul>
-
-            <p><em>Platnost od: 1. 1. 2026</em></p>
-          </div>
+                <!-- Service 6 (Konzultace) -->
+                <div class="service-card bg-slate-800 border border-slate-700 p-8 rounded-2xl transition duration-300 reveal">
+                    <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center mb-6 text-yellow-400 text-2xl border border-slate-700">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Konzultace</h3>
+                    <p class="text-slate-300 mb-4 text-sm leading-relaxed">
+                        Nevíte co vybrat? Porovnám možnosti, navrhnu postup a ušetřím slepé uličky.
+                    </p>
+                    <a href="#faq" class="text-brand-400 font-bold hover:text-white transition inline-flex items-center text-sm">
+                        Časté otázky <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="cenik" class="py-20 bg-slate-900 border-t border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Ceník</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Přehledné balíčky i individuální nabídka. Cena se odvíjí od rozsahu, dodaných podkladů, požadovaných funkcí a termínu dodání.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- Start Plan -->
+                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 hover:border-slate-500 transition reveal">
+                    <h3 class="text-xl font-bold text-white mb-2">Start</h3>
+                    <p class="text-slate-400 text-sm mb-6">Základní prezentační web (onepage)</p>
+                    <div class="flex items-baseline mb-6">
+                        <span class="text-slate-400 text-sm mr-2">od</span>
+                        <span class="text-4xl font-black text-white">8 500 Kč</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-sm text-slate-300">
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Moderní onepage, responzivní (mobile-first)</li>
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Základní struktura sekcí + výzvy k akci (CTA)</li>
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> SEO základ (title, meta popis, nadpisy)</li>
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Kontaktní sekce (e-mail, telefon)</li>
+                    </ul>
+                    <a href="#kontakt" class="block w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 text-white font-bold text-center rounded-lg transition">Poptat Start</a>
+                </div>
+
+                <!-- Standard Plan -->
+                <div class="bg-slate-800 rounded-2xl p-8 border-2 border-brand-400 relative transform md:-translate-y-4 shadow-2xl shadow-brand-400/10 reveal">
+                    <div class="absolute top-0 right-0 bg-brand-400 text-brand-dark text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">NEJČASTĚJŠÍ</div>
+                    <h3 class="text-xl font-bold text-white mb-2">Standard</h3>
+                    <p class="text-slate-400 text-sm mb-6">Rozšířená onepage pro firmu a služby</p>
+                    <div class="flex items-baseline mb-6">
+                        <span class="text-slate-400 text-sm mr-2">od</span>
+                        <span class="text-4xl font-black text-white">12 500 Kč</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-sm text-slate-300">
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Více sekcí (služby, ceník, postup, FAQ, kontakt)</li>
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Kontaktní formulář (Formspree / e-mail)</li>
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Pokročilejší layout a jemné animace</li>
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Optimalizace rychlosti (obrázky, načítání)</li>
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Nasazení + základní nastavení (HTTPS, indexace)</li>
+                    </ul>
+                    <a href="#kontakt" class="block w-full py-3 px-4 bg-brand-400 hover:bg-white hover:text-brand-dark text-brand-dark font-bold text-center rounded-lg transition">Poptat Standard</a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 hover:border-slate-500 transition reveal">
+                    <h3 class="text-xl font-bold text-white mb-2">Premium</h3>
+                    <p class="text-slate-400 text-sm mb-6">Web s rozšířenými funkcemi a individuálním řešením</p>
+                    <div class="flex items-baseline mb-6">
+                        <span class="text-slate-400 text-sm mr-2">od</span>
+                        <span class="text-4xl font-black text-white">16 000 Kč</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-sm text-slate-300">
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Interaktivní prvky (kalkulačka, konfigurátor, formulář s logikou)</li>
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Další stránky (podmínky, GDPR, reference, blog apod.)</li>
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Propojení služeb a automatizace (e-mail, externí systémy)</li>
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Detailní ladění UX a struktury obsahu</li>
+                        <li class="flex"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> Rezerva na úpravy podle zpětné vazby</li>
+                    </ul>
+                    <a href="#kontakt" class="block w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 text-white font-bold text-center rounded-lg transition">Poptat Premium</a>
+                </div>
+            </div>
+
+            <!-- Additional Services -->
+            <div class="bg-slate-800/50 rounded-2xl p-6 md:p-10 reveal">
+                <h3 class="text-xl font-bold text-white mb-6">Doplňkové služby</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                        <span class="text-slate-300">Registrace domény + nastavení DNS</span>
+                        <span class="font-bold text-brand-400">od 800 Kč</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                        <span class="text-slate-300">E-mail na doméně (zřízení + propojení zařízení)</span>
+                        <span class="font-bold text-brand-400">od 900 Kč</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                        <span class="text-slate-300">Nasazení na hosting (včetně HTTPS)</span>
+                        <span class="font-bold text-brand-400">od 900 Kč</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                        <span class="text-slate-300">Úpravy / servis webu</span>
+                        <span class="font-bold text-brand-400">od 500 Kč / hod</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-slate-700 pb-2 md:col-span-2">
+                        <span class="text-slate-300">Servis PC (diagnostika / oprava / instalace)</span>
+                        <span class="font-bold text-brand-400">od 500 Kč / hod</span>
+                    </div>
+                </div>
+                <p class="text-center text-xs text-slate-500 mt-6">Ceny jsou orientační. Finální nabídka je vždy upřesněna podle konkrétního zadání.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="postup" class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Jak to probíhá</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Jasný postup a průběžná komunikace. Od zadání po spuštění webu budete mít přehled o každém kroku.
+                </p>
+            </div>
+
+            <div class="relative">
+                <!-- Line connecting steps on desktop -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-800 -translate-y-1/2 z-0"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 text-center reveal">
+                        <div class="w-12 h-12 bg-brand-400 text-brand-dark font-black text-xl rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-slate-900">01</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Zadání a cíle</h3>
+                        <p class="text-sm text-slate-400">Upřesníme cíl webu, cílovou skupinu, styl a rozsah. Domluvíme se na potřebných podkladech a termínech.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 text-center reveal transition-delay-200">
+                        <div class="w-12 h-12 bg-slate-700 text-white font-black text-xl rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-slate-900">02</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Struktura a obsah</h3>
+                        <p class="text-sm text-slate-400">Navrhnu strukturu stránek a doporučím obsah tak, aby byl web přehledný a srozumitelný pro návštěvníky.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 text-center reveal transition-delay-400">
+                        <div class="w-12 h-12 bg-slate-700 text-white font-black text-xl rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-slate-900">03</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Design a realizace</h3>
+                        <p class="text-sm text-slate-400">Vytvořím moderní vzhled, responzivitu a funkční kód. Průběžně zapracovávám připomínky.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 text-center reveal transition-delay-600">
+                        <div class="w-12 h-12 bg-slate-700 text-white font-black text-xl rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-slate-900">04</div>
+                        <h3 class="text-lg font-bold text-white mb-2">SEO a nasazení</h3>
+                        <p class="text-sm text-slate-400">Nastavím technický základ pro vyhledávače, nasadím web na hosting a pomohu s doménou, DNS a e-mailem.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-slate-800/30">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-10 text-center reveal">FAQ <span class="text-brand-400">.</span></h2>
+            <p class="text-center text-slate-400 mb-10">Rychlé odpovědi na časté dotazy.</p>
+            
+            <div class="space-y-4 reveal">
+                <!-- Question 1 -->
+                <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-white">Zařídíte i doménu, e-mail a hosting?</span>
+                        <i class="fas fa-chevron-down text-brand-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-4 text-slate-400 text-sm">
+                        Ano. Zařídím doménu, DNS záznamy, e-mail na doméně i nasazení webu na hosting.
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-white">Bude web rychlý a mobilně vyladěný?</span>
+                        <i class="fas fa-chevron-down text-brand-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-4 text-slate-400 text-sm">
+                        Mobile-first je základ. Dělám čistý HTML/CSS/JS a rozumné animace tak, aby web zůstal rychlý.
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-white">Jak dlouho to typicky trvá?</span>
+                        <i class="fas fa-chevron-down text-brand-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-4 text-slate-400 text-sm">
+                        Záleží na rozsahu a podkladech. Onepage obvykle zvládneme v řádu dnů až 1–2 týdnů, u větších věcí dle domluvy.
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-white">Umíte i úpravy a servis existujícího webu?</span>
+                        <i class="fas fa-chevron-down text-brand-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-4 text-slate-400 text-sm">
+                        Ano. Od drobných oprav přes zrychlení až po redesign. Stačí poslat odkaz a stručně popsat, co je potřeba.
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-white">Děláte i opravy a upgrade PC?</span>
+                        <i class="fas fa-chevron-down text-brand-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-4 text-slate-400 text-sm">
+                        Ano. HW/SW opravy, instalace, diagnostika, upgrady komponent a nastavení domácích serverů (NAS).
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-white">Bude web fungovat bez měsíčního poplatku?</span>
+                        <i class="fas fa-chevron-down text-brand-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-4 text-slate-400 text-sm">
+                        Ano – samotný web může běžet i bez „správy“. Platí se jen doména/hosting (pokud ho používáte) a případné úpravy podle potřeby.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kontakt" class="py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Info -->
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-5xl font-black text-white mb-6">Kontakt</h2>
+                    <p class="text-lg text-slate-400 mb-8">
+                        Napište mi krátce, co potřebujete. Ozvu se a domluvíme postup.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <a href="mailto:info@jangalba.eu" class="flex items-center group">
+                            <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center text-brand-400 text-xl group-hover:bg-brand-400 group-hover:text-brand-dark transition">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <span class="ml-4 text-xl font-bold text-white">info@jangalba.eu</span>
+                        </a>
+                        <a href="tel:+420775600674" class="flex items-center group">
+                            <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center text-brand-400 text-xl group-hover:bg-brand-400 group-hover:text-brand-dark transition">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <span class="ml-4 text-xl font-bold text-white">775 600 674</span>
+                        </a>
+                    </div>
+
+                    <div class="mt-12 p-6 bg-slate-800/50 rounded-xl border border-slate-700">
+                        <h4 class="font-bold text-white mb-2">Jan Galba</h4>
+                        <p class="text-slate-400 text-sm">Jmenuji se Jan Galba. Vytvořím vám moderní a rychlý web (HTML/CSS/JS), nebo pomohu se servisem a upgradem PC. Zajistím také doménu, e-mail na doméně, hosting a nasazení.</p>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 reveal">
+                    <p class="text-sm text-slate-400 mb-6">Do zprávy ideálně napište: <strong>co potřebujete, do kdy a rozpočet.</strong></p>
+                    
+                    <form action="https://formspree.io/f/mgoovnva" method="POST" class="space-y-4">
+                        
+                        <!-- Honeypot pro ochranu proti spamu (skryté pole) -->
+                        <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                        
+                        <!-- Konfigurace Formspree -->
+                        <input type="hidden" name="_subject" value="Nová poptávka z webu – Jan Galba" />
+                        <input type="hidden" name="_format" value="plain" />
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1" for="jmeno">Jméno</label>
+                            <input type="text" id="jmeno" name="jmeno" autocomplete="name" placeholder="Např. Petr Novák" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-400 transition" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1" for="email">E-mail</label>
+                            <input type="email" id="email" name="email" autocomplete="email" placeholder="napriklad@email.cz" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-400 transition" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1" for="tema">Co potřebujete?</label>
+                            <select id="tema" name="tema" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-400 transition">
+                                <option value="web">Web / onepage / prezentace</option>
+                                <option value="aplikace">Menší webová aplikace / nástroj</option>
+                                <option value="pc">Oprava / upgrade PC</option>
+                                <option value="server">Domácí server / nastavení</option>
+                                <option value="konzultace">Konzultace</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1" for="zprava">Zpráva</label>
+                            <textarea id="zprava" name="zprava" rows="5" placeholder="Stručně popište zadání..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-400 transition" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-brand-400 text-brand-dark font-black uppercase tracking-wide py-4 rounded-lg hover:bg-white transition transform hover:scale-[1.02]">
+                            Odeslat poptávku
+                        </button>
+                        <p class="text-xs text-slate-500 text-center mt-4">Odesláním souhlasíte se zpracováním údajů pro účely kontaktování.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 py-12 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <span class="block text-white font-bold text-lg mb-1">Jan Galba</span>
+                <span class="text-slate-500 text-sm">Weby • aplikace • servis PC • Svitavy / online</span>
+            </div>
+            
+            <div class="flex gap-6 text-sm">
+                <button onclick="openModal('modal-terms')" class="text-slate-400 hover:text-brand-400 transition">Obchodní podmínky</button>
+                <button onclick="openModal('modal-gdpr')" class="text-slate-400 hover:text-brand-400 transition">GDPR</button>
+            </div>
+
+            <div class="text-slate-500 text-sm">
+                &copy; 2026 Jan Galba <br class="md:hidden">
+                <a href="#" class="hover:text-white ml-2">Nahoru ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL: Terms (Obchodní podmínky) -->
+    <div id="modal-terms" class="modal fixed inset-0 z-[100] flex items-center justify-center bg-black/80 opacity-0 invisible p-4">
+        <div class="modal-content bg-slate-900 w-full max-w-4xl max-h-[90vh] rounded-2xl overflow-hidden flex flex-col border border-slate-700">
+            <div class="flex justify-between items-center p-6 border-b border-slate-700 bg-slate-800">
+                <h3 class="text-xl font-bold text-white">Obchodní podmínky</h3>
+                <button onclick="closeModal('modal-terms')" class="text-slate-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div class="p-6 overflow-y-auto text-slate-300 text-sm leading-relaxed legal-text">
+                <p><strong>Poskytovatel:</strong> Jan Galba, OSVČ<br>
+                <strong>IČO:</strong> 24367699<br>
+                <strong>Sídlo / místo podnikání:</strong> Antonína Slavíčka 705/31, 568 02 Svitavy, Česká republika<br>
+                <strong>E-mail:</strong> info@jangalba.eu<br>
+                <strong>Telefon:</strong> +420 775 600 674<br>
+                <strong>DPH:</strong> Poskytovatel není plátcem DPH dle § 6 zákona č. 235/2004 Sb., o dani z přidané hodnoty. Uvedené ceny jsou konečné.<br>
+                Fyzická osoba zapsaná v živnostenském rejstříku.</p>
+
+                <p>Tyto všeobecné obchodní podmínky („Podmínky“) upravují poskytování služeb a dodání díla, zejména tvorbu webových stránek (onepage, prezentace, landing page), tvorbu menších webových aplikací/nástrojů, dále servis/upgrade PC, domácí servery (NAS) a související konzultace. Podmínky se vztahují jak na vztahy B2B (podnikatel), tak na spotřebitele.</p>
+
+                <h4>1. Vymezení pojmů</h4>
+                <ul>
+                    <li><strong>Klient / Objednatel</strong> – osoba, která objednává služby Poskytovatele.</li>
+                    <li><strong>Spotřebitel</strong> – fyzická osoba, která mimo rámec své podnikatelské činnosti nebo výkonu povolání uzavírá smlouvu s Poskytovatelem.</li>
+                    <li><strong>Podnikatel (B2B)</strong> – osoba jednající v rámci své podnikatelské činnosti.</li>
+                    <li><strong>Dílo</strong> – výsledek činnosti Poskytovatele (např. web, kód, grafické prvky vytvořené Poskytovatelem, případně nastavení domény/hostingu/e-mailu dle dohody).</li>
+                    <li><strong>Služby</strong> – zejména konzultace, úpravy webu, nasazení, údržba, servis PC apod.</li>
+                </ul>
+
+                <h4>2. Objednávka a uzavření smlouvy</h4>
+                <ul>
+                    <li>Objednávka může být učiněna e-mailem, telefonicky, přes kontaktní formulář nebo jiným dohodnutým způsobem.</li>
+                    <li>Smlouva je uzavřena okamžikem, kdy Poskytovatel objednávku potvrdí e-mailem nebo zahájí plnění dle dohody.</li>
+                    <li>Rozsah plnění je určen zejména nabídkou, objednávkou a e-mailovou komunikací.</li>
+                </ul>
+
+                <h4>3. Součinnost Klienta, podklady a termíny</h4>
+                <ul>
+                    <li>Klient je povinen poskytnout součinnost (podklady, texty, přístupy, schválení) v přiměřené době.</li>
+                    <li>Termíny dodání se odvíjí od rozsahu a součinnosti Klienta. Prodlení Klienta prodlužuje termíny přiměřeně.</li>
+                    <li>Pokud Klient nedodá podklady včas, může Poskytovatel pozastavit práce do jejich dodání.</li>
+                </ul>
+
+                <h4>4. Rozsah plnění, změny a vícepráce</h4>
+                <ul>
+                    <li>V ceně jsou zahrnuty pouze výslovně dohodnuté práce.</li>
+                    <li>Požadavky nad dohodnutý rozsah jsou vícepráce a budou účtovány nad rámec sjednané ceny dle hodinové sazby nebo nové dohody.</li>
+                    <li>Ceny uvedené v ceníku (označené „od …“) se vztahují pouze na základní rozsah. Dodatečné požadavky mohou vést k navýšení ceny po odsouhlasení Klientem.</li>
+                    <li>Poskytovatel může odmítnout požadavky, které jsou technicky neproveditelné, neúměrně nákladné, nebo v rozporu s právními předpisy.</li>
+                </ul>
+
+                <h4>5. Cena a platební podmínky</h4>
+                <ul>
+                    <li>Cena je sjednána individuálně nebo dle orientačního ceníku na webu.</li>
+                    <li>Poskytovatel může požadovat zálohu až 50 % z ceny.</li>
+                    <li><strong>Nevratnost zálohy:</strong> V případě zrušení objednávky ze strany Klienta nebo nemožnosti dokončení díla z důvodů na straně Klienta (např. neposkytnutí součinnosti po dobu delší než 30 dnů) je uhrazená záloha nevratná a slouží k pokrytí již vynaložených nákladů a rezervace kapacit.</li>
+                    <li>Doplatek je splatný po předání díla / dokončení služby, není-li dohodnuto jinak.</li>
+                    <li>Do úplného zaplacení ceny není Poskytovatel povinen předat zdrojové soubory, přístupy ani udělit licenci k užití díla.</li>
+                </ul>
+
+                <h4>6. Předání díla, akceptace</h4>
+                <ul>
+                    <li>Předání probíhá předáním odkazu (URL), nasazením na doménu/hosting, nebo předáním souborů dle dohody.</li>
+                    <li>Klient je povinen dílo bez zbytečného odkladu zkontrolovat.</li>
+                    <li>Pokud Klient do 7 dnů od předání neuplatní výhrady, má se za to, že dílo převzal a akceptoval. To neplatí u skrytých vad.</li>
+                </ul>
+
+                <h4>7. Autorská práva a licence</h4>
+                <ul>
+                    <li>Licence k užití díla vzniká Klientovi až úplným zaplacením celé ceny dle všech vystavených faktur.</li>
+                    <li>Do té doby není Klient oprávněn dílo ani jeho části užívat v ostrém provozu, zveřejňovat ani poskytovat třetím osobám.</li>
+                    <li>V díle mohou být použity knihovny/komponenty třetích stran s vlastní licencí.</li>
+                    <li>Poskytovatel je oprávněn uvést dílo jako referenci, pokud se strany nedohodnou jinak.</li>
+                </ul>
+
+                <h4>8. Specifika vývoje webu a aplikací</h4>
+                <ul>
+                    <li><strong>Kompatibilita:</strong> Webové stránky a aplikace jsou optimalizovány pro aktuální verze běžných prohlížečů (Chrome, Firefox, Safari, Edge). Plná zpětná kompatibilita se staršími verzemi není garantována.</li>
+                    <li><strong>Právní náležitosti (GDPR, Cookies):</strong> Poskytovatel neposkytuje právní služby. Za zajištění zákonných náležitostí provozu webu (zejména Obchodní podmínky, Zásady ochrany osobních údajů/GDPR, textace Cookies lišty) odpovídá výhradně Klient. Pokud Klient tyto podklady nedodá nebo si neobjedná jejich technické zapracování (např. nasazení cookie lišty), Poskytovatel nenese odpovědnost za případné sankce ze strany dozorových orgánů.</li>
+                    <li><strong>Třetí strany:</strong> Poskytovatel neodpovídá za funkčnost a výpadky služeb třetích stran (hosting, registrátoři domén, API, platební brány).</li>
+                    <li><strong>Odpovědnost za obsah:</strong> Za faktickou a právní správnost podkladů (texty, obrázky) dodaných Klientem odpovídá výhradně Klient.</li>
+                </ul>
+
+                <h4>9. Zvláštní ustanovení pro servis a hardware</h4>
+                <ul>
+                    <li><strong>Záloha dat:</strong> Poskytovatel neodpovídá za data uložená na zařízeních (PC, notebooky, disky, NAS) předaných k servisu či úpravě. Klient je povinen si veškerá data před předáním zálohovat.</li>
+                    <li><strong>Diagnostika:</strong> Pokud Klient po provedení diagnostiky závady odmítne realizaci opravy, je povinen uhradit poplatek za diagnostiku dle platného ceníku nebo hodinové sazby.</li>
+                    <li><strong>Nevyzvednuté zakázky:</strong> Pokud si Klient nevyzvedne zařízení do 30 dnů od výzvy k vyzvednutí (např. e-mailem či SMS), je Poskytovatel oprávněn účtovat skladné ve výši 50 Kč za každý započatý den prodlení.</li>
+                </ul>
+
+                <h4>10. Odpovědnost za škodu</h4>
+                <ul>
+                    <li>V případě vztahů B2B (s podnikateli) odpovídá Poskytovatel za případnou škodu způsobenou porušením povinností pouze do výše ceny sjednané za konkrétní dílo či službu.</li>
+                </ul>
+                
+                <p>Platnost od: 1. 1. 2026</p>
+            </div>
+            <div class="p-4 border-t border-slate-700 bg-slate-800 text-right">
+                <button onclick="closeModal('modal-terms')" class="px-4 py-2 bg-slate-700 hover:bg-white hover:text-slate-900 rounded-lg transition text-white font-bold">Zavřít</button>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <footer class="paticka">
-    <div class="kontejner paticka__vnitr">
-      <div class="paticka__levo">
-       
-        <div class="paticka__text">Weby • aplikace • servis PC • Svitavy / online</div>
-        <div class="paticka__meta">
-    
+    <!-- MODAL: GDPR -->
+    <div id="modal-gdpr" class="modal fixed inset-0 z-[100] flex items-center justify-center bg-black/80 opacity-0 invisible p-4">
+        <div class="modal-content bg-slate-900 w-full max-w-4xl max-h-[90vh] rounded-2xl overflow-hidden flex flex-col border border-slate-700">
+            <div class="flex justify-between items-center p-6 border-b border-slate-700 bg-slate-800">
+                <h3 class="text-xl font-bold text-white">GDPR - Ochrana osobních údajů</h3>
+                <button onclick="closeModal('modal-gdpr')" class="text-slate-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div class="p-6 overflow-y-auto text-slate-300 text-sm leading-relaxed legal-text">
+                <p>Tyto zásady popisují, jak zpracovávám osobní údaje v souladu s obecným nařízením o ochraně osobních údajů (GDPR).</p>
+
+                <h4>1. Správce osobních údajů</h4>
+                <p>Jan Galba, OSVČ<br>
+                IČO: 24367699<br>
+                E-mail: info@jangalba.eu<br>
+                Telefon: +420 775 600 674</p>
+
+                <h4>2. Jaké údaje zpracovávám</h4>
+                <ul>
+                    <li>Identifikační údaje (jméno, příjmení).</li>
+                    <li>Kontaktní údaje (e-mail, telefon).</li>
+                    <li>Údaje o poptávce/objednávce (obsah zprávy, požadavky, případně URL webu).</li>
+                    <li>Fakturační údaje (adresa, IČO/DIČ, údaje na dokladech).</li>
+                    <li>Technické údaje související s provozem webu (např. logy serveru, IP adresa v rámci bezpečnosti a provozu).</li>
+                </ul>
+
+                <h4>3. Účely zpracování a právní základ</h4>
+                <ul>
+                    <li><strong>A) Poptávka a komunikace</strong><br>
+                    Účel: vyřízení poptávky, komunikace, příprava nabídky.<br>
+                    Právní základ: plnění smlouvy / předsmluvní jednání (čl. 6 odst. 1 písm. b GDPR).</li>
+                    
+                    <li><strong>B) Plnění smlouvy</strong><br>
+                    Účel: realizace zakázky, předání díla, domluvená technická podpora související se zakázkou.<br>
+                    Právní základ: plnění smlouvy (čl. 6 odst. 1 písm. b GDPR).</li>
+
+                    <li><strong>C) Účetnictví a daňové povinnosti</strong><br>
+                    Účel: vystavení faktury, účetnictví/daňová evidence.<br>
+                    Právní základ: právní povinnost (čl. 6 odst. 1 písm. c GDPR).</li>
+
+                    <li><strong>D) Ochrana práv a právních nároků</strong><br>
+                    Účel: evidence komunikace, prokázání plnění, řešení reklamací a sporů.<br>
+                    Právní základ: oprávněný zájem (čl. 6 odst. 1 písm. f GDPR) – ochrana právních nároků.</li>
+                </ul>
+
+                <h4>4. Příjemci a zpracovatelé</h4>
+                <p>Osobní údaje neprodávám. Přístup k nim mohou mít pouze subjekty, které zajišťují technický provoz webu/e-mailu, případně zpracování zpráv z kontaktního formuláře a účetní agendu, a to v nezbytném rozsahu. Osobní údaje mohou být dále poskytnuty orgánům veřejné moci, pokud mi to ukládá právní předpis.</p>
+
+                <h4>5. Předávání mimo EU/EEA</h4>
+                <p>Pokud využívám služby, u nichž může docházet k předání dat mimo EU/EEA, děje se tak pouze při splnění podmínek GDPR (např. na základě standardních smluvních doložek nebo jiného odpovídajícího mechanismu).</p>
+
+                <h4>6. Doba uchování</h4>
+                <ul>
+                    <li>Poptávky a komunikace: po dobu nezbytnou k vyřízení, následně obvykle max. 12 měsíců, pokud z nich nevznikne zakázka.</li>
+                    <li>Zakázková dokumentace a komunikace: přiměřeně po dokončení (typicky 3–5 let) kvůli ochraně právních nároků.</li>
+                    <li>Účetní a daňové doklady: dle právních předpisů (obvykle 10 let).</li>
+                </ul>
+
+                <h4>7. Vaše práva</h4>
+                <p>Máte právo na přístup k údajům, opravu, výmaz (pokud jsou splněny podmínky), omezení zpracování, přenositelnost (u smluvního základu) a právo vznést námitku proti zpracování založenému na oprávněném zájmu. Dále máte právo podat stížnost u dozorového úřadu: Úřad pro ochranu osobních údajů (ÚOOÚ).</p>
+
+                <h4>8. Povinnost poskytnout údaje</h4>
+                <p>Poskytnutí údajů je dobrovolné, ale bez základních údajů (zejména kontaktu a popisu požadavku) nemohu poptávku vyřídit ani uzavřít a plnit smlouvu.</p>
+
+                <h4>9. Automatizované rozhodování</h4>
+                <p>Neprovádím automatizované rozhodování ani profilování ve smyslu GDPR.</p>
+
+                <h4>10. Cookies a externí obsah</h4>
+                <p>Web může používat technické cookies nezbytné pro funkčnost a bezpečnost (např. ochrana formuláře). Tyto cookies nevyžadují souhlas, pokud jsou skutečně nezbytné.<br>
+                Marketingové cookies nepoužívám.<br>
+                Web využívá Google Fonts (načítané z domény Google), což může znamenat předání technických údajů poskytovateli služby. Pokud chceš „nejčistší“ řešení, fonty je vhodné self-hostnout.</p>
+
+                <p>Platnost od: 1. 1. 2026</p>
+            </div>
+            <div class="p-4 border-t border-slate-700 bg-slate-800 text-right">
+                <button onclick="closeModal('modal-gdpr')" class="px-4 py-2 bg-slate-700 hover:bg-white hover:text-slate-900 rounded-lg transition text-white font-bold">Zavřít</button>
+            </div>
         </div>
-        <div class="paticka__pravo">
-    <a class="paticka__odkaz" href="#obchodni-podminky"
-       data-legal-open="op"
-       aria-label="Otevřít obchodní podmínky">Obchodní podmínky</a>
-
-    <a class="paticka__odkaz" href="#gdpr"
-       data-legal-open="gdpr"
-       aria-label="Otevřít zásady ochrany osobních údajů">GDPR</a>
-
-    <a class="paticka__odkaz" href="#nahoru">Nahoru ↑</a>
-</div>
     </div>
-        <div class="paticka__meta" style="margin-top:8px;">
-          © <span id="rok"></span> Jan Galba
-        </div>
-      </div>
 
-      
-  </footer>
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Mobile Menu Toggle ---
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('open');
+        }
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMenu);
 
-  <script src="script_redesign.js" defer></script>
+        // --- Accordion Logic ---
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.fa-chevron-down');
+            
+            // Toggle current
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
 
-  
+        // --- Scroll Animation (Intersection Observer) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Animate only once
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+        });
+
+        // --- Modal Logic ---
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('invisible', 'opacity-0');
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add('invisible', 'opacity-0');
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on click outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal(event.target.id);
+            }
+        }
+    </script>
 </body>
 </html>
