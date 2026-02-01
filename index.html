@@ -6,6 +6,55 @@
     <title>Jan Galba: Web & PC</title>
     <meta name="description" content="Moderní webové stránky a servis PC ve Svitavách rychle, čistě, profi. Tvorba webů, webové aplikace, servis PC, domácí servery.">
     <meta name="author" content="Jan Galba">
+
+    <!-- SEO / Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="canonical" href="https://jangalba.eu/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="cs_CZ">
+    <meta property="og:title" content="Jan Galba: Web & PC">
+    <meta property="og:description" content="Moderní webové stránky a servis PC ve Svitavách. Rychle, čistě, profi. Weby, menší aplikace, servis a upgrade PC, NAS.">
+    <meta property="og:url" content="https://jangalba.eu/">
+    <meta property="og:image" content="https://jangalba.eu/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jan Galba: Web & PC">
+    <meta name="twitter:description" content="Moderní webové stránky a servis PC ve Svitavách. Rychle, čistě, profi.">
+    <meta name="twitter:image" content="https://jangalba.eu/og.jpg">
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Jan Galba: Web & PC",
+      "image": "https://jangalba.eu/og.jpg",
+      "url": "https://jangalba.eu/",
+      "telephone": "+420775600674",
+      "email": "info@jangalba.eu",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Antonína Slavíčka 705/31",
+        "postalCode": "568 02",
+        "addressLocality": "Svitavy",
+        "addressCountry": "CZ"
+      },
+      "areaServed": "CZ",
+      "knowsAbout": ["tvorba webů", "webové aplikace", "servis PC", "upgrade PC", "NAS", "DNS", "e-mail na doméně"]
+    }
+    </script>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,6 +189,9 @@
         .legal-text li {
             margin-bottom: 0.25rem;
         }
+
+        /* Canvas */
+        #fx { display: block; }
     </style>
 </head>
 <body class="antialiased">
@@ -186,9 +238,12 @@
 
     <!-- Hero Section -->
     <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- CANVAS: Pohybující se pozadí -->
+        <canvas id="fx" class="absolute inset-0 w-full h-full pointer-events-none opacity-100 z-0 mix-blend-screen"></canvas>
+
         <!-- Background Elements -->
-        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-brand-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
-        <div class="absolute top-0 left-0 -ml-20 -mt-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-brand-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob z-0"></div>
+        <div class="absolute top-0 left-0 -ml-20 -mt-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000 z-0"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 text-sm font-medium text-brand-400 mb-8 reveal">
@@ -490,7 +545,6 @@
             <p class="text-center text-slate-400 mb-10">Rychlé odpovědi na časté dotazy.</p>
             
             <div class="space-y-4 reveal">
-                <!-- Question 1 -->
                 <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
                     <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
                         <span class="font-bold text-white">Zařídíte i doménu, e-mail a hosting?</span>
@@ -501,7 +555,6 @@
                     </div>
                 </div>
 
-                <!-- Question 2 -->
                 <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
                     <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
                         <span class="font-bold text-white">Bude web rychlý a mobilně vyladěný?</span>
@@ -512,7 +565,6 @@
                     </div>
                 </div>
 
-                <!-- Question 3 -->
                 <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
                     <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
                         <span class="font-bold text-white">Jak dlouho to typicky trvá?</span>
@@ -523,7 +575,6 @@
                     </div>
                 </div>
 
-                <!-- Question 4 -->
                 <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
                     <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
                         <span class="font-bold text-white">Umíte i úpravy a servis existujícího webu?</span>
@@ -534,7 +585,6 @@
                     </div>
                 </div>
 
-                <!-- Question 5 -->
                 <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
                     <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
                         <span class="font-bold text-white">Děláte i opravy a upgrade PC?</span>
@@ -545,7 +595,6 @@
                     </div>
                 </div>
 
-                <!-- Question 6 -->
                 <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700">
                     <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
                         <span class="font-bold text-white">Bude web fungovat bez měsíčního poplatku?</span>
@@ -596,11 +645,7 @@
                     <p class="text-sm text-slate-400 mb-6">Do zprávy ideálně napište: <strong>co potřebujete, do kdy a rozpočet.</strong></p>
                     
                     <form action="https://formspree.io/f/mgoovnva" method="POST" class="space-y-4">
-                        
-                        <!-- Honeypot pro ochranu proti spamu (skryté pole) -->
                         <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
-                        
-                        <!-- Konfigurace Formspree -->
                         <input type="hidden" name="_subject" value="Nová poptávka z webu – Jan Galba" />
                         <input type="hidden" name="_format" value="plain" />
 
@@ -850,8 +895,6 @@
         function toggleAccordion(button) {
             const content = button.nextElementSibling;
             const icon = button.querySelector('.fa-chevron-down');
-            
-            // Toggle current
             if (content.classList.contains('hidden')) {
                 content.classList.remove('hidden');
                 icon.style.transform = 'rotate(180deg)';
@@ -869,7 +912,7 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        observer.unobserve(entry.target); // Animate only once
+                        observer.unobserve(entry.target);
                     }
                 });
             }, {
@@ -887,7 +930,7 @@
             const modal = document.getElementById(id);
             modal.classList.remove('invisible', 'opacity-0');
             modal.classList.add('open');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal(id) {
@@ -897,12 +940,126 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal on click outside
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 closeModal(event.target.id);
             }
         }
+
+        // --- Canvas FX (pohyblivé pozadí v HERO) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('fx');
+            if (!canvas) return;
+
+            const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
+
+            const ctx = canvas.getContext('2d', { alpha: true });
+
+            let W = 0, H = 0, DPR = 1;
+            const dots = [];
+            let raf = 0;
+
+            function pickCount() {
+                return window.innerWidth < 640 ? 18 : window.innerWidth < 1024 ? 26 : 38;
+            }
+
+            function resetDots() {
+                dots.length = 0;
+                const n = pickCount();
+                for (let i = 0; i < n; i++) {
+                    dots.push({
+                        x: Math.random() * W,
+                        y: Math.random() * H,
+                        r: 1.2 + Math.random() * 2.2,
+                        vx: (-0.30 + Math.random() * 0.60),
+                        vy: (-0.22 + Math.random() * 0.44),
+                        a: 0.18 + Math.random() * 0.35
+                    });
+                }
+            }
+
+            function resize() {
+                const parent = canvas.parentElement;
+                if (!parent) return;
+
+                DPR = Math.min(2, window.devicePixelRatio || 1);
+                W = Math.max(1, parent.clientWidth);
+                H = Math.max(1, parent.clientHeight);
+
+                canvas.width = Math.floor(W * DPR);
+                canvas.height = Math.floor(H * DPR);
+                canvas.style.width = W + 'px';
+                canvas.style.height = H + 'px';
+                ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+                resetDots();
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+
+                const g1 = ctx.createRadialGradient(W * 0.22, H * 0.28, 0, W * 0.22, H * 0.28, Math.max(W, H) * 0.95);
+                g1.addColorStop(0, 'rgba(34,211,238,0.22)');
+                g1.addColorStop(0.55, 'rgba(168,85,247,0.14)');
+                g1.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = g1;
+                ctx.fillRect(0, 0, W, H);
+
+                const g2 = ctx.createRadialGradient(W * 0.75, H * 0.40, 0, W * 0.75, H * 0.40, Math.max(W, H) * 0.85);
+                g2.addColorStop(0, 'rgba(34,211,238,0.12)');
+                g2.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = g2;
+                ctx.fillRect(0, 0, W, H);
+
+                const sc = window.scrollY || 0;
+                const drift = sc * 0.00009;
+
+                for (const d of dots) {
+                    d.x += d.vx + d.vx * drift;
+                    d.y += d.vy + d.vy * drift;
+
+                    if (d.x < -50) d.x = W + 50;
+                    if (d.x > W + 50) d.x = -50;
+                    if (d.y < -50) d.y = H + 50;
+                    if (d.y > H + 50) d.y = -50;
+
+                    ctx.beginPath();
+                    ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(34,211,238,${d.a})`;
+                    ctx.fill();
+                }
+
+                for (let i = 0; i < dots.length; i++) {
+                    for (let j = i + 1; j < dots.length; j++) {
+                        const a = dots[i], b = dots[j];
+                        const dist = Math.hypot(a.x - b.x, a.y - b.y);
+                        const max = 150;
+                        if (dist < max) {
+                            const alpha = (1 - dist / max) * 0.22;
+                            ctx.strokeStyle = `rgba(168,85,247,${alpha})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(a.x, a.y);
+                            ctx.lineTo(b.x, b.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                raf = requestAnimationFrame(draw);
+            }
+
+            requestAnimationFrame(() => {
+                resize();
+                cancelAnimationFrame(raf);
+                draw();
+            });
+
+            window.addEventListener('resize', () => {
+                resize();
+            }, { passive: true });
+        });
     </script>
 </body>
 </html>
